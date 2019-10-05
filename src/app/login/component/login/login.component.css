@@ -1,0 +1,22 @@
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+.login-wallpaper-wrapper {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-image: url("/assets/background/login-background.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.login-form-wrapper {
+    width: 50%;
+    height: 100%;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
