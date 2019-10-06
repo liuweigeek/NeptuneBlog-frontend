@@ -1,0 +1,27 @@
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.zone {
+    width: 100%;
+    margin: 10px 15px;
+}
+
+#search-bar nz-input-group input {
+    border-color: #63b6ff;
+    border-radius: 20px;
+    background: #f6f8fa;
+}
+
+#trend-list {
+    border-radius: 15px;
+    background: #f6f8fa;
+}
+
+#trend-list ul {
+    border: none;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+}

@@ -1,0 +1,30 @@
+[nz-menu] {
+    width: 160px;
+}
+
+#nav-banner {
+    color: #63b6ff;
+    margin: 5px 0 5px 10px;
+    font-size: 36px;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+#nav-menu-ul {
+    border: 0;
+}
+
+.nav-menu-item {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+.nav-menu-item i {
+    font-size: 20px;
+}

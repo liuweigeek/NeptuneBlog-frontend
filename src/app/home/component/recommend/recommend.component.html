@@ -1,0 +1,32 @@
+<div class="container">
+    <div id="search-bar" class="zone">
+        <nz-input-group nzSize="large" [nzSuffix]="suffixTemplate" [nzPrefix]="prefixTemplate">
+            <input type="text" nz-input placeholder="搜索 NeptuneBlog"/>
+        </nz-input-group>
+        <ng-template #prefixTemplate>
+            <i nz-icon nzType="search"></i>
+        </ng-template>
+        <ng-template #suffixTemplate>
+            <i nz-icon nz-tooltip nzTitle="Extra information" nzTheme="fill" nzType="close-circle"></i>
+        </ng-template>
+    </div>
+    <div id="trend-list" class="zone">
+        <ul nz-list
+            [nzDataSource]="data"
+            nzBordered
+            nzSize="default"
+            [nzHeader]="trendHeader"
+            [nzFooter]="trendFooter"
+            [nzRenderItem]="trendItem">
+            <ng-template #trendItem let-item>
+                <nz-list-item [nzContent]="item"></nz-list-item>
+            </ng-template>
+            <ng-template #trendHeader let-item>
+                <span style="font-size: 20px; font-weight: bold">你的趋势</span>
+            </ng-template>
+            <ng-template #trendFooter let-item>
+                <a style="font-size: 16px; font-weight: normal; color: #63b6ff">显示更多</a>
+            </ng-template>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+.container {
+    background: white;
+    padding: 10px 15px 5px 15px;
+}
+
+nz-form-item {
+    margin-bottom: 20px;
+}
+
+/*nz-comment nz-avatar {
+    width: 64px;
+    height: 64px;
+}
+
+img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+}*/
+
+nz-comment-content textarea {
+    color: black;
+    font-size: 22px;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    box-shadow: none;
+    resize: none;
+}
+
+#form-textarea {
+    margin-bottom: 40px;
+}
+
+#controls-group {
+    vertical-align: center;
+    margin-bottom: 0;
+}
+
+.attachment-control {
+    float: left;
+    margin-left: 10px;
+}
+
+.publish-control {
+    float: right;
+}

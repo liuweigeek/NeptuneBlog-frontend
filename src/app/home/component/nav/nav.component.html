@@ -1,0 +1,12 @@
+<div id="container">
+    <span>
+        <i id="nav-banner" nz-icon nzType="twitter" nzTheme="outline"></i>
+    </span>
+    <ul id="nav-menu-ul" nz-menu nzMode="vertical" (nzClick)="handleMenuSelected($event)">
+        <li *ngFor="let menu of menuItems" class="nav-menu-item" nz-menu-item nz-tooltip nzPlacement="right"
+            [nzSelected]="menu === initSelectedMenu" [routerLink]="menu.link">
+            <i nz-icon nzType="{{menu.icon}}"></i>
+            <span>{{menu.title}}</span>
+        </li>
+    </ul>
+</div>
