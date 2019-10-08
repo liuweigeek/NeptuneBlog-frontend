@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
         this.loginService.login(this.validateForm.controls.email.value, this.validateForm.controls.password.value)
             .subscribe(response => {
                 if (response.isSuccess()) {
-                    this.userStoreService.loginUser = response.data;
+                    this.userStoreService.setLoginUser(response.data);
                     this.router.navigate(['/home']);
                 } else {
                     this.message.info(response.msg);

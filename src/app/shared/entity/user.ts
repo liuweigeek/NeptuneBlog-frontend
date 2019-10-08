@@ -2,27 +2,37 @@ export interface User {
     /**
      * Id
      */
-    id?: string;
+    id: string;
 
     /**
      * 邮箱地址
      */
-    email?: string;
+    email: string;
 
     /**
      * 用户名
      */
-    username?: string;
+    username: string;
 
     /**
-     * 真实姓名
+     * 昵称
      */
-    realName?: string;
+    nickname: string;
 
     /**
-     * 头像URL
+     * 小尺寸头像
      */
-    avatar?: string;
+    smallAvatar: string;
+
+    /**
+     * 正常尺寸头像
+     */
+    normalAvatar: string;
+
+    /**
+     * 大尺寸头像
+     */
+    largeAvatar: string;
 
     /**
      * 密码
@@ -37,7 +47,7 @@ export interface User {
     /**
      * 性别
      */
-    sex?: number;
+    sex: number;
 
     /**
      * 注册时间

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    private readonly tokenKey = 'token';
+    private readonly tokenKey = 'current_user';
 
     private readonly ignoreUrls: string[] = [
         '/user/user/login',
@@ -25,6 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
             }
         }
         const authToken = this.auth.getAuthorizationToken();
+        console.log('authToken', authToken);
         if (!authToken) {
             this.router.navigate(['/signIn']);
             return;

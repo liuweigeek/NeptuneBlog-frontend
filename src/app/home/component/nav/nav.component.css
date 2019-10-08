@@ -22,6 +22,7 @@
     font-size: 20px;
     font-weight: bold;
     border-radius: 20px;
+    outline-style: none;
     margin: 20px 0;
 }
 

@@ -1,23 +1,41 @@
-<ng-template>
-    <nz-comment [nzAuthor]="post.author.username" [nzDatetime]="post.createDate | date: dateFormat">
+<div class="container">
+    <nz-comment [nzAuthor]="post.authorUsername" [nzDatetime]="post.createDate | date: dateFormat">
         <nz-avatar nz-comment-avatar
                    nzIcon="user"
-                   [nzSrc]="post.author.avatar">
+                   [nzSrc]="post.authorAvatar">
         </nz-avatar>
         <nz-comment-content>
-            <p>{{post.userId}}</p>
+            <p>{{post.content}}</p>
         </nz-comment-content>
-        <nz-comment-action>转发</nz-comment-action>
-        <nz-comment-action>评论</nz-comment-action>
+        <nz-comment-action>
+            <i nz-tooltip
+               nzTitle="Forward"
+               nz-icon
+               nzType="retweet"
+               theme="outline"
+               (click)="handleLike()">
+            </i>
+            转发<span class="count like">{{post.forwards}}</span>
+        </nz-comment-action>
+        <nz-comment-action>
+            <i nz-tooltip
+               nzTitle="Comment"
+               nz-icon
+               nzType="message"
+               theme="outline"
+               (click)="handleLike()">
+            </i>
+            评论<span class="count like">{{post.comments}}</span>
+        </nz-comment-action>
         <nz-comment-action>
             <i nz-tooltip
                nzTitle="Like"
                nz-icon
                nzType="like"
-               [theme]="post.likes > 0 ? 'twotone' : 'outline'"
+               theme="outline"
                (click)="handleLike()">
             </i>
-            <span class="count like">{{post.likes}}</span>
+            喜欢<span class="count like">{{post.likes}}</span>
         </nz-comment-action>
     </nz-comment>
-</ng-template>
+</div>

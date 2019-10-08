@@ -6,7 +6,7 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="username" nzRequired>
           <span>
               用户名
             <i nz-icon nz-tooltip nzTitle="其他用户可通过用户名找到你" nzType="question-circle"
@@ -15,6 +15,12 @@
         </nz-form-label>
         <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请输入用户名">
             <input nz-input id="username" formControlName="username"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired></nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请输入昵称">
+            <input nz-input id="nickname" formControlName="nickname"/>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>

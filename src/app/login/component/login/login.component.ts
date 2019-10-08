@@ -22,12 +22,12 @@ export class LoginComponent implements OnInit {
     }
 
     handleSignInSuccess(user: User) {
-        this.userStoreService.loginUser = user;
+        this.userStoreService.setLoginUser(user);
         this.router.navigate(['home']);
     }
 
     handleSignUpSuccess(user: User) {
-        this.userStoreService.loginUser = user;
+        this.userStoreService.setLoginUser(user);
         this.router.navigate(['home']);
     }
 

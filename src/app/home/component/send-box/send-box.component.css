@@ -7,16 +7,16 @@ nz-form-item {
     margin-bottom: 20px;
 }
 
-/*nz-comment nz-avatar {
-    width: 64px;
-    height: 64px;
+nz-comment nz-avatar {
+    width: 50px;
+    height: 50px;
 }
 
-img {
+nz-comment nz-avatar ::ng-deep img {
     display: block !important;
     width: 100% !important;
     height: 100% !important;
-}*/
+}
 
 nz-comment-content textarea {
     color: black;
@@ -44,4 +44,8 @@ nz-comment-content textarea {
 
 .publish-control {
     float: right;
+}
+
+::ng-deep .ant-comment-inner {
+    padding-bottom: 8px;
 }

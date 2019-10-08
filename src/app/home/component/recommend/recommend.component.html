@@ -1,13 +1,13 @@
 <div class="container">
     <div id="search-bar" class="zone">
         <nz-input-group nzSize="large" [nzSuffix]="suffixTemplate" [nzPrefix]="prefixTemplate">
-            <input type="text" nz-input placeholder="搜索 NeptuneBlog"/>
+            <input type="text" nz-input placeholder="搜索 Neptune Blog"/>
         </nz-input-group>
         <ng-template #prefixTemplate>
             <i nz-icon nzType="search"></i>
         </ng-template>
         <ng-template #suffixTemplate>
-            <i nz-icon nz-tooltip nzTitle="Extra information" nzTheme="fill" nzType="close-circle"></i>
+            <i nz-icon nz-tooltip nzTitle="清除" nzTheme="fill" nzType="close-circle"></i>
         </ng-template>
     </div>
     <div id="trend-list" class="zone">

@@ -1,4 +1,9 @@
 <div class="container">
     <nz-page-header nzTitle="主页"></nz-page-header>
-    <app-send-box [user]=""></app-send-box>
+    <div id="container-send-box">
+        <app-send-box [user]="user"></app-send-box>
+    </div>
+    <div id="container-post-list">
+        <app-post-card *ngFor="let post of postList" [post]="post"></app-post-card>
+    </div>
 </div>
