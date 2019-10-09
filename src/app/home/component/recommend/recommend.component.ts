@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class RecommendComponent implements OnInit {
 
   data = [
-    '#Chine National Day',
+    '#China National Day',
     '#New iPhone',
     '#Google I/O',
     '#Steve Jobs'
