@@ -3,6 +3,7 @@ import { Post, User } from '../../../shared/entity';
 import { PostService } from '../../../post/service';
 import { UserStoreService } from '../../../shared/service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Pageable } from '../../../shared/entity/pageable';
 
 @Component({
     selector: 'app-content',
@@ -14,8 +15,10 @@ export class ContentComponent implements OnInit {
     private user: User;
     private postList: Post[] = [];
 
-    private pageNumber = 1;
-    private pageSize = 30;
+    private pageable: Pageable<any> = {
+        current: 1,
+        size: 30
+    };
 
     constructor(private userStoreService: UserStoreService,
                 private postService: PostService,
@@ -29,10 +32,10 @@ export class ContentComponent implements OnInit {
 
     getNextPosts() {
 
-        this.postService.getFollowingPost(this.pageNumber, this.pageSize)
+        this.postService.getFollowingPost(this.pageable)
             .subscribe(response => {
                 if (response.isSuccess()) {
-                    const newPosts = response.data;
+                    const newPosts = response.data.records;
                     if (newPosts.length > 0) {
                         for (const post of newPosts) {
                             this.postList.push(post);
@@ -45,7 +48,7 @@ export class ContentComponent implements OnInit {
                 }
             });
 
-        this.pageNumber++;
+        this.pageable.current++;
     }
 
 }
