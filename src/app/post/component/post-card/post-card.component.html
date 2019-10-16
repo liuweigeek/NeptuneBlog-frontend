@@ -1,5 +1,5 @@
 <div class="container">
-    <nz-comment [nzAuthor]="post.authorUsername" [nzDatetime]="post.createDate | date: dateFormat">
+    <nz-comment [nzAuthor]="post.authorNickname" [nzDatetime]="post.createDate | date: dateFormat">
         <nz-avatar nz-comment-avatar
                    nzIcon="user"
                    [nzSrc]="post.authorAvatar">

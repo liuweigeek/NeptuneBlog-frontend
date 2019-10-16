@@ -46,7 +46,7 @@ export class SignInComponent implements OnInit {
                     this.userStoreService.setLoginUser(response.data);
                     this.router.navigate(['/home']);
                 } else {
-                    this.message.info(response.msg);
+                    this.message.error(response.msg);
                 }
             });
     }

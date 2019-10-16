@@ -3,11 +3,28 @@ import { CommonModule } from '@angular/common';
 
 import { PostRoutingModule } from './post-routing.module';
 import { PostCardComponent } from './component/post-card';
-import { NzAvatarModule, NzCommentModule, NzIconModule, NzToolTipModule } from 'ng-zorro-antd';
-
+import {
+    NzAvatarModule,
+    NzButtonModule,
+    NzCommentModule,
+    NzFormModule,
+    NzIconModule,
+    NzInputModule,
+    NzPageHeaderModule,
+    NzToolTipModule
+} from 'ng-zorro-antd';
+import { PostZoneComponent } from './component/post-zone';
+import { PostDetailComponent } from './component/post-detail';
+import { SendBoxComponent } from './component/send-box';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [PostCardComponent],
+    declarations: [
+        PostCardComponent,
+        PostZoneComponent,
+        PostDetailComponent,
+        SendBoxComponent
+    ],
     exports: [
         PostCardComponent
     ],
@@ -17,7 +34,13 @@ import { NzAvatarModule, NzCommentModule, NzIconModule, NzToolTipModule } from '
         NzCommentModule,
         NzIconModule,
         NzAvatarModule,
-        NzToolTipModule
+        NzToolTipModule,
+        NzPageHeaderModule,
+        NzFormModule,
+        FormsModule,
+        NzButtonModule,
+        NzInputModule
     ]
 })
-export class PostModule { }
+export class PostModule {
+}

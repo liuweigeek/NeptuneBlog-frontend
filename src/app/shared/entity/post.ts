@@ -55,6 +55,12 @@ export interface Post {
      */
     authorUsername: string;
 
+
+    /**
+     * 昵称
+     */
+    authorNickname: string;
+
     /**
      * 性别
      */

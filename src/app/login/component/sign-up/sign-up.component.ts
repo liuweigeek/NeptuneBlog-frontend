@@ -50,7 +50,7 @@ export class SignUpComponent implements OnInit {
                     this.userStoreService.setLoginUser(response.data);
                     this.router.navigate(['/signIn']);
                 } else {
-                    this.message.info(response.msg);
+                    this.message.error(response.msg);
                 }
             });
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NavMenuItem } from '../nav';
-import { NavService } from '../../service/nav.service';
+import { NavService } from '../../service';
 
 @Component({
     selector: 'app-home',

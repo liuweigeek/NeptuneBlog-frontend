@@ -1,9 +1,3 @@
 <div class="container">
-    <nz-page-header nzTitle="主页"></nz-page-header>
-    <div id="container-send-box">
-        <app-send-box [user]="user"></app-send-box>
-    </div>
-    <div id="container-post-list">
-        <app-post-card *ngFor="let post of postList" [post]="post"></app-post-card>
-    </div>
+    <router-outlet></router-outlet>
 </div>

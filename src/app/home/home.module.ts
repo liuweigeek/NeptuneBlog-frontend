@@ -1,28 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HomeRoutingModule } from './home-routing.module';
 
 import {
-    NzAvatarModule, NzButtonModule,
+    NzAvatarModule,
+    NzButtonModule,
     NzCommentModule,
     NzFormModule,
     NzGridModule,
-    NzIconModule, NzInputModule, NzListModule,
+    NzIconModule,
+    NzInputModule,
+    NzListModule,
     NzMenuModule,
     NzPageHeaderModule,
     NzToolTipModule
 } from 'ng-zorro-antd';
 
-import { HomeRoutingModule } from './home-routing.module';
+import { FormsModule } from '@angular/forms';
+import { PostModule } from '../post';
 import { HomeComponent } from './component/home';
 import { NavComponent } from './component/nav';
 import { ContentComponent } from './component/content';
-import { SendBoxComponent } from './component/send-box';
-import { FormsModule } from '@angular/forms';
-import { RecommendComponent } from './component/recommend/recommend.component';
-import { PostModule } from '../post/post.module';
+import { RecommendComponent } from './component/recommend';
+import { UserModule } from '../user';
 
 @NgModule({
-  declarations: [HomeComponent, ContentComponent, NavComponent, SendBoxComponent, RecommendComponent],
+    declarations: [
+        HomeComponent,
+        ContentComponent,
+        NavComponent,
+        RecommendComponent
+    ],
     imports: [
         CommonModule,
         HomeRoutingModule,
@@ -38,7 +46,9 @@ import { PostModule } from '../post/post.module';
         NzAvatarModule,
         NzButtonModule,
         NzListModule,
-        PostModule
+        PostModule,
+        UserModule
     ]
 })
-export class HomeModule { }
+export class HomeModule {
+}

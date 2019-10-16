@@ -1,8 +1,9 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { AuthorityService } from '../service/authority.service';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { AuthorityService } from '../service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -25,7 +26,6 @@ export class AuthInterceptor implements HttpInterceptor {
             }
         }
         const authToken = this.auth.getAuthorizationToken();
-        console.log('authToken', authToken);
         if (!authToken) {
             this.router.navigate(['/signIn']);
             return;
@@ -33,7 +33,17 @@ export class AuthInterceptor implements HttpInterceptor {
         const authReq = req.clone({
             headers: req.headers.set(this.tokenKey, authToken)
         });
-        return next.handle(authReq);
+        return next.handle(authReq).pipe(
+            map(event => {
+                if (event instanceof HttpResponse) {
+                    if (event.body.status && event.body.status === 10) {
+                        this.router.navigate(['/signIn']);
+                        return;
+                    }
+                }
+                return event;
+            })
+        );
     }
 
 }

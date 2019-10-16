@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Post, ServerResponse, User } from '../../shared/entity';
+import { Post, ServerResponse } from '../../shared/entity';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { catchError, map, timeout } from 'rxjs/operators';
