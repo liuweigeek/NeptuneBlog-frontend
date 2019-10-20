@@ -22,7 +22,7 @@ export class LoginService {
             }
         ).pipe(
             map(result => Object.assign(new ServerResponse(), result)),
-            timeout(30000),
+            timeout(environment.httpTimeout),
             catchError(e => {
                 return this.handleError();
             })
@@ -34,7 +34,7 @@ export class LoginService {
             `${environment.baseUrl}/user/user/register`, user
         ).pipe(
             map(result => Object.assign(new ServerResponse(), result)),
-            timeout(30000),
+            timeout(environment.httpTimeout),
             catchError(e => {
                 return this.handleError();
             })

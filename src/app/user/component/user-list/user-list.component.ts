@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
-import { FriendService } from '../../../post/service/friend.service';
+import { FriendService } from '../../service';
 import { Pageable } from '../../../shared/entity/pageable';
 import { ServerResponse, User } from '../../../shared/entity';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-user-card',
@@ -16,7 +17,7 @@ export class UserListComponent implements OnInit {
 
     private pageable: Pageable<any> = {
         current: 1,
-        size: 30
+        size: environment.pageSize
     };
 
     constructor(private friendService: FriendService, private message: NzMessageService) {

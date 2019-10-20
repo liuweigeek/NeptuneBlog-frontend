@@ -1,0 +1,82 @@
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+nz-page-header {
+    margin-bottom: 1px;
+}
+
+.user-card {
+    height: 360px;
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+.user-background {
+    height: 50%;
+    width: 100%;
+    background-image: url("/assets/background/user-profile-background.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.user-profile {
+    height: 50%;
+    width: 100%;
+    padding: 0 16px;
+    background: white;
+}
+
+.user-avatar {
+    display: inline-block;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-top: -65px;
+}
+
+.user-edit-profile {
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.user-info-zone {
+    width: 100%;
+}
+
+.user-nickname {
+    font-weight: bold;
+    font-size: large;
+    color: black;
+}
+
+.user-username {
+}
+
+.user-more-info {
+    margin-top: 5px;
+}
+
+.user-more-info-item {
+    margin-right: 10px;
+}
+
+.user-relation-info {
+    margin-top: 2px;
+}
+
+.user-relation-info-item {
+    margin-right: 10px;
+}
+
+.user-relation-count {
+    font-weight: bold;
+    color: black;
+}
+
+#container-post-list {
+    cursor: pointer;
+}

@@ -14,6 +14,25 @@ export class PostService {
     constructor(private http: HttpClient) {
     }
 
+    getPostsByUserId(authorId: string, pageable: Pageable<any>): Observable<ServerResponse<Pageable<Post>>> {
+        return this.http.get<ServerResponse<Post[]>>(
+            `${environment.baseUrl}/post/post/getPostsByUserId`,
+            {
+                params: {
+                    authorId,
+                    current: String(pageable.current),
+                    size: String(pageable.size)
+                }
+            }
+        ).pipe(
+            map(result => Object.assign(new ServerResponse<Pageable<Post>>(), result)),
+            timeout(environment.httpTimeout),
+            catchError(() => {
+                return this.handleError();
+            })
+        );
+    }
+
     getFollowingPost(pageable: Pageable<any>): Observable<ServerResponse<Pageable<Post>>> {
         return this.http.get<ServerResponse<Post[]>>(
             `${environment.baseUrl}/post/post/getFollowingPosts`,
@@ -25,14 +44,14 @@ export class PostService {
             }
         ).pipe(
             map(result => Object.assign(new ServerResponse<Pageable<Post>>(), result)),
-            timeout(30000),
-            catchError(e => {
+            timeout(environment.httpTimeout),
+            catchError(() => {
                 return this.handleError();
             })
         );
     }
 
     private handleError() {
-        return of(ServerResponse.createByErrorMsg('操作失败'));
+        return of(ServerResponse.createByErrorMsg('获取推文失败'));
     }
 }

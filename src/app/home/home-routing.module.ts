@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './component/home';
 import { UserListComponent } from '../user/component/user-list';
 import { PostZoneComponent } from '../post/component/post-zone';
+import { UserProfileComponent } from '../user/component/user-profile';
 
 const routes: Routes = [
     {
@@ -27,6 +28,10 @@ const routes: Routes = [
                 path: 'followers',
                 component: UserListComponent,
                 pathMatch: 'full'
+            },
+            {
+                path: ':userId',
+                component: UserProfileComponent
             }
         ]
     }

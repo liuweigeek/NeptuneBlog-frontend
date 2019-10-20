@@ -5,7 +5,10 @@
     <ul id="nav-menu-ul" nz-menu nzMode="vertical" (nzClick)="handleMenuSelected($event)">
         <li *ngFor="let menu of menuItems" class="nav-menu-item" nz-menu-item nz-tooltip nzPlacement="right"
             [nzSelected]="menu === initSelectedMenu" [routerLink]="menu.link">
-            <i nz-icon nzType="{{menu.icon}}"></i>
+            <i *ngIf="menu.icon; else avatar" nz-icon nzType="{{menu.icon}}"></i>
+            <ng-template #avatar>
+                <nz-avatar nzIcon="user" nzSize="small" nzSrc="{{menu.img}}"></nz-avatar>
+            </ng-template>
             <span>{{menu.title}}</span>
         </li>
     </ul>

@@ -4,6 +4,7 @@ import { Pageable } from '../../../shared/entity/pageable';
 import { UserStoreService } from '../../../shared/service';
 import { PostService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-post-zone',
@@ -17,7 +18,7 @@ export class PostZoneComponent implements OnInit {
 
     private pageable: Pageable<any> = {
         current: 1,
-        size: 30
+        size: environment.pageSize
     };
 
     constructor(private userStoreService: UserStoreService,

@@ -6,7 +6,8 @@ import { UserCenterComponent } from './component/user-center';
 import { UserSettingsComponent } from './component/user-settings';
 import { UserListComponent } from './component/user-list';
 import { UserProfileComponent } from './component/user-profile';
-import { NzButtonModule, NzListModule, NzPageHeaderModule, NzSkeletonModule } from 'ng-zorro-antd';
+import { NzButtonModule, NzIconModule, NzListModule, NzPageHeaderModule, NzSkeletonModule, NzToolTipModule } from 'ng-zorro-antd';
+import { PostModule } from '../post';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,10 @@ import { NzButtonModule, NzListModule, NzPageHeaderModule, NzSkeletonModule } fr
         NzListModule,
         NzButtonModule,
         NzSkeletonModule,
-        NzPageHeaderModule
+        NzPageHeaderModule,
+        NzToolTipModule,
+        NzIconModule,
+        PostModule
     ],
     exports: [
         UserCenterComponent,

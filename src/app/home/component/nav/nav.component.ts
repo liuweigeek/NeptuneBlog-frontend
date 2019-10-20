@@ -3,7 +3,8 @@ import { NzMenuItemDirective } from 'ng-zorro-antd';
 
 export class NavMenuItem {
   title: string;
-  icon: string;
+  icon?: string;
+  img?: string;
   link: string;
 }
 

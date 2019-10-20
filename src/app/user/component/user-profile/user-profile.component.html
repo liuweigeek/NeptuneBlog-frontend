@@ -1,1 +1,41 @@
-<p>user-profile works!</p>
+<div class="container">
+    <nz-page-header nzTitle="Scott Lau"></nz-page-header>
+    <div class="user-card">
+        <div class="user-background"></div>
+        <div class="user-profile">
+            <img class="user-avatar" [src]="user ? user.normalAvatar : ''" alt="user avatar">
+            <button nz-button nzType="primary" nzShape="round" nzGhost nzSize="large" class="user-edit-profile">
+                编辑资料
+            </button>
+            <div class="user-info-zone">
+                <div class="user-nickname">{{user ? user.nickname : ''}}</div>
+                <div class="user-username">@{{user ? user.username : ''}}</div>
+                <div class="user-more-info">
+                    <span class="user-more-info-item">
+                        <i nz-tooltip nzTitle="Forward" nz-icon nzType="environment" theme="outline"></i>
+                        中华人民共和国
+                    </span>
+                    <span class="user-more-info-item">
+                        <i nz-tooltip nzTitle="Forward" nz-icon nzType="bulb" theme="outline"></i>
+                        出生于{{user ? (user.birthday | date: birthdayFormat) : ''}}
+                    </span>
+                    <span class="user-more-info-item">
+                        <i nz-tooltip nzTitle="Forward" nz-icon nzType="calendar" theme="outline"></i>
+                        {{user ? (user.registerDate | date: registerDateFormat) : ''}}加入
+                    </span>
+                </div>
+                <div class="user-relation-info">
+                    <span class="user-relation-info-item">
+                        <label class="user-relation-count">320</label> 正在关注
+                    </span>
+                    <span class="user-relation-info-item">
+                        <label class="user-relation-count">4</label> 个关注者
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="container-post-list">
+        <app-post-card *ngFor="let post of postList" [post]="post"></app-post-card>
+    </div>
+</div>

@@ -41,12 +41,12 @@ export class SignInComponent implements OnInit {
         }
 
         this.loginService.login(this.validateForm.controls.email.value, this.validateForm.controls.password.value)
-            .subscribe(response => {
-                if (response.isSuccess()) {
-                    this.userStoreService.setLoginUser(response.data);
+            .subscribe(res => {
+                if (res.isSuccess()) {
+                    this.userStoreService.setLoginUser(res.data);
                     this.router.navigate(['/home']);
                 } else {
-                    this.message.error(response.msg);
+                    this.message.error(res.msg);
                 }
             });
     }
