@@ -16,7 +16,6 @@ export class SignInComponent implements OnInit {
     validateForm: FormGroup;
 
     @Output() signInSuccess = new EventEmitter<User>();
-
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private message: NzMessageService,
@@ -43,8 +42,7 @@ export class SignInComponent implements OnInit {
         this.loginService.login(this.validateForm.controls.email.value, this.validateForm.controls.password.value)
             .subscribe(res => {
                 if (res.isSuccess()) {
-                    this.userStoreService.setLoginUser(res.data);
-                    this.router.navigate(['/home']);
+                    this.signInSuccess.emit(res.data);
                 } else {
                     this.message.error(res.msg);
                 }

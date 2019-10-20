@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../../shared/entity/user';
-import { UserStoreService } from '../../../shared/service/user-store.service';
+import { User } from '../../../shared/entity';
+import { UserStoreService } from '../../../shared/service';
 
 @Component({
     selector: 'app-login',
@@ -23,12 +23,12 @@ export class LoginComponent implements OnInit {
 
     handleSignInSuccess(user: User) {
         this.userStoreService.setLoginUser(user);
-        this.router.navigate(['home']);
+        this.router.navigate(['/home']);
     }
 
     handleSignUpSuccess(user: User) {
         this.userStoreService.setLoginUser(user);
-        this.router.navigate(['home']);
+        this.router.navigate(['/signIn']);
     }
 
 }

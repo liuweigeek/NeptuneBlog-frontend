@@ -49,4 +49,8 @@ export class PostZoneComponent implements OnInit {
             });
     }
 
+    publishPostSuccess(post: Post) {
+        console.log('send success', post);
+    }
+
 }

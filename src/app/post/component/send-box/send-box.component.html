@@ -1,25 +1,30 @@
 <div class="container">
-    <nz-comment>
-        <nz-avatar id="avatar" nz-comment-avatar nzIcon="user" nzSize="large" [nzSrc]="user.smallAvatar"></nz-avatar>
-        <nz-comment-content>
-            <nz-form-item id="form-textarea">
-                <label>
-                    <textarea [(ngModel)]="content" nz-input nzAutosize [placeholder]="placeHolder"></textarea>
-                </label>
-            </nz-form-item>
-            <nz-form-item id="controls-group">
-                <button nz-button nzType="default" nzShape="circle" class="attachment-control">
-                    <i nz-icon nzTheme="outline" nzType="file-image"></i>
-                </button>
-                <button nz-button nzType="default" nzShape="circle" class="attachment-control">
-                    <i nz-icon nzTheme="outline" nzType="smile"></i>
-                </button>
-                <button nz-button nzType="primary" nzShape="round" nzSize="default" class="publish-control"
-                        [nzLoading]="isSending" [disabled]="isSending || content.length <= 0"
-                        (click)="handleSubmit()">
-                    发布
-                </button>
-            </nz-form-item>
-        </nz-comment-content>
-    </nz-comment>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="handleSubmit()">
+        <nz-comment>
+            <nz-avatar id="avatar" nz-comment-avatar nzIcon="user" nzSize="large"
+                       [nzSrc]="user.smallAvatar"></nz-avatar>
+            <nz-comment-content>
+                <nz-form-item id="form-textarea">
+                    <label>
+                        <textarea formControlName="content" nz-input nzAutosize [placeholder]="placeHolder"></textarea>
+                    </label>
+                </nz-form-item>
+                <nz-form-item id="controls-group">
+                    <button nz-button nzType="default" nzShape="circle" class="attachment-control">
+                        <i nz-icon nzTheme="outline" nzType="file-image"></i>
+                    </button>
+                    <button nz-button nzType="default" nzShape="circle" class="attachment-control">
+                        <i nz-icon nzTheme="outline" nzType="smile"></i>
+                    </button>
+                    <button nz-button nzType="primary" nzShape="round" nzSize="default" class="publish-control"
+                            [nzLoading]="isSending"
+                            [disabled]="isSending
+                            || !validateForm.controls.content.value
+                            || validateForm.controls.content.value.length <= 0">
+                        发布
+                    </button>
+                </nz-form-item>
+            </nz-comment-content>
+        </nz-comment>
+    </form>
 </div>

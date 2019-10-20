@@ -16,7 +16,7 @@ import {
 import { PostZoneComponent } from './component/post-zone';
 import { PostDetailComponent } from './component/post-detail';
 import { SendBoxComponent } from './component/send-box';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -39,7 +39,8 @@ import { FormsModule } from '@angular/forms';
         NzFormModule,
         FormsModule,
         NzButtonModule,
-        NzInputModule
+        NzInputModule,
+        ReactiveFormsModule
     ]
 })
 export class PostModule {

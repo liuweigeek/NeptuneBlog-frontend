@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/entity';
 import { LoginService } from '../../service/login.service';
-import { UserStoreService } from '../../../shared/service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -20,8 +19,7 @@ export class SignUpComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private message: NzMessageService,
-                private loginService: LoginService,
-                private userStoreService: UserStoreService) {
+                private loginService: LoginService) {
     }
 
     ngOnInit(): void {
@@ -45,12 +43,11 @@ export class SignUpComponent implements OnInit {
         }
 
         this.loginService.register(this.getUserFromForm())
-            .subscribe(response => {
-                if (response.isSuccess()) {
-                    this.userStoreService.setLoginUser(response.data);
-                    this.router.navigate(['/signIn']);
+            .subscribe(res => {
+                if (res.isSuccess()) {
+                    this.signUpSuccess.emit(res.data);
                 } else {
-                    this.message.error(response.msg);
+                    this.message.error(res.msg);
                 }
             });
     }

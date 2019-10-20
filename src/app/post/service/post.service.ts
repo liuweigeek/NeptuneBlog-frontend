@@ -14,6 +14,19 @@ export class PostService {
     constructor(private http: HttpClient) {
     }
 
+    publishPost(post: Post): Observable<ServerResponse<Post>> {
+        return this.http.post<ServerResponse<Post>>(
+            `${environment.baseUrl}/post/post/sendPost`,
+            post
+        ).pipe(
+            map(result => Object.assign(new ServerResponse(), result)),
+            timeout(environment.httpTimeout),
+            catchError(() =>
+                of(ServerResponse.createByErrorMsg('发送失败'))
+            )
+        );
+    }
+
     getPostsByUserId(authorId: string, pageable: Pageable<any>): Observable<ServerResponse<Pageable<Post>>> {
         return this.http.get<ServerResponse<Post[]>>(
             `${environment.baseUrl}/post/post/getPostsByUserId`,

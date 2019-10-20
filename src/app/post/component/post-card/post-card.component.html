@@ -1,7 +1,9 @@
 <div class="container">
-    <nz-comment [nzAuthor]="post.authorNickname" [nzDatetime]="post.createDate | date: dateFormat">
+    <nz-comment [nzAuthor]="post.authorNickname"
+                [nzDatetime]="post.createDate | date: dateFormat">
         <nz-avatar nz-comment-avatar
                    nzIcon="user"
+                   routerLink="/home/{{post.authorId}}"
                    [nzSrc]="post.authorAvatar">
         </nz-avatar>
         <nz-comment-content>
