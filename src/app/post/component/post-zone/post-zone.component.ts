@@ -34,9 +34,9 @@ export class PostZoneComponent implements OnInit {
     getNextPosts() {
 
         this.postService.getFollowingPost(this.pageable)
-            .subscribe(response => {
-                if (response.isSuccess()) {
-                    const newPosts = response.data.records;
+            .subscribe(res => {
+                if (res.isSuccess()) {
+                    const newPosts = res.data.records;
                     if (newPosts.length > 0) {
                         this.postList = this.postList.concat(newPosts);
                         this.pageable.current++;
@@ -44,7 +44,7 @@ export class PostZoneComponent implements OnInit {
                         this.message.info('没有更多内容了');
                     }
                 } else {
-                    this.message.error(response.msg);
+                    this.message.error(res.msg);
                 }
             });
     }
