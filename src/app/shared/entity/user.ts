@@ -68,4 +68,31 @@ export interface User {
      * 登录Token信息
      */
     token?: string;
+
+    /**
+     * 关注状态
+     */
+    relationState: number;
+
+}
+
+/**
+ * 关系类型
+ */
+export enum RelationState {
+
+    /**
+     * 自己
+     */
+    SELF = 0,
+
+    /**
+     * 正在关注
+     */
+    FOLLOWING = 1,
+
+    /**
+     * 未关注
+     */
+    UN_FOLLOW = 2
 }

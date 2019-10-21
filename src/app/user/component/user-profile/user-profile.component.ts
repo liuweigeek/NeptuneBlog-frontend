@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Post, User } from '../../../shared/entity';
+import { Post, RelationState, User } from '../../../shared/entity';
 import { PostService } from '../../../post/service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Pageable } from '../../../shared/entity/pageable';
-import { UserService } from '../../service';
+import { FriendService, UserService } from '../../service';
+import { UserStoreService } from '../../../shared/service';
 
 @Component({
     selector: 'app-user-profile',
@@ -15,8 +16,9 @@ import { UserService } from '../../service';
 })
 export class UserProfileComponent implements OnInit {
 
-    userId$: Observable<string>;
-    user: User;
+    private userId$: Observable<string>;
+    private user: User;
+    private loginUser: User;
 
     private postList: Post[] = [];
 
@@ -29,13 +31,21 @@ export class UserProfileComponent implements OnInit {
     private registerDateFormat = 'yyyy年MM月';
 
     constructor(private activeRoute: ActivatedRoute,
+                private router: Router,
                 private message: NzMessageService,
+                private userStoreService: UserStoreService,
                 private userService: UserService,
+                private friendService: FriendService,
                 private postService: PostService) {
     }
 
     ngOnInit() {
 
+        this.loginUser = this.userStoreService.getLoginUser();
+        if (!this.loginUser) {
+            this.router.navigate(['/signIn']);
+            return;
+        }
         this.userId$ = this.activeRoute.paramMap.pipe(
             filter(params => params.has('userId')),
             map(params => params.get('userId'))
@@ -84,4 +94,35 @@ export class UserProfileComponent implements OnInit {
             });
     }
 
+    isSelf(): boolean {
+        return RelationState.SELF === this.user.relationState;
+    }
+
+    isFollowing(): boolean {
+        return RelationState.FOLLOWING === this.user.relationState;
+    }
+
+    handlerFollow() {
+        this.friendService.follow(this.user.id)
+            .subscribe(res => {
+                if (res.isSuccess()) {
+                    this.message.info(`已成功关注${this.user.nickname}`);
+                    this.user.relationState = RelationState.FOLLOWING;
+                } else {
+                    this.message.error(res.msg);
+                }
+            });
+    }
+
+    handlerCancelFollow() {
+        this.friendService.cancelFollow(this.user.id)
+            .subscribe(res => {
+                if (res.isSuccess()) {
+                    this.message.success('已取消关注');
+                    this.user.relationState = RelationState.UN_FOLLOW;
+                } else {
+                    this.message.error(res.msg);
+                }
+            });
+    }
 }

@@ -13,7 +13,7 @@ export class NavService {
 
     user = this.userStoreService.getLoginUser();
     navMenuItems: NavMenuItem[] = [
-        {title: '主页', icon: 'home', link: ''},
+        {title: '主页', icon: 'home', link: '/'},
         {title: '好友圈', icon: 'team', link: ''},
         {title: '探索', icon: 'compass', link: ''},
         {title: '通知', icon: 'notification', link: ''},

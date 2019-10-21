@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Pageable } from '../../shared/entity/pageable';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ServerResponse, User } from '../../shared/entity';
 import { environment } from '../../../environments/environment';
 import { catchError, map, timeout } from 'rxjs/operators';
@@ -14,6 +14,12 @@ export class FriendService {
     constructor(private http: HttpClient) {
     }
 
+    /**
+     * 获取正在关注的用户
+     * @param pageable          分页
+     * @param successCallback   获取成功回调
+     * @param failedCallback    获取失败回调
+     */
     getFollowingUsers(
         pageable: Pageable<any>,
         successCallback: (res: ServerResponse<Pageable<User>>) => void,
@@ -30,13 +36,42 @@ export class FriendService {
         ).pipe(
             map(result => Object.assign(new ServerResponse<Pageable<User>>(), result)),
             timeout(environment.httpTimeout),
-            catchError(() => this.handleError())
-        ).subscribe(response => {
-            response.isSuccess() ? successCallback(response) : failedCallback(response);
+            catchError(() => of(ServerResponse.createByErrorMsg('获取关注人失败')))
+        ).subscribe(res => {
+            res.isSuccess() ? successCallback(res) : failedCallback(res);
         });
     }
 
-    private handleError() {
-        return of(ServerResponse.createByErrorMsg('操作失败'));
+    /**
+     * 关注用户
+     * @param userId    用户ID
+     */
+    follow(userId: string): Observable<ServerResponse<any>> {
+        return this.http.post<ServerResponse<any>>(
+            `${environment.baseUrl}/user/friend/follow`,
+            userId
+        ).pipe(
+            map(result => Object.assign(new ServerResponse(), result)),
+            timeout(environment.httpTimeout),
+            catchError(() =>
+                of(ServerResponse.createByErrorMsg('关注失败'))
+            )
+        );
+    }
+
+    /**
+     * 取消关注
+     * @param userId    用户ID
+     */
+    cancelFollow(userId: string): Observable<ServerResponse<any>> {
+        return this.http.delete<ServerResponse<any>>(
+            `${environment.baseUrl}/user/friend/cancelFollow/${userId}`
+        ).pipe(
+            map(result => Object.assign(new ServerResponse(), result)),
+            timeout(environment.httpTimeout),
+            catchError(() =>
+                of(ServerResponse.createByErrorMsg('取消关注失败'))
+            )
+        );
     }
 }

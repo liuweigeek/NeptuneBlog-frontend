@@ -4,8 +4,18 @@
         <div class="user-background"></div>
         <div class="user-profile">
             <img class="user-avatar" [src]="user ? user.normalAvatar : ''" alt="user avatar">
-            <button nz-button nzType="primary" nzShape="round" nzGhost nzSize="large" class="user-edit-profile">
+            <button *ngIf="user && isSelf()" nz-button nzType="primary" nzShape="round" nzGhost nzSize="large"
+                    class="user-edit-profile">
                 编辑资料
+            </button>
+            <button *ngIf="user && !isSelf() && isFollowing()" nz-button nzType="primary" nzShape="round" nzGhost nzSize="large"
+                    class="user-edit-profile" (click)="handlerCancelFollow()">
+                关注中
+            </button>
+            <button *ngIf="user && !isSelf() && !isFollowing()" nz-button nzType="primary" nzShape="round" nzGhost
+                    nzSize="large"
+                    class="user-edit-profile" (click)="handlerFollow()">
+                关注
             </button>
             <div class="user-info-zone">
                 <div class="user-nickname">{{user ? user.nickname : ''}}</div>
