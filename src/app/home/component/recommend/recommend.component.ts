@@ -13,7 +13,9 @@ export class RecommendComponent implements OnInit {
     '#Google I/O',
     '#Steve Jobs'
   ];
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

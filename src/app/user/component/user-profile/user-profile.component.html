@@ -8,7 +8,8 @@
                     class="user-edit-profile">
                 编辑资料
             </button>
-            <button *ngIf="user && !isSelf() && isFollowing()" nz-button nzType="primary" nzShape="round" nzGhost nzSize="large"
+            <button *ngIf="user && !isSelf() && isFollowing()" nz-button nzType="primary" nzShape="round" nzGhost
+                    nzSize="large"
                     class="user-edit-profile" (click)="handlerCancelFollow()">
                 关注中
             </button>

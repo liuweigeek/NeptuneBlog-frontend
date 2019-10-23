@@ -18,25 +18,25 @@ import { HomeModule } from './home';
 registerLocaleData(zh);
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        NzFormModule,
-        NgZorroAntdModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        NzMessageModule,
-        HomeModule
-    ],
-    providers: [
-        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-        {provide: NZ_I18N, useValue: zh_CN}
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NzFormModule,
+    NgZorroAntdModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NzMessageModule,
+    HomeModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: NZ_I18N, useValue: zh_CN}
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

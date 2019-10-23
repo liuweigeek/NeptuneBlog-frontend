@@ -10,119 +10,119 @@ import { FriendService, UserService } from '../../service';
 import { UserStoreService } from '../../../shared/service';
 
 @Component({
-    selector: 'app-user-profile',
-    templateUrl: './user-profile.component.html',
-    styleUrls: ['./user-profile.component.css']
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
 
-    private userId$: Observable<string>;
-    private user: User;
-    private loginUser: User;
+  private userId$: Observable<string>;
+  private user: User;
+  private loginUser: User;
 
-    private postList: Post[] = [];
+  private postList: Post[] = [];
 
-    private pageable: Pageable<any> = {
-        current: 1,
-        size: 30
-    };
+  private pageable: Pageable<any> = {
+    current: 1,
+    size: 30
+  };
 
-    private birthdayFormat = 'yyyy年MM月dd日';
-    private registerDateFormat = 'yyyy年MM月';
+  private birthdayFormat = 'yyyy年MM月dd日';
+  private registerDateFormat = 'yyyy年MM月';
 
-    constructor(private activeRoute: ActivatedRoute,
-                private router: Router,
-                private message: NzMessageService,
-                private userStoreService: UserStoreService,
-                private userService: UserService,
-                private friendService: FriendService,
-                private postService: PostService) {
+  constructor(private activeRoute: ActivatedRoute,
+              private router: Router,
+              private message: NzMessageService,
+              private userStoreService: UserStoreService,
+              private userService: UserService,
+              private friendService: FriendService,
+              private postService: PostService) {
+  }
+
+  ngOnInit() {
+
+    this.loginUser = this.userStoreService.getLoginUser();
+    if (!this.loginUser) {
+      this.router.navigate(['/signIn']);
+      return;
     }
+    this.userId$ = this.activeRoute.paramMap.pipe(
+      filter(params => params.has('userId')),
+      map(params => params.get('userId'))
+    );
 
-    ngOnInit() {
+    this.userId$.subscribe(userId => {
+      this.getUserInfo(userId);
+      this.getPosts(userId);
+    });
 
-        this.loginUser = this.userStoreService.getLoginUser();
-        if (!this.loginUser) {
-            this.router.navigate(['/signIn']);
-            return;
+  }
+
+  /**
+   * 获取用户信息
+   * @param userId    用户ID
+   */
+  getUserInfo(userId: string) {
+    this.userService.getUserInfo(userId)
+      .subscribe(res => {
+        if (res.isSuccess()) {
+          this.user = res.data;
+        } else {
+          this.message.error(res.msg);
         }
-        this.userId$ = this.activeRoute.paramMap.pipe(
-            filter(params => params.has('userId')),
-            map(params => params.get('userId'))
-        );
+      });
+  }
 
-        this.userId$.subscribe(userId => {
-            this.getUserInfo(userId);
-            this.getPosts(userId);
-        });
+  /**
+   * 获取用户推文
+   * @param userId    用户ID
+   */
+  getPosts(userId: string) {
+    this.postService.getPostsByUserId(userId, this.pageable)
+      .subscribe(res => {
+        if (res.isSuccess()) {
+          const newPosts = res.data.records;
+          if (newPosts.length > 0) {
+            this.postList = this.postList.concat(newPosts);
+            this.pageable.current++;
+          } else {
+            this.message.info('没有更多内容了');
+          }
+        } else {
+          this.message.error(res.msg);
+        }
+      });
+  }
 
-    }
+  isSelf(): boolean {
+    return RelationState.SELF === this.user.relationState;
+  }
 
-    /**
-     * 获取用户信息
-     * @param userId    用户ID
-     */
-    getUserInfo(userId: string) {
-        this.userService.getUserInfo(userId)
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    this.user = res.data;
-                } else {
-                    this.message.error(res.msg);
-                }
-            });
-    }
+  isFollowing(): boolean {
+    return RelationState.FOLLOWING === this.user.relationState;
+  }
 
-    /**
-     * 获取用户推文
-     * @param userId    用户ID
-     */
-    getPosts(userId: string) {
-        this.postService.getPostsByUserId(userId, this.pageable)
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    const newPosts = res.data.records;
-                    if (newPosts.length > 0) {
-                        this.postList = this.postList.concat(newPosts);
-                        this.pageable.current++;
-                    } else {
-                        this.message.info('没有更多内容了');
-                    }
-                } else {
-                    this.message.error(res.msg);
-                }
-            });
-    }
+  handlerFollow() {
+    this.friendService.follow(this.user.id)
+      .subscribe(res => {
+        if (res.isSuccess()) {
+          this.message.info(`已成功关注${this.user.nickname}`);
+          this.user.relationState = RelationState.FOLLOWING;
+        } else {
+          this.message.error(res.msg);
+        }
+      });
+  }
 
-    isSelf(): boolean {
-        return RelationState.SELF === this.user.relationState;
-    }
-
-    isFollowing(): boolean {
-        return RelationState.FOLLOWING === this.user.relationState;
-    }
-
-    handlerFollow() {
-        this.friendService.follow(this.user.id)
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    this.message.info(`已成功关注${this.user.nickname}`);
-                    this.user.relationState = RelationState.FOLLOWING;
-                } else {
-                    this.message.error(res.msg);
-                }
-            });
-    }
-
-    handlerCancelFollow() {
-        this.friendService.cancelFollow(this.user.id)
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    this.message.success('已取消关注');
-                    this.user.relationState = RelationState.UN_FOLLOW;
-                } else {
-                    this.message.error(res.msg);
-                }
-            });
-    }
+  handlerCancelFollow() {
+    this.friendService.cancelFollow(this.user.id)
+      .subscribe(res => {
+        if (res.isSuccess()) {
+          this.message.success('已取消关注');
+          this.user.relationState = RelationState.UN_FOLLOW;
+        } else {
+          this.message.error(res.msg);
+        }
+      });
+  }
 }

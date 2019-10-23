@@ -5,54 +5,54 @@ import { PostService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
-    selector: 'app-send-box',
-    templateUrl: './send-box.component.html',
-    styleUrls: ['./send-box.component.css']
+  selector: 'app-send-box',
+  templateUrl: './send-box.component.html',
+  styleUrls: ['./send-box.component.css']
 })
 export class SendBoxComponent implements OnInit {
 
-    private isSending = false;
-    private placeHolder = '有什么新鲜事?';
+  private isSending = false;
+  private placeHolder = '有什么新鲜事?';
 
-    validateForm: FormGroup;
+  validateForm: FormGroup;
 
-    @Input() user: User;
-    @Output() publishSuccess = new EventEmitter<Post>();
+  @Input() user: User;
+  @Output() publishSuccess = new EventEmitter<Post>();
 
-    constructor(private fb: FormBuilder,
-                private postService: PostService,
-                private message: NzMessageService) {
+  constructor(private fb: FormBuilder,
+              private postService: PostService,
+              private message: NzMessageService) {
+  }
+
+  ngOnInit() {
+    this.validateForm = this.fb.group({
+      content: [null, [Validators.required, Validators.maxLength(200)]]
+    });
+  }
+
+  handleSubmit() {
+    for (const i in this.validateForm.controls) {
+      if (this.validateForm.controls.hasOwnProperty(i)) {
+        this.validateForm.controls[i].markAsDirty();
+        this.validateForm.controls[i].updateValueAndValidity();
+      }
     }
 
-    ngOnInit() {
-        this.validateForm = this.fb.group({
-            content: [null, [Validators.required, Validators.maxLength(200)]]
-        });
-    }
-
-    handleSubmit() {
-        for (const i in this.validateForm.controls) {
-            if (this.validateForm.controls.hasOwnProperty(i)) {
-                this.validateForm.controls[i].markAsDirty();
-                this.validateForm.controls[i].updateValueAndValidity();
-            }
+    this.postService.publishPost(this.getPostFromForm())
+      .subscribe(res => {
+        if (res.isSuccess()) {
+          this.message.success('发送成功');
+          this.publishSuccess.emit(res.data);
+          this.validateForm.reset();
+        } else {
+          this.message.error(res.msg);
         }
+      });
+  }
 
-        this.postService.publishPost(this.getPostFromForm())
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    this.message.success('发送成功');
-                    this.publishSuccess.emit(res.data);
-                    this.validateForm.reset();
-                } else {
-                    this.message.error(res.msg);
-                }
-            });
-    }
-
-    getPostFromForm(): Post {
-        return {
-            content: this.validateForm.controls.content.value,
-        } as Post;
-    }
+  getPostFromForm(): Post {
+    return {
+      content: this.validateForm.controls.content.value,
+    } as Post;
+  }
 }

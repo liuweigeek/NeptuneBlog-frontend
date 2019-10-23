@@ -1,1 +1,1 @@
-export * from './user-settings.component'
+export * from './user-settings.component';

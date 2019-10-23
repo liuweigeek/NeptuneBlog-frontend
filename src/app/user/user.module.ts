@@ -10,30 +10,30 @@ import { NzButtonModule, NzIconModule, NzListModule, NzPageHeaderModule, NzSkele
 import { PostModule } from '../post';
 
 @NgModule({
-    declarations: [
-        UserCenterComponent,
-        UserSettingsComponent,
-        UserListComponent,
-        UserProfileComponent,
-        UserListComponent
-    ],
-    imports: [
-        CommonModule,
-        UserRoutingModule,
-        NzListModule,
-        NzButtonModule,
-        NzSkeletonModule,
-        NzPageHeaderModule,
-        NzToolTipModule,
-        NzIconModule,
-        PostModule
-    ],
-    exports: [
-        UserCenterComponent,
-        UserSettingsComponent,
-        UserListComponent,
-        UserProfileComponent
-    ]
+  declarations: [
+    UserCenterComponent,
+    UserSettingsComponent,
+    UserListComponent,
+    UserProfileComponent,
+    UserListComponent
+  ],
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    NzListModule,
+    NzButtonModule,
+    NzSkeletonModule,
+    NzPageHeaderModule,
+    NzToolTipModule,
+    NzIconModule,
+    PostModule
+  ],
+  exports: [
+    UserCenterComponent,
+    UserSettingsComponent,
+    UserListComponent,
+    UserProfileComponent
+  ]
 })
 export class UserModule {
 }

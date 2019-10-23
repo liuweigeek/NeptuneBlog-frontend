@@ -8,9 +8,9 @@ describe('PostZoneComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostZoneComponent ]
+      declarations: [PostZoneComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
