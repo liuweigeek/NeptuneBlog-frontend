@@ -16,11 +16,13 @@ export class FriendService {
 
   /**
    * 获取正在关注的用户
+   * @param userId            用户ID
    * @param pageable          分页
    * @param successCallback   获取成功回调
    * @param failedCallback    获取失败回调
    */
   getFollowingUsers(
+    userId: string,
     pageable: Pageable<any>,
     successCallback: (res: ServerResponse<Pageable<User>>) => void,
     failedCallback: (res: ServerResponse<Pageable<User>>) => void
@@ -29,6 +31,7 @@ export class FriendService {
       `${environment.baseUrl}/user/friend/findFollowing`,
       {
         params: {
+          fromId: userId,
           current: String(pageable.current),
           size: String(pageable.size)
         }
@@ -37,6 +40,37 @@ export class FriendService {
       map(result => Object.assign(new ServerResponse<Pageable<User>>(), result)),
       timeout(environment.httpTimeout),
       catchError(() => of(ServerResponse.createByErrorMsg('获取关注人失败')))
+    ).subscribe(res => {
+      res.isSuccess() ? successCallback(res) : failedCallback(res);
+    });
+  }
+
+  /**
+   * 获取关注者
+   * @param userId            用户ID
+   * @param pageable          分页
+   * @param successCallback   获取成功回调
+   * @param failedCallback    获取失败回调
+   */
+  getFollowerUsers(
+    userId: string,
+    pageable: Pageable<any>,
+    successCallback: (res: ServerResponse<Pageable<User>>) => void,
+    failedCallback: (res: ServerResponse<Pageable<User>>) => void
+  ) {
+    return this.http.get<ServerResponse<User[]>>(
+      `${environment.baseUrl}/user/friend/findFollower`,
+      {
+        params: {
+          toId: userId,
+          current: String(pageable.current),
+          size: String(pageable.size)
+        }
+      }
+    ).pipe(
+      map(result => Object.assign(new ServerResponse<Pageable<User>>(), result)),
+      timeout(environment.httpTimeout),
+      catchError(() => of(ServerResponse.createByErrorMsg('获取关注者失败')))
     ).subscribe(res => {
       res.isSuccess() ? successCallback(res) : failedCallback(res);
     });

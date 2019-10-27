@@ -3,6 +3,9 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { FriendService } from '../../service';
 import { Pageable, ServerResponse, User } from '../../../shared/entity';
 import { environment } from '../../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-card',
@@ -11,38 +14,85 @@ import { environment } from '../../../../environments/environment';
 })
 export class UserListComponent implements OnInit {
 
-  loading = false;
-  userList: User[] = [];
+  private userId$: Observable<string>;
+  private userId: string;
+  private title = '';
+  private following: boolean;
+  private loading = false;
+  private userList: User[] = [];
 
   private pageable: Pageable<any> = {
     current: 1,
     size: environment.pageSize
   };
 
-  constructor(private friendService: FriendService, private message: NzMessageService) {
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private friendService: FriendService,
+    private message: NzMessageService) {
   }
 
   ngOnInit(): void {
-    this.getFollowings();
+
+    this.userId$ = this.activeRoute.paramMap.pipe(
+      filter(params => {
+        return params.has('userId');
+      }),
+      map(params => params.get('userId'))
+    );
+
+    this.userId$.subscribe(userId => {
+      this.userId = userId;
+    });
+
+    this.userId$.subscribe(() => {
+      if (this.router.url.endsWith('followings')) {
+        this.following = true;
+        this.title = '正在关注';
+        this.getFollowings();
+      } else if (this.router.url.endsWith('followers')) {
+        this.following = true;
+        this.title = '关注者';
+        this.getFollowers();
+      }
+    });
+
   }
 
   getFollowings() {
     this.loading = true;
-    this.friendService.getFollowingUsers(this.pageable,
+    this.friendService.getFollowingUsers(this.userId, this.pageable,
       (res: ServerResponse<Pageable<User>>) => {
-        this.loading = false;
-        const newUsers = res.data.records;
-        if (newUsers.length > 0) {
-          this.userList = this.userList.concat(newUsers);
-          this.pageable.current++;
-        } else {
-          this.message.info('没有更多内容了');
-        }
+        this.successCallBack(res);
       },
       (res: ServerResponse<any>) => {
         this.loading = false;
         this.message.error(res.msg);
       });
+  }
+
+  getFollowers() {
+    this.loading = true;
+    this.friendService.getFollowerUsers(this.userId, this.pageable,
+      (res: ServerResponse<Pageable<User>>) => {
+        this.successCallBack(res);
+      },
+      (res: ServerResponse<any>) => {
+        this.loading = false;
+        this.message.error(res.msg);
+      });
+  }
+
+  successCallBack(res: ServerResponse<Pageable<User>>) {
+    this.loading = false;
+    const newUsers = res.data.records;
+    if (newUsers.length > 0) {
+      this.userList = this.userList.concat(newUsers);
+      this.pageable.current++;
+    } else {
+      this.message.info('没有更多内容了');
+    }
   }
 
 }

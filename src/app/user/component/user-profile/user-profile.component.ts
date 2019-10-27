@@ -41,10 +41,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
 
     this.loginUser = this.userStoreService.getLoginUser();
-    if (!this.loginUser) {
-      this.router.navigate(['/signIn']);
-      return;
-    }
     this.userId$ = this.activeRoute.paramMap.pipe(
       filter(params => params.has('userId')),
       map(params => params.get('userId'))

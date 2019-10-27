@@ -38,12 +38,12 @@
                     </span>
                 </div>
                 <div class="user-relation-info">
-                    <span class="user-relation-info-item">
-                        <label class="user-relation-count">{{user.followingCount}}</label> 正在关注
-                    </span>
-                    <span class="user-relation-info-item">
-                        <label class="user-relation-count">{{user.followerCount}}</label> 个关注者
-                    </span>
+                    <a class="user-relation-info-item" [routerLink]="user ? '/home/' + user.id + '/followings' : ''">
+                        <label class="user-relation-count">{{user ? user.followingCount : 0}}</label> 正在关注
+                    </a>
+                    <a class="user-relation-info-item" [routerLink]="user ? '/home/' + user.id + '/followers' : ''">
+                        <label class="user-relation-count">{{user ? user.followerCount : 0}}</label> 个关注者
+                    </a>
                 </div>
             </div>
         </div>

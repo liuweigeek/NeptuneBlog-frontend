@@ -5,11 +5,13 @@ import { UserListComponent } from '../user/component/user-list';
 import { PostZoneComponent } from '../post/component/post-zone';
 import { UserProfileComponent } from '../user/component/user-profile';
 import { SearchResultListComponent } from '../search/component/search-result-list';
+import { AuthGuard } from '../shared/guard';
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -21,22 +23,25 @@ const routes: Routes = [
         component: PostZoneComponent
       },
       {
-        path: 'followings',
+        path: 'search/:keyword',
+        component: SearchResultListComponent
+      },
+      {
+        path: ':userId/followings',
         component: UserListComponent,
         pathMatch: 'full'
       },
       {
-        path: 'followers',
+        path: ':userId/followers',
         component: UserListComponent,
         pathMatch: 'full'
       },
       {
         path: ':userId',
-        component: UserProfileComponent
-      },
-      {
-        path: 'search/:keyword',
-        component: SearchResultListComponent
+        component: UserProfileComponent,
+        children: [
+
+        ]
       }
     ]
   }

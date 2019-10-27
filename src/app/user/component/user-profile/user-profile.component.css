@@ -70,6 +70,11 @@ nz-page-header {
 
 .user-relation-info-item {
     margin-right: 10px;
+    color: rgba(0,0,0,.65);
+}
+
+.user-relation-info-item:hover {
+    text-decoration: underline;
 }
 
 .user-relation-count {

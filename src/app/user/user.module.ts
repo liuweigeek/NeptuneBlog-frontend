@@ -6,7 +6,15 @@ import { UserCenterComponent } from './component/user-center';
 import { UserSettingsComponent } from './component/user-settings';
 import { UserListComponent } from './component/user-list';
 import { UserProfileComponent } from './component/user-profile';
-import { NzButtonModule, NzIconModule, NzListModule, NzPageHeaderModule, NzSkeletonModule, NzToolTipModule } from 'ng-zorro-antd';
+import {
+  NzAvatarModule,
+  NzButtonModule,
+  NzIconModule,
+  NzListModule,
+  NzPageHeaderModule,
+  NzSkeletonModule,
+  NzToolTipModule
+} from 'ng-zorro-antd';
 import { PostModule } from '../post';
 import { UserItemComponent } from './component/user-item/user-item.component';
 
@@ -28,7 +36,8 @@ import { UserItemComponent } from './component/user-item/user-item.component';
     NzPageHeaderModule,
     NzToolTipModule,
     NzIconModule,
-    PostModule
+    PostModule,
+    NzAvatarModule
   ],
   exports: [
     UserCenterComponent,

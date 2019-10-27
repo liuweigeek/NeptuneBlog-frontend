@@ -80,7 +80,7 @@ export interface User {
   followingCount: number;
 
   /**
-   * 粉丝数量
+   * 关注者数量
    */
   followerCount: number;
 
