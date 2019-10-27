@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SearchRoutingModule } from './search-routing.module';
 import { SearchResultListComponent } from './component/search-result-list';
-import { NzPageHeaderModule } from 'ng-zorro-antd';
+import { NzIconModule, NzInputModule, NzListModule, NzPageHeaderModule, NzToolTipModule } from 'ng-zorro-antd';
 import { PostModule } from '../post';
+import { UserModule } from '../user';
 
 @NgModule({
   declarations: [SearchResultListComponent],
   imports: [
     CommonModule,
-    SearchRoutingModule,
     NzPageHeaderModule,
-    PostModule
+    PostModule,
+    NzInputModule,
+    NzIconModule,
+    NzToolTipModule,
+    UserModule,
+    NzListModule
   ],
   exports: [SearchResultListComponent]
 })

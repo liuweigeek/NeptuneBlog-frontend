@@ -8,14 +8,16 @@
                     class="user-edit-profile">
                 编辑资料
             </button>
-            <button *ngIf="user && !isSelf() && isFollowing()" nz-button nzType="primary" nzShape="round" nzGhost
+            <button *ngIf="user && !isSelf() && isFollowing()"
+                    nz-button nzType="primary" nzShape="round" nzGhost
                     nzSize="large"
-                    class="user-edit-profile" (click)="handlerCancelFollow()">
+                    class="user-edit-profile" (click)="handleCancelFollow()">
                 关注中
             </button>
-            <button *ngIf="user && !isSelf() && !isFollowing()" nz-button nzType="primary" nzShape="round" nzGhost
+            <button *ngIf="user && !isSelf() && !isFollowing()"
+                    nz-button nzType="primary" nzShape="round" nzGhost
                     nzSize="large"
-                    class="user-edit-profile" (click)="handlerFollow()">
+                    class="user-edit-profile" (click)="handleFollow()">
                 关注
             </button>
             <div class="user-info-zone">
@@ -37,10 +39,10 @@
                 </div>
                 <div class="user-relation-info">
                     <span class="user-relation-info-item">
-                        <label class="user-relation-count">320</label> 正在关注
+                        <label class="user-relation-count">{{user.followingCount}}</label> 正在关注
                     </span>
                     <span class="user-relation-info-item">
-                        <label class="user-relation-count">4</label> 个关注者
+                        <label class="user-relation-count">{{user.followerCount}}</label> 个关注者
                     </span>
                 </div>
             </div>

@@ -72,27 +72,32 @@ export interface User {
   /**
    * 关注状态
    */
-  relationState: number;
+  relation: number;
+
+  /**
+   * 正在关注用户数量
+   */
+  followingCount: number;
+
+  /**
+   * 粉丝数量
+   */
+  followerCount: number;
 
 }
 
 /**
  * 关系类型
  */
-export enum RelationState {
-
-  /**
-   * 自己
-   */
-  SELF = 0,
-
-  /**
-   * 正在关注
-   */
-  FOLLOWING = 1,
+export enum Relation {
 
   /**
    * 未关注
    */
-  UN_FOLLOW = 2
+  UN_FOLLOW = 0,
+
+  /**
+   * 正在关注
+   */
+  FOLLOWING = 1
 }

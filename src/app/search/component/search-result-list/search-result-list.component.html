@@ -1,6 +1,17 @@
 <div class="container">
-    <nz-page-header nzTitle="主页"></nz-page-header>
-    <div id="container-post-list">
+    <nz-page-header nzBackIcon nzTitle="搜索 '{{keyword}}'"></nz-page-header>
+    <div *ngIf="userList && userList.length > 0" id="container-user-list">
+        <nz-page-header nzTitle="用户"></nz-page-header>
+        <nz-list [nzDataSource]="userList"
+                 [nzRenderItem]="item"
+                 [nzItemLayout]="'horizontal'">
+            <ng-template #item let-user>
+                <app-user-item [user]="user"></app-user-item>
+            </ng-template>
+        </nz-list>
+    </div>
+    <div *ngIf="postList && postList.length > 0" id="container-post-list">
+        <nz-page-header nzTitle="推文"></nz-page-header>
         <app-post-card *ngFor="let post of postList" [post]="post"></app-post-card>
     </div>
 </div>

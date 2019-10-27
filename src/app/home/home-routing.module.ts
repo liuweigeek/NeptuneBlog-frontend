@@ -4,6 +4,7 @@ import { HomeComponent } from './component/home';
 import { UserListComponent } from '../user/component/user-list';
 import { PostZoneComponent } from '../post/component/post-zone';
 import { UserProfileComponent } from '../user/component/user-profile';
+import { SearchResultListComponent } from '../search/component/search-result-list';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: ':userId',
         component: UserProfileComponent
+      },
+      {
+        path: 'search/:keyword',
+        component: SearchResultListComponent
       }
     ]
   }

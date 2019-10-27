@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { FriendService } from '../../service';
-import { Pageable } from '../../../shared/entity/pageable';
-import { ServerResponse, User } from '../../../shared/entity';
+import { Pageable, ServerResponse, User } from '../../../shared/entity';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -44,10 +43,6 @@ export class UserListComponent implements OnInit {
         this.loading = false;
         this.message.error(res.msg);
       });
-  }
-
-  handleFollow(userId: number): void {
-    this.message.success(userId.toString());
   }
 
 }

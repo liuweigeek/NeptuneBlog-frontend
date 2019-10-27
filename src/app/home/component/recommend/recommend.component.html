@@ -1,7 +1,7 @@
 <div class="container">
     <div id="search-bar" class="zone">
         <nz-input-group nzSize="large" [nzSuffix]="suffixTemplate" [nzPrefix]="prefixTemplate">
-            <input type="text" nz-input placeholder="搜索 Neptune Blog"/>
+            <input type="text" nz-input placeholder="搜索 Neptune Blog" (keyup.enter)="search($event)"/>
         </nz-input-group>
         <ng-template #prefixTemplate>
             <i nz-icon nzType="search"></i>

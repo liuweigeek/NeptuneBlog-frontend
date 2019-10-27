@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Post, RelationState, User } from '../../../shared/entity';
+import { Pageable, Post, Relation, User } from '../../../shared/entity';
 import { PostService } from '../../../post/service';
 import { NzMessageService } from 'ng-zorro-antd';
-import { Pageable } from '../../../shared/entity/pageable';
 import { FriendService, UserService } from '../../service';
 import { UserStoreService } from '../../../shared/service';
 
@@ -95,31 +94,31 @@ export class UserProfileComponent implements OnInit {
   }
 
   isSelf(): boolean {
-    return RelationState.SELF === this.user.relationState;
+    return this.loginUser.id === this.user.id;
   }
 
   isFollowing(): boolean {
-    return RelationState.FOLLOWING === this.user.relationState;
+    return Relation.FOLLOWING === this.user.relation;
   }
 
-  handlerFollow() {
+  handleFollow() {
     this.friendService.follow(this.user.id)
       .subscribe(res => {
         if (res.isSuccess()) {
           this.message.info(`已成功关注${this.user.nickname}`);
-          this.user.relationState = RelationState.FOLLOWING;
+          this.user.relation = Relation.FOLLOWING;
         } else {
           this.message.error(res.msg);
         }
       });
   }
 
-  handlerCancelFollow() {
+  handleCancelFollow() {
     this.friendService.cancelFollow(this.user.id)
       .subscribe(res => {
         if (res.isSuccess()) {
           this.message.success('已取消关注');
-          this.user.relationState = RelationState.UN_FOLLOW;
+          this.user.relation = Relation.UN_FOLLOW;
         } else {
           this.message.error(res.msg);
         }

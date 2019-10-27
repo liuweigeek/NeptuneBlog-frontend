@@ -8,6 +8,7 @@ import { UserListComponent } from './component/user-list';
 import { UserProfileComponent } from './component/user-profile';
 import { NzButtonModule, NzIconModule, NzListModule, NzPageHeaderModule, NzSkeletonModule, NzToolTipModule } from 'ng-zorro-antd';
 import { PostModule } from '../post';
+import { UserItemComponent } from './component/user-item/user-item.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PostModule } from '../post';
     UserSettingsComponent,
     UserListComponent,
     UserProfileComponent,
-    UserListComponent
+    UserListComponent,
+    UserItemComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { PostModule } from '../post';
     UserCenterComponent,
     UserSettingsComponent,
     UserListComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserItemComponent
   ]
 })
 export class UserModule {

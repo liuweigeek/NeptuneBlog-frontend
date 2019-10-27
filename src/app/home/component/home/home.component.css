@@ -6,3 +6,13 @@
 .zone {
     height: 100%;
 }
+
+app-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    height: 100%;
+}

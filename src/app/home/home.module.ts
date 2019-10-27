@@ -23,6 +23,7 @@ import { NavComponent } from './component/nav';
 import { ContentComponent } from './component/content';
 import { RecommendComponent } from './component/recommend';
 import { UserModule } from '../user';
+import { SearchModule } from '../search';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UserModule } from '../user';
     NzButtonModule,
     NzListModule,
     PostModule,
-    UserModule
+    UserModule,
+    SearchModule
   ]
 })
 export class HomeModule {

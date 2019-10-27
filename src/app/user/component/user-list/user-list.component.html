@@ -5,18 +5,7 @@
              [nzItemLayout]="'horizontal'"
              [nzLoading]="loading">
         <ng-template #item let-user>
-            <nz-list-item [nzActions]="[follow, cancelFollow]">
-                <nz-list-item-meta
-                        [nzTitle]="nzTitle"
-                        [nzAvatar]="user.smallAvatar"
-                        [nzDescription]="user.nickname">
-                    <ng-template #nzTitle>
-                        <a href="https://ng.ant.design">{{ user.username }}</a>
-                    </ng-template>
-                    <ng-template #follow><a (click)="handleFollow(user.id)">关注</a></ng-template>
-                    <ng-template #cancelFollow><a (click)="handleFollow(user.id)">取消关注</a></ng-template>
-                </nz-list-item-meta>
-            </nz-list-item>
+            <app-user-item [user]="user"></app-user-item>
         </ng-template>
     </nz-list>
 </div>
