@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Relation, User } from '../../../shared/entity';
 import { FriendService } from '../../service';
@@ -7,7 +7,8 @@ import { UserStoreService } from '../../../shared/service';
 @Component({
   selector: 'app-user-item',
   templateUrl: './user-item.component.html',
-  styleUrls: ['./user-item.component.css']
+  styleUrls: ['./user-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserItemComponent implements OnInit {
 
@@ -19,7 +20,8 @@ export class UserItemComponent implements OnInit {
 
   constructor(private userStoreService: UserStoreService,
               private friendService: FriendService,
-              private message: NzMessageService) {
+              private message: NzMessageService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -46,6 +48,7 @@ export class UserItemComponent implements OnInit {
         if (res.isSuccess()) {
           this.message.info(`已成功关注${this.user.nickname}`);
           this.user.relation = Relation.FOLLOWING;
+          this.cd.markForCheck();
         } else {
           this.message.error(res.msg);
         }
@@ -58,6 +61,7 @@ export class UserItemComponent implements OnInit {
         if (res.isSuccess()) {
           this.message.success('已取消关注');
           this.user.relation = Relation.UN_FOLLOW;
+          this.cd.markForCheck();
         } else {
           this.message.error(res.msg);
         }

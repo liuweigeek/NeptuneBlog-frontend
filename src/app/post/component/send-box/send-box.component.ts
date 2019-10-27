@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post, User } from '../../../shared/entity';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../../service';
@@ -7,7 +7,8 @@ import { NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'app-send-box',
   templateUrl: './send-box.component.html',
-  styleUrls: ['./send-box.component.css']
+  styleUrls: ['./send-box.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SendBoxComponent implements OnInit {
 
@@ -21,7 +22,8 @@ export class SendBoxComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private postService: PostService,
-              private message: NzMessageService) {
+              private message: NzMessageService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class SendBoxComponent implements OnInit {
           this.message.success('发送成功');
           this.publishSuccess.emit(res.data);
           this.validateForm.reset();
+          this.cd.markForCheck();
         } else {
           this.message.error(res.msg);
         }

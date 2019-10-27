@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Pageable, Post, User } from '../../../shared/entity';
 import { UserStoreService } from '../../../shared/service';
 import { PostService } from '../../service';
@@ -8,7 +8,8 @@ import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-post-zone',
   templateUrl: './post-zone.component.html',
-  styleUrls: ['./post-zone.component.css']
+  styleUrls: ['./post-zone.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostZoneComponent implements OnInit {
 
@@ -22,16 +23,17 @@ export class PostZoneComponent implements OnInit {
 
   constructor(private userStoreService: UserStoreService,
               private postService: PostService,
-              private message: NzMessageService) {
+              private message: NzMessageService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     this.user = this.userStoreService.getLoginUser();
+    this.cd.markForCheck();
     this.getNextPosts();
   }
 
   getNextPosts() {
-
     this.postService.getFollowingPost(this.pageable)
       .subscribe(res => {
         if (res.isSuccess()) {
@@ -39,6 +41,7 @@ export class PostZoneComponent implements OnInit {
           if (newPosts.length > 0) {
             this.postList = this.postList.concat(newPosts);
             this.pageable.current++;
+            this.cd.markForCheck();
           } else {
             this.message.info('没有更多内容了');
           }

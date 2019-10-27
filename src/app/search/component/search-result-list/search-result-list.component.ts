@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Post, ServerResponse, User } from '../../../shared/entity';
 import { SearchService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -8,7 +8,8 @@ import { filter, map } from 'rxjs/operators';
 @Component({
   selector: 'app-search-result-list',
   templateUrl: './search-result-list.component.html',
-  styleUrls: ['./search-result-list.component.css']
+  styleUrls: ['./search-result-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchResultListComponent implements OnInit {
 
@@ -19,7 +20,8 @@ export class SearchResultListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private searchService: SearchService,
-              private message: NzMessageService) {
+              private message: NzMessageService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -28,6 +30,7 @@ export class SearchResultListComponent implements OnInit {
       map(params => params.get('keyword'))
     ).subscribe(keyword => {
       this.keyword = keyword;
+      this.cd.markForCheck();
       this.searchByKeyword(this.keyword);
     });
   }
@@ -46,6 +49,7 @@ export class SearchResultListComponent implements OnInit {
             const userRes = Object.assign(new ServerResponse<User[]>(), resultMap.get('userRes'));
             if (userRes.isSuccess()) {
               this.userList = userRes.data;
+              this.cd.markForCheck();
             } else {
               this.message.error(userRes.msg);
             }
@@ -55,6 +59,7 @@ export class SearchResultListComponent implements OnInit {
             const postRes = Object.assign(new ServerResponse<Post[]>(), resultMap.get('postRes'));
             if (postRes.isSuccess()) {
               this.postList = postRes.data;
+              this.cd.markForCheck();
             } else {
               this.message.error(postRes.msg);
             }

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recommend',
   templateUrl: './recommend.component.html',
-  styleUrls: ['./recommend.component.css']
+  styleUrls: ['./recommend.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecommendComponent implements OnInit {
 

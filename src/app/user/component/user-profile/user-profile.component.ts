@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -11,7 +11,8 @@ import { UserStoreService } from '../../../shared/service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserProfileComponent implements OnInit {
 
@@ -35,7 +36,8 @@ export class UserProfileComponent implements OnInit {
               private userStoreService: UserStoreService,
               private userService: UserService,
               private friendService: FriendService,
-              private postService: PostService) {
+              private postService: PostService,
+              private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -62,6 +64,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe(res => {
         if (res.isSuccess()) {
           this.user = res.data;
+          this.cd.markForCheck();
         } else {
           this.message.error(res.msg);
         }
@@ -80,6 +83,7 @@ export class UserProfileComponent implements OnInit {
           if (newPosts.length > 0) {
             this.postList = this.postList.concat(newPosts);
             this.pageable.current++;
+            this.cd.markForCheck();
           } else {
             this.message.info('没有更多内容了');
           }
@@ -103,6 +107,7 @@ export class UserProfileComponent implements OnInit {
         if (res.isSuccess()) {
           this.message.info(`已成功关注${this.user.nickname}`);
           this.user.relation = Relation.FOLLOWING;
+          this.cd.markForCheck();
         } else {
           this.message.error(res.msg);
         }
@@ -115,6 +120,7 @@ export class UserProfileComponent implements OnInit {
         if (res.isSuccess()) {
           this.message.success('已取消关注');
           this.user.relation = Relation.UN_FOLLOW;
+          this.cd.markForCheck();
         } else {
           this.message.error(res.msg);
         }

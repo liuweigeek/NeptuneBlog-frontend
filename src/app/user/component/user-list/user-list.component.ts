@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { FriendService } from '../../service';
 import { Pageable, ServerResponse, User } from '../../../shared/entity';
@@ -10,7 +10,8 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: ['./user-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent implements OnInit {
 
@@ -30,7 +31,8 @@ export class UserListComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private router: Router,
     private friendService: FriendService,
-    private message: NzMessageService) {
+    private message: NzMessageService,
+    private cd: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -50,10 +52,12 @@ export class UserListComponent implements OnInit {
       if (this.router.url.endsWith('followings')) {
         this.following = true;
         this.title = '正在关注';
+        this.cd.markForCheck();
         this.getFollowings();
       } else if (this.router.url.endsWith('followers')) {
         this.following = true;
         this.title = '关注者';
+        this.cd.markForCheck();
         this.getFollowers();
       }
     });
@@ -69,6 +73,7 @@ export class UserListComponent implements OnInit {
       (res: ServerResponse<any>) => {
         this.loading = false;
         this.message.error(res.msg);
+        this.cd.markForCheck();
       });
   }
 
@@ -81,7 +86,8 @@ export class UserListComponent implements OnInit {
       (res: ServerResponse<any>) => {
         this.loading = false;
         this.message.error(res.msg);
-      });
+        this.cd.markForCheck();
+    });
   }
 
   successCallBack(res: ServerResponse<Pageable<User>>) {
@@ -93,6 +99,7 @@ export class UserListComponent implements OnInit {
     } else {
       this.message.info('没有更多内容了');
     }
+    this.cd.markForCheck();
   }
 
 }
