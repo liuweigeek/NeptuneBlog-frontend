@@ -20,12 +20,8 @@ export class UserService {
       map(result => Object.assign(new ServerResponse<User>(), result)),
       timeout(environment.httpTimeout),
       catchError(() => {
-        return this.handleError();
+        return of(ServerResponse.createByErrorMsg('获取用户信息失败'));
       })
     );
-  }
-
-  private handleError() {
-    return of(ServerResponse.createByErrorMsg('操作失败'));
   }
 }

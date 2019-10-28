@@ -41,7 +41,7 @@ export class PostService {
       map(result => Object.assign(new ServerResponse<Pageable<Post>>(), result)),
       timeout(environment.httpTimeout),
       catchError(() => {
-        return this.handleError();
+        return of(ServerResponse.createByErrorMsg('获取推文失败'));
       })
     );
   }
@@ -59,12 +59,8 @@ export class PostService {
       map(result => Object.assign(new ServerResponse<Pageable<Post>>(), result)),
       timeout(environment.httpTimeout),
       catchError(() => {
-        return this.handleError();
+        return of(ServerResponse.createByErrorMsg('获取推文失败'));
       })
     );
-  }
-
-  private handleError() {
-    return of(ServerResponse.createByErrorMsg('获取推文失败'));
   }
 }

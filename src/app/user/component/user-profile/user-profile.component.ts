@@ -105,7 +105,7 @@ export class UserProfileComponent implements OnInit {
     this.friendService.follow(this.user.id)
       .subscribe(res => {
         if (res.isSuccess()) {
-          this.message.info(`已成功关注${this.user.nickname}`);
+          this.message.success(`已成功关注${this.user.nickname}`);
           this.user.relation = Relation.FOLLOWING;
           this.cd.markForCheck();
         } else {

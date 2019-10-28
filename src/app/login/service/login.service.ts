@@ -24,7 +24,7 @@ export class LoginService {
       map(result => Object.assign(new ServerResponse(), result)),
       timeout(environment.httpTimeout),
       catchError(e => {
-        return this.handleError();
+        return of(ServerResponse.createByErrorMsg('登录失败'));
       })
     );
   }
@@ -36,12 +36,8 @@ export class LoginService {
       map(result => Object.assign(new ServerResponse(), result)),
       timeout(environment.httpTimeout),
       catchError(e => {
-        return this.handleError();
+        return of(ServerResponse.createByErrorMsg('注册失败'));
       })
     );
-  }
-
-  private handleError() {
-    return of(ServerResponse.createByErrorMsg('操作失败'));
   }
 }
