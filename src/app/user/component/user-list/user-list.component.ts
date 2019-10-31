@@ -87,7 +87,7 @@ export class UserListComponent implements OnInit {
         this.loading = false;
         this.message.error(res.msg);
         this.cd.markForCheck();
-    });
+      });
   }
 
   successCallBack(res: ServerResponse<Pageable<User>>) {

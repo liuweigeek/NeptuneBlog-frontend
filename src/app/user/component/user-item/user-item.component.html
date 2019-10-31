@@ -7,7 +7,8 @@
             <a routerLink="/home/{{user.id}}">{{ user.username }}</a>
         </ng-template>
         <ng-template #nzAvatar>
-            <nz-avatar [nzSize]="50" nzSrc="{{user.smallAvatar}}"></nz-avatar>
+            <nz-avatar [nzSize]="50" [nzSrc]="user.smallAvatar ? user.smallAvatar : null"
+                       [nzIcon]="!user.smallAvatar ? 'user' : null"></nz-avatar>
         </ng-template>
         <ng-template #follow><a (click)="handleFollow(user.id)">关注</a></ng-template>
         <ng-template #cancelFollow><a (click)="handleCancelFollow(user.id)">已关注</a></ng-template>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import {
+  NzAvatarModule,
   NzButtonModule,
   NzCheckboxModule,
   NzDatePickerModule,
@@ -11,7 +12,8 @@ import {
   NzInputModule,
   NzRadioModule,
   NzSelectModule,
-  NzToolTipModule
+  NzToolTipModule,
+  NzUploadModule
 } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -35,7 +37,9 @@ import { SignUpComponent } from './component/sign-up';
     NzGridModule,
     NzDatePickerModule,
     FormsModule,
-    NzRadioModule
+    NzRadioModule,
+    NzUploadModule,
+    NzAvatarModule
   ],
   exports: [
     SignUpComponent

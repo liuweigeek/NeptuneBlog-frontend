@@ -30,9 +30,6 @@ nz-page-header {
 
 .user-avatar {
     display: inline-block;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
     border: 4px solid white;
     margin-top: -65px;
 }
@@ -70,7 +67,7 @@ nz-page-header {
 
 .user-relation-info-item {
     margin-right: 10px;
-    color: rgba(0,0,0,.65);
+    color: rgba(0, 0, 0, .65);
 }
 
 .user-relation-info-item:hover {

@@ -1,5 +1,23 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="30" nzFor="avatar">头像</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-upload
+                    class="avatar-uploader"
+                    nzAction="https://jsonplaceholder.typicode.com/posts/"
+                    nzName="avatar"
+                    nzListType="picture"
+                    [nzShowUploadList]="false">
+                <!--<ng-container *ngIf="!avatarUrl">
+                    <i class="upload-icon" nz-icon nzType="'plus'"></i>
+                    <div class="ant-upload-text">Upload</div>
+                </ng-container>-->
+                <nz-avatar [nzSize]="128" nzSrc="http://localhost:9000/neptune-blog/avatar/1571561700763.jpg"
+                           class="avatar"></nz-avatar>
+            </nz-upload>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
         <nz-form-label [nzSm]="8" [nzXs]="30" nzRequired nzFor="email">电子邮箱</nz-form-label>
         <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请输入有效邮箱地址">
             <input nz-input formControlName="email" id="email"/>

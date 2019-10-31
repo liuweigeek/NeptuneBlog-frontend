@@ -39,9 +39,7 @@ const routes: Routes = [
       {
         path: ':userId',
         component: UserProfileComponent,
-        children: [
-
-        ]
+        children: []
       }
     ]
   }

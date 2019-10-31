@@ -2,9 +2,9 @@
     <nz-comment [nzAuthor]="post.authorNickname"
                 [nzDatetime]="post.createDate | date: dateFormat">
         <nz-avatar nz-comment-avatar
-                   nzIcon="user"
                    [nzSize]="50"
-                   [nzSrc]="post.authorAvatar"
+                   [nzSrc]="post.authorAvatar ? post.authorAvatar : null"
+                   [nzIcon]="!post.authorAvatar ? 'user' : null"
                    routerLink="/home/{{post.authorId}}">
         </nz-avatar>
         <nz-comment-content>

@@ -3,7 +3,9 @@
     <div class="user-card">
         <div class="user-background"></div>
         <div class="user-profile">
-            <img class="user-avatar" [src]="user ? user.normalAvatar : ''" alt="user avatar">
+            <nz-avatar class="user-avatar" [nzSize]="130"
+                       [nzSrc]="user ? user.normalAvatar : null"
+                       [nzIcon]="!(user && user.normalAvatar) ? 'user' : null"></nz-avatar>
             <button *ngIf="user && isSelf()" nz-button nzType="primary" nzShape="round" nzGhost nzSize="large"
                     class="user-edit-profile">
                 编辑资料

@@ -23,6 +23,8 @@ export class SignUpComponent implements OnInit {
               private loginService: LoginService) {
   }
 
+  file: File;
+
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
