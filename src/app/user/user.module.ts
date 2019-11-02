@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UserRoutingModule } from './user-routing.module';
 import { UserCenterComponent } from './component/user-center';
 import { UserSettingsComponent } from './component/user-settings';
 import { UserListComponent } from './component/user-list';
@@ -16,7 +15,8 @@ import {
   NzToolTipModule
 } from 'ng-zorro-antd';
 import { PostModule } from '../post';
-import { UserItemComponent } from './component/user-item/user-item.component';
+import { UserItemComponent } from './component/user-item';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,6 @@ import { UserItemComponent } from './component/user-item/user-item.component';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule,
     NzListModule,
     NzButtonModule,
     NzSkeletonModule,
@@ -37,7 +36,8 @@ import { UserItemComponent } from './component/user-item/user-item.component';
     NzToolTipModule,
     NzIconModule,
     PostModule,
-    NzAvatarModule
+    NzAvatarModule,
+    RouterModule
   ],
   exports: [
     UserCenterComponent,

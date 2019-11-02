@@ -30,6 +30,6 @@ export class RecommendComponent implements OnInit {
       this.message.error('请输入关键字');
       return;
     }
-    this.router.navigate(['home', 'search', keyword]);
+    this.router.navigate(['search', keyword]);
   }
 }

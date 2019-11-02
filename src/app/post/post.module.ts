@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PostRoutingModule } from './post-routing.module';
 import { PostCardComponent } from './component/post-card';
 import {
   NzAvatarModule,
@@ -17,6 +16,7 @@ import { PostZoneComponent } from './component/post-zone';
 import { PostDetailComponent } from './component/post-detail';
 import { SendBoxComponent } from './component/send-box';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    PostRoutingModule,
     NzCommentModule,
     NzIconModule,
     NzAvatarModule,
@@ -41,7 +40,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     NzButtonModule,
     NzInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class PostModule {

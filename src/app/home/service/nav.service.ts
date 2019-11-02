@@ -19,7 +19,7 @@ export class NavService {
     {title: '通知', icon: 'notification', link: ''},
     {title: '私信', icon: 'mail', link: ''},
     {title: '喜欢', icon: 'like', link: ''},
-    {title: '个人资料', icon: 'user', link: `/home/${this.user.id}`}
+    {title: '个人资料', icon: 'user', link: `/${this.user.id}`}
   ];
 
   getNavMenus(): Observable<NavMenuItem[]> {

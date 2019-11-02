@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginRoutingModule } from './login-routing.module';
 import {
   NzAvatarModule,
   NzButtonModule,
@@ -20,12 +19,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './component/login';
 import { SignInComponent } from './component/sign-in';
 import { SignUpComponent } from './component/sign-up';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent, LoginComponent],
   imports: [
     CommonModule,
-    LoginRoutingModule,
     NzFormModule,
     NzInputModule,
     ReactiveFormsModule,
@@ -39,7 +38,8 @@ import { SignUpComponent } from './component/sign-up';
     FormsModule,
     NzRadioModule,
     NzUploadModule,
-    NzAvatarModule
+    NzAvatarModule,
+    RouterModule
   ],
   exports: [
     SignUpComponent

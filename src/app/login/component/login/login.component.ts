@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   handleSignInSuccess(user: User) {
     this.userStoreService.setLoginUser(user);
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   handleSignUpSuccess(user: User) {

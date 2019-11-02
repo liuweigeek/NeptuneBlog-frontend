@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeRoutingModule } from './home-routing.module';
 
 import {
   NzAvatarModule,
@@ -24,6 +23,7 @@ import { ContentComponent } from './component/content';
 import { RecommendComponent } from './component/recommend';
 import { UserModule } from '../user';
 import { SearchModule } from '../search';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import { SearchModule } from '../search';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
     NzGridModule,
     NzMenuModule,
     NzIconModule,
@@ -49,7 +48,8 @@ import { SearchModule } from '../search';
     NzListModule,
     PostModule,
     UserModule,
-    SearchModule
+    SearchModule,
+    RouterModule
   ]
 })
 export class HomeModule {

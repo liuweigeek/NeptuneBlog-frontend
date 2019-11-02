@@ -5,7 +5,7 @@
                    [nzSize]="50"
                    [nzSrc]="post.authorAvatar ? post.authorAvatar : null"
                    [nzIcon]="!post.authorAvatar ? 'user' : null"
-                   routerLink="/home/{{post.authorId}}">
+                   routerLink="/{{post.authorId}}">
         </nz-avatar>
         <nz-comment-content>
             <p>{{post.content}}</p>

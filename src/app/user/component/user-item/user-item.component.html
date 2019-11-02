@@ -4,7 +4,7 @@
             [nzAvatar]="nzAvatar"
             [nzDescription]="user.nickname">
         <ng-template #nzTitle>
-            <a routerLink="/home/{{user.id}}">{{ user.username }}</a>
+            <a routerLink="/{{user.id}}">{{ user.username }}</a>
         </ng-template>
         <ng-template #nzAvatar>
             <nz-avatar [nzSize]="50" [nzSrc]="user.smallAvatar ? user.smallAvatar : null"
