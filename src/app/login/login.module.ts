@@ -20,9 +20,10 @@ import { LoginComponent } from './component/login';
 import { SignInComponent } from './component/sign-in';
 import { SignUpComponent } from './component/sign-up';
 import { RouterModule } from '@angular/router';
+import { AddInfoComponent } from './component/add-info/add-info.component';
 
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent, LoginComponent],
+  declarations: [SignInComponent, SignUpComponent, LoginComponent, AddInfoComponent],
   imports: [
     CommonModule,
     NzFormModule,

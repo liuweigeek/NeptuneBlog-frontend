@@ -40,10 +40,10 @@
                     </span>
                 </div>
                 <div class="user-relation-info">
-                    <a class="user-relation-info-item" [routerLink]="user ? '/' + user.id + '/followings' : ''">
+                    <a class="user-relation-info-item" [routerLink]="user ? '/' + user.username + '/followings' : ''">
                         <label class="user-relation-count">{{user ? user.followingCount : 0}}</label> 正在关注
                     </a>
-                    <a class="user-relation-info-item" [routerLink]="user ? '/' + user.id + '/followers' : ''">
+                    <a class="user-relation-info-item" [routerLink]="user ? '/' + user.username + '/followers' : ''">
                         <label class="user-relation-count">{{user ? user.followerCount : 0}}</label> 个关注者
                     </a>
                 </div>

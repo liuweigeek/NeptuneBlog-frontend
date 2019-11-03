@@ -16,7 +16,7 @@ import { UserStoreService } from '../../../shared/service';
 })
 export class UserProfileComponent implements OnInit {
 
-  private userId$: Observable<string>;
+  private username$: Observable<string>;
   private user: User;
   private loginUser: User;
 
@@ -43,24 +43,24 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
 
     this.loginUser = this.userStoreService.getLoginUser();
-    this.userId$ = this.activeRoute.paramMap.pipe(
-      filter(params => params.has('userId')),
-      map(params => params.get('userId'))
+    this.username$ = this.activeRoute.paramMap.pipe(
+      filter(params => params.has('username')),
+      map(params => params.get('username'))
     );
 
-    this.userId$.subscribe(userId => {
-      this.getUserInfo(userId);
-      this.getPosts(userId);
+    this.username$.subscribe(username => {
+      this.getByUsername(username);
+      this.getPosts(username);
     });
 
   }
 
   /**
-   * 获取用户信息
-   * @param userId    用户ID
+   * 根据用户名获取用户
+   * @param username  用户名
    */
-  getUserInfo(userId: string) {
-    this.userService.getUserInfo(userId)
+  getByUsername(username: string) {
+    this.userService.getByUsername(username)
       .subscribe(res => {
         if (res.isSuccess()) {
           this.user = res.data;
@@ -73,10 +73,10 @@ export class UserProfileComponent implements OnInit {
 
   /**
    * 获取用户推文
-   * @param userId    用户ID
+   * @param username  用户名
    */
-  getPosts(userId: string) {
-    this.postService.getPostsByUserId(userId, this.pageable)
+  getPosts(username: string) {
+    this.postService.getPostsByUsername(username, this.pageable)
       .subscribe(res => {
         if (res.isSuccess()) {
           const newPosts = res.data.records;

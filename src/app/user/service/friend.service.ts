@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Pageable } from '../../shared/entity/pageable';
+import { Pageable, ServerResponse, User } from '../../shared/entity';
 import { Observable, of } from 'rxjs';
-import { ServerResponse, User } from '../../shared/entity';
 import { environment } from '../../../environments/environment';
 import { catchError, map, timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -16,13 +15,13 @@ export class FriendService {
 
   /**
    * 获取正在关注的用户
-   * @param userId            用户ID
+   * @param username          用户名
    * @param pageable          分页
    * @param successCallback   获取成功回调
    * @param failedCallback    获取失败回调
    */
   getFollowingUsers(
-    userId: string,
+    username: string,
     pageable: Pageable<any>,
     successCallback: (res: ServerResponse<Pageable<User>>) => void,
     failedCallback: (res: ServerResponse<Pageable<User>>) => void
@@ -31,7 +30,7 @@ export class FriendService {
       `${environment.baseUrl}/user/friend/findFollowing`,
       {
         params: {
-          fromId: userId,
+          username,
           current: String(pageable.current),
           size: String(pageable.size)
         }
@@ -47,13 +46,13 @@ export class FriendService {
 
   /**
    * 获取关注者
-   * @param userId            用户ID
+   * @param username          用户名
    * @param pageable          分页
    * @param successCallback   获取成功回调
    * @param failedCallback    获取失败回调
    */
   getFollowerUsers(
-    userId: string,
+    username: string,
     pageable: Pageable<any>,
     successCallback: (res: ServerResponse<Pageable<User>>) => void,
     failedCallback: (res: ServerResponse<Pageable<User>>) => void
@@ -62,7 +61,7 @@ export class FriendService {
       `${environment.baseUrl}/user/friend/findFollower`,
       {
         params: {
-          toId: userId,
+          username,
           current: String(pageable.current),
           size: String(pageable.size)
         }

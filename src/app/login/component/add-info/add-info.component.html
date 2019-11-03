@@ -1,0 +1,25 @@
+<form nz-form (ngSubmit)="submitForm()" enctype="multipart/form-data">
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="30" nzFor="avatar">头像</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-upload
+                    class="avatar-uploader"
+                    nzName="avatar"
+                    nzListType="picture"
+                    [nzMultiple]="false"
+                    [nzAction]="null"
+                    [nzBeforeUpload]="beforeUpload">
+                <nz-avatar class="avatar" [nzSize]="128"
+                           [nzIcon]="!previewUrl ? 'user' : null"
+                           [nzSrc]="previewUrl ? previewUrl : null">
+                </nz-avatar>
+            </nz-upload>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="add-info-area">
+        <nz-form-control [nzSpan]="16" [nzOffset]="10">
+            <button type="button" (click)="navigateToMainPage()" nz-button nzType="default">以后再说</button>
+            <button type="submit" [nzLoading]="uploading" nz-button nzType="primary">保存设置</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>

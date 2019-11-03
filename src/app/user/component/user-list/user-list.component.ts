@@ -15,8 +15,8 @@ import { Observable } from 'rxjs';
 })
 export class UserListComponent implements OnInit {
 
-  private userId$: Observable<string>;
-  private userId: string;
+  private username$: Observable<string>;
+  private username: string;
   private title = '';
   private following: boolean;
   private loading = false;
@@ -37,18 +37,18 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userId$ = this.activeRoute.paramMap.pipe(
+    this.username$ = this.activeRoute.paramMap.pipe(
       filter(params => {
-        return params.has('userId');
+        return params.has('username');
       }),
-      map(params => params.get('userId'))
+      map(params => params.get('username'))
     );
 
-    this.userId$.subscribe(userId => {
-      this.userId = userId;
+    this.username$.subscribe(username => {
+      this.username = username;
     });
 
-    this.userId$.subscribe(() => {
+    this.username$.subscribe(() => {
       if (this.router.url.endsWith('followings')) {
         this.following = true;
         this.title = '正在关注';
@@ -66,7 +66,7 @@ export class UserListComponent implements OnInit {
 
   getFollowings() {
     this.loading = true;
-    this.friendService.getFollowingUsers(this.userId, this.pageable,
+    this.friendService.getFollowingUsers(this.username, this.pageable,
       (res: ServerResponse<Pageable<User>>) => {
         this.successCallBack(res);
       },
@@ -79,7 +79,7 @@ export class UserListComponent implements OnInit {
 
   getFollowers() {
     this.loading = true;
-    this.friendService.getFollowerUsers(this.userId, this.pageable,
+    this.friendService.getFollowerUsers(this.username, this.pageable,
       (res: ServerResponse<Pageable<User>>) => {
         this.successCallBack(res);
       },

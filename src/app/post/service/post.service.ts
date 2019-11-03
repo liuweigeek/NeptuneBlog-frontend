@@ -46,6 +46,25 @@ export class PostService {
     );
   }
 
+  getPostsByUsername(username: string, pageable: Pageable<any>): Observable<ServerResponse<Pageable<Post>>> {
+    return this.http.get<ServerResponse<Post[]>>(
+      `${environment.baseUrl}/post/post/getPostsByUsername`,
+      {
+        params: {
+          username,
+          current: String(pageable.current),
+          size: String(pageable.size)
+        }
+      }
+    ).pipe(
+      map(result => Object.assign(new ServerResponse<Pageable<Post>>(), result)),
+      timeout(environment.httpTimeout),
+      catchError(() => {
+        return of(ServerResponse.createByErrorMsg('获取推文失败'));
+      })
+    );
+  }
+
   getFollowingPost(pageable: Pageable<any>): Observable<ServerResponse<Pageable<Post>>> {
     return this.http.get<ServerResponse<Post[]>>(
       `${environment.baseUrl}/post/post/getFollowingPosts`,

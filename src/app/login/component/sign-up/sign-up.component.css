@@ -5,17 +5,3 @@
 .sign-up-area {
     margin-bottom: 8px;
 }
-
-.sign-up-form-button {
-    width: 100%;
-}
-
-.upload-icon {
-    font-size: 32px;
-    color: #999;
-}
-
-.ant-upload-text {
-    margin-top: 8px;
-    color: #666;
-}

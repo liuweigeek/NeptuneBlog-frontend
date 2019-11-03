@@ -7,16 +7,35 @@ import { UserProfileComponent } from './user/component/user-profile';
 import { UserListComponent } from './user/component/user-list';
 import { HomeComponent } from './home/component/home';
 import { PostZoneComponent } from './post/component/post-zone';
+import { SignInComponent } from './login/component/sign-in';
+import { SignUpComponent } from './login/component/sign-up';
+import { AddInfoComponent } from './login/component/add-info';
 
 
 const routes: Routes = [
   {
-    path: 'signIn',
-    component: LoginComponent
-  },
-  {
-    path: 'signUp',
-    component: LoginComponent
+    path: 'login',
+    component: LoginComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'signIn',
+        pathMatch: 'full'
+      },
+      {
+        path: 'signIn',
+        component: SignInComponent
+      },
+      {
+        path: 'signUp',
+        component: SignUpComponent
+      },
+      {
+        path: 'addInfo',
+        component: AddInfoComponent,
+        canActivate: [AuthGuard]
+      }
+    ]
   },
   {
     path: '',
@@ -34,20 +53,20 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: ':userId',
+        path: ':username',
         component: UserProfileComponent,
         pathMatch: 'full'
       },
       {
-        path: ':userId/followings',
+        path: ':username/followings',
         component: UserListComponent,
         pathMatch: 'full'
       },
       {
-        path: ':userId/followers',
+        path: ':username/followers',
         component: UserListComponent,
         pathMatch: 'full'
-      },
+      }
     ]
   }
 ];

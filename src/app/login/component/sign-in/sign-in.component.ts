@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../service/login.service';
-import { User } from '../../../shared/entity';
 import { UserStoreService } from '../../../shared/service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -15,8 +14,6 @@ import { NzMessageService } from 'ng-zorro-antd';
 export class SignInComponent implements OnInit {
 
   validateForm: FormGroup;
-
-  @Output() signInSuccess = new EventEmitter<User>();
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -44,7 +41,8 @@ export class SignInComponent implements OnInit {
     this.loginService.login(this.validateForm.controls.email.value, this.validateForm.controls.password.value)
       .subscribe(res => {
         if (res.isSuccess()) {
-          this.signInSuccess.emit(res.data);
+          this.userStoreService.setLoginUser(res.data);
+          this.router.navigate(['/']);
         } else {
           this.message.error(res.msg);
         }

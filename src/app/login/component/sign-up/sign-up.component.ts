@@ -4,6 +4,7 @@ import { User } from '../../../shared/entity';
 import { LoginService } from '../../service/login.service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
+import { UserStoreService } from '../../../shared/service';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,10 +21,9 @@ export class SignUpComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private message: NzMessageService,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              private userStoreService: UserStoreService) {
   }
-
-  file: File;
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -48,7 +48,8 @@ export class SignUpComponent implements OnInit {
     this.loginService.register(this.getUserFromForm())
       .subscribe(res => {
         if (res.isSuccess()) {
-          this.signUpSuccess.emit(res.data);
+          this.userStoreService.setLoginUser(res.data);
+          this.router.navigate(['login', 'addInfo']);
         } else {
           this.message.error(res.msg);
         }
@@ -67,7 +68,7 @@ export class SignUpComponent implements OnInit {
   }
 
   updateConfirmValidator(): void {
-    /** wait for refresh value */
+    // wait for refresh value
     Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
 

@@ -24,4 +24,16 @@ export class UserService {
       })
     );
   }
+
+  getByUsername(username: string): Observable<ServerResponse<User>> {
+    return this.http.get<ServerResponse<Post[]>>(
+      `${environment.baseUrl}/user/user/getByUsername/${username}`
+    ).pipe(
+      map(result => Object.assign(new ServerResponse<User>(), result)),
+      timeout(environment.httpTimeout),
+      catchError(() => {
+        return of(ServerResponse.createByErrorMsg('获取用户信息失败'));
+      })
+    );
+  }
 }
