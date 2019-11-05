@@ -29,4 +29,8 @@ export class UserStoreService {
     this.authService.setAuthorizationToken(user.token);
   }
 
+  updateLoginUser(user: User) {
+    this.setLoginUser(user);
+  }
+
 }

@@ -85,7 +85,7 @@ export class AddInfoComponent implements OnInit {
 
   submitForm(): void {
     const formData = new FormData();
-    formData.append('avatarFile', this.avatarFile);
+    formData.append('file', this.avatarFile);
     this.uploading = true;
     this.userAvatarService.uploadAvatar(formData)
       .subscribe(res => {
@@ -93,7 +93,7 @@ export class AddInfoComponent implements OnInit {
           if (res.isSuccess()) {
             this.avatarFile = null;
             this.message.success('头像上传成功');
-            this.userStoreService.setLoginUser(res.data);
+            this.userStoreService.updateLoginUser(res.data);
             this.navigateToMainPage();
           } else {
             this.message.error(res.msg);
