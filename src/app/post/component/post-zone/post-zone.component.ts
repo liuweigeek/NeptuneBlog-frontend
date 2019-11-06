@@ -52,6 +52,7 @@ export class PostZoneComponent implements OnInit {
   }
 
   publishPostSuccess(post: Post) {
+    this.postList.unshift(post);
   }
 
 }

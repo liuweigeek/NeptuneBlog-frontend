@@ -93,7 +93,7 @@ export class AddInfoComponent implements OnInit {
           if (res.isSuccess()) {
             this.avatarFile = null;
             this.message.success('头像上传成功');
-            this.userStoreService.updateLoginUser(res.data);
+            this.userStoreService.setLoginUser(res.data);
             this.navigateToMainPage();
           } else {
             this.message.error(res.msg);
