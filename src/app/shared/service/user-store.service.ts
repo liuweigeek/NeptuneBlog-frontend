@@ -25,6 +25,7 @@ export class UserStoreService {
   }
 
   setLoginUser(user: User) {
+    this.loginUser = user;
     localStorage.setItem(this.userInfoKey, JSON.stringify(user));
     this.authService.setAuthorizationToken(user.token);
   }

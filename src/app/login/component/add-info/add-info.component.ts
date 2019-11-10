@@ -25,6 +25,8 @@ export class AddInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    const loginUser = this.userStoreService.getLoginUser();
+    this.previewUrl = loginUser.normalAvatar;
   }
 
   beforeUpload = (file: File): boolean => {
