@@ -9,7 +9,9 @@ import {
   NzFormModule,
   NzIconModule,
   NzInputModule,
+  NzListModule,
   NzPageHeaderModule,
+  NzSkeletonModule,
   NzToolTipModule
 } from 'ng-zorro-antd';
 import { PostZoneComponent } from './component/post-zone';
@@ -41,7 +43,9 @@ import { RouterModule } from '@angular/router';
     NzButtonModule,
     NzInputModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NzListModule,
+    NzSkeletonModule
   ]
 })
 export class PostModule {

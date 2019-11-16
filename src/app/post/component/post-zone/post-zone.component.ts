@@ -14,7 +14,10 @@ import { environment } from '../../../../environments/environment';
 export class PostZoneComponent implements OnInit {
 
   private user: User;
-  private postList: Post[] = [];
+
+  initLoading = true;
+  loadingMore = false;
+  postList: Array<Post> = [];
 
   private pageable: Pageable<any> = {
     current: 1,
@@ -30,10 +33,27 @@ export class PostZoneComponent implements OnInit {
   ngOnInit() {
     this.user = this.userStoreService.getLoginUser();
     this.cd.markForCheck();
-    this.getNextPosts();
+    this.postService.getFollowingPost(this.pageable)
+      .subscribe(res => {
+        this.initLoading = false;
+        if (res.isSuccess()) {
+          const newPosts = res.data.records;
+          if (newPosts.length > 0) {
+            this.postList = newPosts;
+            this.pageable.current++;
+            this.cd.markForCheck();
+          } else {
+            this.message.info('没有更多内容了');
+          }
+        } else {
+          this.message.error(res.msg);
+        }
+      });
+
   }
 
   getNextPosts() {
+    this.loadingMore = true;
     this.postService.getFollowingPost(this.pageable)
       .subscribe(res => {
         if (res.isSuccess()) {
@@ -48,6 +68,7 @@ export class PostZoneComponent implements OnInit {
         } else {
           this.message.error(res.msg);
         }
+        this.loadingMore = false;
       });
   }
 
