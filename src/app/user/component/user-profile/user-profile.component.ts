@@ -49,6 +49,11 @@ export class UserProfileComponent implements OnInit {
     );
 
     this.username$.subscribe(username => {
+      this.pageable = {
+        current: 1,
+        size: 30
+      };
+      this.postList = [];
       this.getByUsername(username);
       this.getPosts(username);
     });
