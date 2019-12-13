@@ -13,7 +13,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class PostZoneComponent implements OnInit {
 
-  private user: User;
+  user: User;
 
   initLoading = true;
   loadingMore = false;
@@ -73,7 +73,8 @@ export class PostZoneComponent implements OnInit {
   }
 
   publishPostSuccess(post: Post) {
-    this.postList.unshift(post);
+    this.postList = [post].concat(this.postList);
+    this.cd.markForCheck();
   }
 
 }

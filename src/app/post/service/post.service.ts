@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { catchError, map, timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Pageable } from '../../shared/entity/pageable';
+import { Pageable } from '../../shared/entity';
 
 @Injectable({
   providedIn: 'root'
