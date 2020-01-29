@@ -44,7 +44,7 @@ export class AddInfoComponent implements OnInit {
       this.cd.markForCheck();
     }
     return false;
-  };
+  }
 
   checkFile(file: File): boolean {
     const isSupports = ['image/jpeg', 'image/png'].includes(file.type);
@@ -52,7 +52,7 @@ export class AddInfoComponent implements OnInit {
       this.message.error('请传入JPG或PNG格式的图片');
       return false;
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
+    const isLt2M = file.size / 1024 / 1024 < 5;
     if (!isLt2M) {
       this.message.error('图片大小不可超过2MB');
       return false;
