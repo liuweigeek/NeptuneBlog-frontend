@@ -14,8 +14,8 @@ export class PostService {
     }
 
     publishPost(post: Post): Observable<ServerResponse<Post>> {
-        return this.http.put<ServerResponse<Post>>(
-            `${environment.baseUrl}/post/post`,
+        return this.http.post<ServerResponse<Post>>(
+            `${environment.baseUrl}/post/post/sendPost`,
             post
         ).pipe(
             map(result => Object.assign(new ServerResponse(), result)),

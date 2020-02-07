@@ -14,7 +14,7 @@ export class PostCardComponent implements OnInit {
     constructor() {
     }
 
-    private dateFormat = 'yyyy/MM/dd HH:mm:ss';
+    dateFormat = 'yyyy/MM/dd HH:mm:ss';
 
     ngOnInit() {
     }

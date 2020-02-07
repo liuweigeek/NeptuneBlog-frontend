@@ -13,10 +13,10 @@ import { filter, map } from 'rxjs/operators';
 })
 export class SearchResultListComponent implements OnInit {
 
-    private keyword: string;
+    keyword: string;
 
-    private userList: User[] = [];
-    private postList: Post[] = [];
+    userList: User[] = [];
+    postList: Post[] = [];
 
     constructor(private route: ActivatedRoute,
                 private searchService: SearchService,

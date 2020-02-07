@@ -20,8 +20,8 @@ import { NzMessageService } from 'ng-zorro-antd';
 })
 export class SendBoxComponent implements OnInit {
 
-    private isSending = false;
-    private placeHolder = '有什么新鲜事?';
+    isSending = false;
+    placeHolder = '有什么新鲜事?';
 
     validateForm: FormGroup;
 

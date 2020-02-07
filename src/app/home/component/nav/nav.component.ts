@@ -15,7 +15,7 @@ export class NavMenuItem {
 })
 export class NavComponent implements OnInit {
 
-    private initSelectedMenu: NavMenuItem;
+    initSelectedMenu: NavMenuItem;
     @Input() menuItems: NavMenuItem[];
 
     constructor() {

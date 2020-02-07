@@ -15,12 +15,12 @@ import { Observable } from 'rxjs';
 })
 export class UserListComponent implements OnInit {
 
-    private username$: Observable<string>;
-    private username: string;
-    private title = '';
-    private following: boolean;
-    private loading = false;
-    private userList: User[] = [];
+    username$: Observable<string>;
+    username: string;
+    title = '';
+    following: boolean;
+    loading = false;
+    userList: User[] = [];
 
     private pageable: Pageable<any> = {
         current: 1,

@@ -16,19 +16,19 @@ import { UserStoreService } from '../../../shared/service';
 })
 export class UserProfileComponent implements OnInit {
 
-    private username$: Observable<string>;
-    private user: User;
-    private loginUser: User;
+    username$: Observable<string>;
+    user: User;
+    loginUser: User;
 
-    private postList: Post[] = [];
+    postList: Post[] = [];
 
-    private pageable: Pageable<any> = {
+    pageable: Pageable<any> = {
         current: 1,
         size: 30
     };
 
-    private birthdayFormat = 'yyyy年MM月dd日';
-    private registerDateFormat = 'yyyy年MM月';
+    birthdayFormat = 'yyyy年MM月dd日';
+    registerDateFormat = 'yyyy年MM月';
 
     constructor(private activeRoute: ActivatedRoute,
                 private router: Router,
