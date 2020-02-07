@@ -6,27 +6,27 @@ import { catchError, map, timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserAvatarService {
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  uploadAvatar(formData: FormData): Observable<ServerResponse<User>> {
+    uploadAvatar(formData: FormData): Observable<ServerResponse<User>> {
 
-    return this.http.post<ServerResponse<User>>(
-      `${environment.baseUrl}/user/userAvatar/uploadAvatar`,
-      formData,
-      {}
-    ).pipe(
-      map(result => Object.assign(new ServerResponse<User>(), result)),
-      timeout(environment.httpTimeout),
-      catchError(() => {
-        return of(ServerResponse.createByErrorMsg('上传头像失败'));
-      })
-    );
+        return this.http.post<ServerResponse<User>>(
+            `${environment.baseUrl}/user/userAvatar/uploadAvatar`,
+            formData,
+            {}
+        ).pipe(
+            map(result => Object.assign(new ServerResponse<User>(), result)),
+            timeout(environment.httpTimeout),
+            catchError(() => {
+                return of(ServerResponse.createByErrorMsg('上传头像失败'));
+            })
+        );
 
 
-  }
+    }
 }

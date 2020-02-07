@@ -2,24 +2,24 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { Post } from '../../../shared/entity';
 
 @Component({
-  selector: 'app-post-card',
-  templateUrl: './post-card.component.html',
-  styleUrls: ['./post-card.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-post-card',
+    templateUrl: './post-card.component.html',
+    styleUrls: ['./post-card.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostCardComponent implements OnInit {
 
-  @Input() post: Post;
+    @Input() post: Post;
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  private dateFormat = 'yyyy/MM/dd HH:mm:ss';
+    private dateFormat = 'yyyy/MM/dd HH:mm:ss';
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  handleLike() {
-    return null;
-  }
+    handleLike() {
+        return null;
+    }
 }

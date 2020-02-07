@@ -1,8 +1,8 @@
 <nz-list-item [nzActions]="getActions()">
     <nz-list-item-meta
-            [nzTitle]="nzTitle"
-            [nzAvatar]="nzAvatar"
-            [nzDescription]="user.nickname">
+        [nzTitle]="nzTitle"
+        [nzAvatar]="nzAvatar"
+        [nzDescription]="user.nickname">
         <ng-template #nzTitle>
             <a routerLink="/{{user.username}}">{{ user.username }}</a>
         </ng-template>

@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { PostCardComponent } from './component/post-card';
 import {
-  NzAvatarModule,
-  NzButtonModule,
-  NzCommentModule,
-  NzFormModule,
-  NzIconModule,
-  NzInputModule,
-  NzListModule,
-  NzPageHeaderModule,
-  NzSkeletonModule,
-  NzToolTipModule
+    NzAvatarModule,
+    NzButtonModule,
+    NzCommentModule,
+    NzFormModule,
+    NzIconModule,
+    NzInputModule,
+    NzListModule,
+    NzPageHeaderModule,
+    NzSkeletonModule,
+    NzToolTipModule
 } from 'ng-zorro-antd';
 import { PostZoneComponent } from './component/post-zone';
 import { PostDetailComponent } from './component/post-detail';
@@ -21,32 +21,32 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    PostCardComponent,
-    PostZoneComponent,
-    PostDetailComponent,
-    SendBoxComponent
-  ],
-  exports: [
-    PostCardComponent,
-    PostZoneComponent
-  ],
-  imports: [
-    CommonModule,
-    NzCommentModule,
-    NzIconModule,
-    NzAvatarModule,
-    NzToolTipModule,
-    NzPageHeaderModule,
-    NzFormModule,
-    FormsModule,
-    NzButtonModule,
-    NzInputModule,
-    ReactiveFormsModule,
-    RouterModule,
-    NzListModule,
-    NzSkeletonModule
-  ]
+    declarations: [
+        PostCardComponent,
+        PostZoneComponent,
+        PostDetailComponent,
+        SendBoxComponent
+    ],
+    exports: [
+        PostCardComponent,
+        PostZoneComponent
+    ],
+    imports: [
+        CommonModule,
+        NzCommentModule,
+        NzIconModule,
+        NzAvatarModule,
+        NzToolTipModule,
+        NzPageHeaderModule,
+        NzFormModule,
+        FormsModule,
+        NzButtonModule,
+        NzInputModule,
+        ReactiveFormsModule,
+        RouterModule,
+        NzListModule,
+        NzSkeletonModule
+    ]
 })
 export class PostModule {
 }

@@ -20,27 +20,27 @@ import { LoginModule } from './login';
 registerLocaleData(zh);
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule,
-    NzFormModule,
-    NgZorroAntdModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    NzMessageModule,
-    HomeModule,
-    LoginModule
-  ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: NZ_I18N, useValue: zh_CN}
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        RouterModule,
+        NzFormModule,
+        NgZorroAntdModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        NzMessageModule,
+        HomeModule,
+        LoginModule
+    ],
+    providers: [
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+        {provide: NZ_I18N, useValue: zh_CN}
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

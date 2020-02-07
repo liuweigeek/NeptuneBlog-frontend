@@ -13,67 +13,67 @@ import { AddInfoComponent } from './login/component/add-info';
 
 
 const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-    children: [
-      {
+    {
+        path: 'login',
+        component: LoginComponent,
+        children: [
+            {
+                path: '',
+                redirectTo: 'signIn',
+                pathMatch: 'full'
+            },
+            {
+                path: 'signIn',
+                component: SignInComponent
+            },
+            {
+                path: 'signUp',
+                component: SignUpComponent
+            },
+            {
+                path: 'addInfo',
+                component: AddInfoComponent,
+                canActivate: [AuthGuard]
+            }
+        ]
+    },
+    {
         path: '',
-        redirectTo: 'signIn',
-        pathMatch: 'full'
-      },
-      {
-        path: 'signIn',
-        component: SignInComponent
-      },
-      {
-        path: 'signUp',
-        component: SignUpComponent
-      },
-      {
-        path: 'addInfo',
-        component: AddInfoComponent,
-        canActivate: [AuthGuard]
-      }
-    ]
-  },
-  {
-    path: '',
-    component: HomeComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        component: PostZoneComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'search/:keyword',
-        component: SearchResultListComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: ':username',
-        component: UserProfileComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: ':username/followings',
-        component: UserListComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: ':username/followers',
-        component: UserListComponent,
-        pathMatch: 'full'
-      }
-    ]
-  }
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: '',
+                component: PostZoneComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'search/:keyword',
+                component: SearchResultListComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: ':username',
+                component: UserProfileComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: ':username/followings',
+                component: UserListComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: ':username/followers',
+                component: UserListComponent,
+                pathMatch: 'full'
+            }
+        ]
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  NzAvatarModule,
-  NzButtonModule,
-  NzCheckboxModule,
-  NzDatePickerModule,
-  NzFormModule,
-  NzGridModule,
-  NzIconModule,
-  NzInputModule,
-  NzRadioModule,
-  NzSelectModule,
-  NzToolTipModule,
-  NzUploadModule
+    NzAvatarModule,
+    NzButtonModule,
+    NzCheckboxModule,
+    NzDatePickerModule,
+    NzFormModule,
+    NzGridModule,
+    NzIconModule,
+    NzInputModule,
+    NzRadioModule,
+    NzSelectModule,
+    NzToolTipModule,
+    NzUploadModule
 } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -23,31 +23,31 @@ import { RouterModule } from '@angular/router';
 import { AddInfoComponent } from './component/add-info/add-info.component';
 
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent, LoginComponent, AddInfoComponent],
-  imports: [
-    CommonModule,
-    NzFormModule,
-    NzInputModule,
-    ReactiveFormsModule,
-    NzCheckboxModule,
-    NzButtonModule,
-    NzIconModule,
-    NzToolTipModule,
-    NzSelectModule,
-    NzGridModule,
-    NzDatePickerModule,
-    FormsModule,
-    NzRadioModule,
-    NzUploadModule,
-    NzAvatarModule,
-    RouterModule
-  ],
-  exports: [
-    SignUpComponent
-  ],
-  providers: [
-    SignUpComponent
-  ]
+    declarations: [SignInComponent, SignUpComponent, LoginComponent, AddInfoComponent],
+    imports: [
+        CommonModule,
+        NzFormModule,
+        NzInputModule,
+        ReactiveFormsModule,
+        NzCheckboxModule,
+        NzButtonModule,
+        NzIconModule,
+        NzToolTipModule,
+        NzSelectModule,
+        NzGridModule,
+        NzDatePickerModule,
+        FormsModule,
+        NzRadioModule,
+        NzUploadModule,
+        NzAvatarModule,
+        RouterModule
+    ],
+    exports: [
+        SignUpComponent
+    ],
+    providers: [
+        SignUpComponent
+    ]
 })
 export class LoginModule {
 }

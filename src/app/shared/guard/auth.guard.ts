@@ -3,29 +3,29 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { AuthorityService, UserStoreService } from '../service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  signInRoute = '/login/signIn';
+    signInRoute = '/login/signIn';
 
-  constructor(private router: Router,
-              private authService: AuthorityService,
-              private userStoreService: UserStoreService) {
-  }
-
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (!this.authService.getAuthorizationToken()) {
-      this.navigateToSignUp();
-      return false;
+    constructor(private router: Router,
+                private authService: AuthorityService,
+                private userStoreService: UserStoreService) {
     }
-    if (!this.userStoreService.getLoginUser()) {
-      this.navigateToSignUp();
-      return false;
-    }
-    return true;
-  }
 
-  navigateToSignUp() {
-    this.router.navigate([this.signInRoute]);
-  }
+    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        if (!this.authService.getAuthorizationToken()) {
+            this.navigateToSignUp();
+            return false;
+        }
+        if (!this.userStoreService.getLoginUser()) {
+            this.navigateToSignUp();
+            return false;
+        }
+        return true;
+    }
+
+    navigateToSignUp() {
+        this.router.navigate([this.signInRoute]);
+    }
 }

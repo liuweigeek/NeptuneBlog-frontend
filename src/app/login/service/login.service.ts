@@ -6,38 +6,38 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, timeout } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  login(email: string, password: string): Observable<ServerResponse<User>> {
-    return this.http.post<ServerResponse<User>>(
-      `${environment.baseUrl}/user/user/login`,
-      {
-        email,
-        password
-      }
-    ).pipe(
-      map(result => Object.assign(new ServerResponse(), result)),
-      timeout(environment.httpTimeout),
-      catchError(e => {
-        return of(ServerResponse.createByErrorMsg('登录失败'));
-      })
-    );
-  }
+    login(email: string, password: string): Observable<ServerResponse<User>> {
+        return this.http.post<ServerResponse<User>>(
+            `${environment.baseUrl}/user/user/login`,
+            {
+                email,
+                password
+            }
+        ).pipe(
+            map(result => Object.assign(new ServerResponse(), result)),
+            timeout(environment.httpTimeout),
+            catchError(e => {
+                return of(ServerResponse.createByErrorMsg('登录失败'));
+            })
+        );
+    }
 
-  register(user: User): Observable<ServerResponse<User>> {
-    return this.http.post<ServerResponse<User>>(
-      `${environment.baseUrl}/user/user/register`, user
-    ).pipe(
-      map(result => Object.assign(new ServerResponse(), result)),
-      timeout(environment.httpTimeout),
-      catchError(e => {
-        return of(ServerResponse.createByErrorMsg('注册失败'));
-      })
-    );
-  }
+    register(user: User): Observable<ServerResponse<User>> {
+        return this.http.post<ServerResponse<User>>(
+            `${environment.baseUrl}/user/user/register`, user
+        ).pipe(
+            map(result => Object.assign(new ServerResponse(), result)),
+            timeout(environment.httpTimeout),
+            catchError(e => {
+                return of(ServerResponse.createByErrorMsg('注册失败'));
+            })
+        );
+    }
 }

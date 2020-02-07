@@ -3,12 +3,12 @@
         <nz-form-label [nzSm]="8" [nzXs]="30" nzFor="avatar">头像</nz-form-label>
         <nz-form-control [nzSm]="16" [nzXs]="24">
             <nz-upload
-                    class="avatar-uploader"
-                    nzName="avatar"
-                    nzListType="picture"
-                    [nzMultiple]="false"
-                    [nzAction]="null"
-                    [nzBeforeUpload]="beforeUpload">
+                class="avatar-uploader"
+                nzName="avatar"
+                nzListType="picture"
+                [nzMultiple]="false"
+                [nzAction]="null"
+                [nzBeforeUpload]="beforeUpload">
                 <nz-avatar class="avatar" [nzSize]="128"
                            [nzIcon]="!previewUrl ? 'user' : null"
                            [nzSrc]="previewUrl ? previewUrl : null">
