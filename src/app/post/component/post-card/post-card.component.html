@@ -12,30 +12,30 @@
         </nz-comment-content>
         <nz-comment-action>
             <i nz-tooltip
-               nzTitle="Forward"
+               nzTooltipTitle="Forward"
                nz-icon
                nzType="retweet"
-               theme="outline"
+               nzTheme="outline"
                (click)="handleLike()">
             </i>
             转发<span class="count like">{{post.forwards}}</span>
         </nz-comment-action>
         <nz-comment-action>
             <i nz-tooltip
-               nzTitle="Comment"
+               nzTooltipTitle="Comment"
                nz-icon
                nzType="message"
-               theme="outline"
+               nzTheme="outline"
                (click)="handleLike()">
             </i>
             评论<span class="count like">{{post.comments}}</span>
         </nz-comment-action>
         <nz-comment-action>
             <i nz-tooltip
-               nzTitle="Like"
+               nzTooltipTitle="Like"
                nz-icon
                nzType="like"
-               theme="outline"
+               nzTheme="outline"
                (click)="handleLike()">
             </i>
             喜欢<span class="count like">{{post.likes}}</span>

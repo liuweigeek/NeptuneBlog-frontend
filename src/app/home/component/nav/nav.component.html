@@ -3,7 +3,7 @@
         <i id="nav-banner" routerLink="/" nz-icon nzType="twitter" nzTheme="outline"></i>
     </span>
     <ul id="nav-menu-ul" nz-menu nzMode="vertical">
-        <li *ngFor="let menu of menuItems" class="nav-menu-item" nz-menu-item nz-tooltip nzPlacement="right"
+        <li *ngFor="let menu of menuItems" class="nav-menu-item" nz-menu-item nz-tooltip nzTooltipPlacement="right"
             [nzSelected]="menu === initSelectedMenu" [routerLink]="menu.link">
             <i *ngIf="menu.icon; else avatar" nz-icon nzType="{{menu.icon}}"></i>
             <ng-template #avatar>
