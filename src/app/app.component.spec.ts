@@ -20,16 +20,16 @@ describe('AppComponent', () => {
         expect(app).toBeTruthy();
     });
 
-    it(`should have as title 'NeptuneBlog-fe'`, () => {
+    it(`should have as title 'NeptuneBlog-frontend'`, () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual('NeptuneBlog-fe');
+        expect(app.title).toEqual('NeptuneBlog-frontend');
     });
 
     it('should render title', () => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('.content span').textContent).toContain('NeptuneBlog-fe app is running!');
+        expect(compiled.querySelector('.content span').textContent).toContain('NeptuneBlog-frontend app is running!');
     });
 });
