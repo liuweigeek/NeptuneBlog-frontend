@@ -4,8 +4,8 @@
         <div class="user-background"></div>
         <div class="user-profile">
             <nz-avatar class="user-avatar" [nzSize]="130"
-                       [nzSrc]="user ? user.normalAvatar : null"
-                       [nzIcon]="!(user && user.normalAvatar) ? 'user' : null"></nz-avatar>
+                       [nzSrc]="user ? user.mediumAvatar : null"
+                       [nzIcon]="!(user && user.mediumAvatar) ? 'user' : null"></nz-avatar>
             <button *ngIf="user && isSelf()" nz-button nzType="primary" nzShape="round" nzGhost nzSize="large"
                     class="user-edit-profile">
                 编辑资料
@@ -23,7 +23,7 @@
                 关注
             </button>
             <div class="user-info-zone">
-                <div class="user-nickname">{{user ? user.nickname : ''}}</div>
+                <div class="user-name">{{user ? user.name : ''}}</div>
                 <div class="user-username">@{{user ? user.username : ''}}</div>
                 <div class="user-more-info">
                     <span class="user-more-info-item">
@@ -36,7 +36,7 @@
                     </span>
                     <span class="user-more-info-item">
                         <i nz-tooltip nzTooltipTitle="Forward" nz-icon nzType="calendar" nzTheme="outline"></i>
-                        {{user ? (user.registerDate | date: registerDateFormat) : ''}}加入
+                        {{user ? (user.createAt | date: createAtFormat) : ''}}加入
                     </span>
                 </div>
                 <div class="user-relation-info">
@@ -44,13 +44,13 @@
                         <label class="user-relation-count">{{user ? user.followingCount : 0}}</label> 个正在关注
                     </a>
                     <a class="user-relation-info-item" [routerLink]="user ? '/' + user.username + '/followers' : ''">
-                        <label class="user-relation-count">{{user ? user.followerCount : 0}}</label> 个关注者
+                        <label class="user-relation-count">{{user ? user.followersCount : 0}}</label> 个关注者
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <div id="container-post-list">
-        <app-post-card *ngFor="let post of postList" [post]="post"></app-post-card>
+    <div id="container-tweet-list">
+        <app-tweet-card *ngFor="let tweet of tweetList" [tweet]="tweet"></app-tweet-card>
     </div>
 </div>

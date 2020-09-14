@@ -5,16 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class AuthorityService {
 
-    private readonly tokenKey = 'token';
+    private readonly authToken = 'token';
 
     constructor() {
     }
 
     getAuthorizationToken(): string {
-        return localStorage.getItem(this.tokenKey);
+        return localStorage.getItem(this.authToken);
     }
 
     setAuthorizationToken(token: string): void {
-        localStorage.setItem(this.tokenKey, token);
+        localStorage.setItem(this.authToken, token);
     }
 }

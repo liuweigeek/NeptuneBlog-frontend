@@ -8,10 +8,10 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    private readonly tokenKey = 'current_user';
+    private readonly authHeader = 'Authorization';
 
     private readonly ignoreUrls: string[] = [
-        '/user/user/login',
+        '/user/user/authentication',
         '/user/user/register'
     ];
 
@@ -27,17 +27,17 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         const authToken = this.auth.getAuthorizationToken();
         if (!authToken) {
-            this.router.navigate(['/login/signIn']);
+            this.router.navigate(['/authentication/signIn']);
             return;
         }
         const authReq = req.clone({
-            headers: req.headers.set(this.tokenKey, authToken)
+            headers: req.headers.set(this.authHeader, authToken)
         });
         return next.handle(authReq).pipe(
             map(event => {
                 if (event instanceof HttpResponse) {
                     if (event.body.status && event.body.status === 10) {
-                        this.router.navigate(['/login/signIn']);
+                        this.router.navigate(['/authentication/signIn']);
                         return;
                     }
                 }

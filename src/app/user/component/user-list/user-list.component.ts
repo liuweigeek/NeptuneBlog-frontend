@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { FriendService } from '../../service';
-import { Pageable, ServerResponse, User } from '../../../shared/entity';
+import { Pageable, PageRequest, ServerResponse, User } from '../../../shared/entity';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
@@ -22,9 +22,9 @@ export class UserListComponent implements OnInit {
     loading = false;
     userList: User[] = [];
 
-    private pageable: Pageable<any> = {
-        current: 1,
-        size: environment.pageSize
+    private pageRequest: PageRequest = {
+        offset: 1,
+        limit: environment.pageLimit
     };
 
     constructor(
@@ -66,7 +66,7 @@ export class UserListComponent implements OnInit {
 
     getFollowings() {
         this.loading = true;
-        this.friendService.getFollowingUsers(this.username, this.pageable,
+        this.friendService.getFollowingUsers(this.username, this.pageRequest,
             (res: ServerResponse<Pageable<User>>) => {
                 this.successCallBack(res);
             },
@@ -79,7 +79,7 @@ export class UserListComponent implements OnInit {
 
     getFollowers() {
         this.loading = true;
-        this.friendService.getFollowerUsers(this.username, this.pageable,
+        this.friendService.getFollowerUsers(this.username, this.pageRequest,
             (res: ServerResponse<Pageable<User>>) => {
                 this.successCallBack(res);
             },
@@ -95,7 +95,7 @@ export class UserListComponent implements OnInit {
         const newUsers = res.data.records;
         if (newUsers.length > 0) {
             this.userList = this.userList.concat(newUsers);
-            this.pageable.current++;
+            this.pageRequest.offset += newUsers.length;
         } else {
             this.message.info('没有更多内容了');
         }

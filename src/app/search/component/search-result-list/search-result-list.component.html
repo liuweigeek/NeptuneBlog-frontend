@@ -10,8 +10,8 @@
             </ng-template>
         </nz-list>
     </div>
-    <div *ngIf="postList && postList.length > 0" id="container-post-list">
+    <div *ngIf="tweetList && tweetList.length > 0" id="container-tweet-list">
         <nz-page-header nzTitle="推文"></nz-page-header>
-        <app-post-card *ngFor="let post of postList" [post]="post"></app-post-card>
+        <app-tweet-card *ngFor="let tweet of tweetList" [tweet]="tweet"></app-tweet-card>
     </div>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Post, ServerResponse, User } from '../../shared/entity';
+import { ServerResponse, Tweet, User } from '../../shared/entity';
 import { environment } from '../../../environments/environment';
 import { catchError, map, timeout } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
@@ -14,7 +14,7 @@ export class UserService {
     }
 
     getUserInfo(userId: string): Observable<ServerResponse<User>> {
-        return this.http.get<ServerResponse<Post[]>>(
+        return this.http.get<ServerResponse<User[]>>(
             `${environment.baseUrl}/user/user/getUserInfo/${userId}`
         ).pipe(
             map(result => Object.assign(new ServerResponse<User>(), result)),
@@ -26,7 +26,7 @@ export class UserService {
     }
 
     getByUsername(username: string): Observable<ServerResponse<User>> {
-        return this.http.get<ServerResponse<Post[]>>(
+        return this.http.get<ServerResponse<Tweet[]>>(
             `${environment.baseUrl}/user/user/getByUsername/${username}`
         ).pipe(
             map(result => Object.assign(new ServerResponse<User>(), result)),

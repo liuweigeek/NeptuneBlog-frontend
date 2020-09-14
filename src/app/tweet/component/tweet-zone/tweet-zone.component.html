@@ -1,0 +1,22 @@
+<div class="container">
+    <nz-page-header nzTitle="主页"></nz-page-header>
+    <div id="container-send-box">
+        <app-send-box [user]="user" (publishSuccess)="publishTweetSuccess($event)"></app-send-box>
+    </div>
+    <div id="container-tweet-list">
+        <nz-list [nzDataSource]="tweetList"
+                 [nzItemLayout]="'horizontal'"
+                 [nzLoading]="initLoading"
+                 [nzRenderItem]="item"
+                 [nzLoadMore]="loadMore">
+            <ng-template #item let-item>
+                <app-tweet-card [tweet]="" ]="item"></app-tweet-card>
+            </ng-template>
+            <ng-template #loadMore>
+                <div class="load-more">
+                    <button nz-button *ngIf="!loadingMore" (click)="getNextTweets()">加载更多</button>
+                </div>
+            </ng-template>
+        </nz-list>
+    </div>
+</div>

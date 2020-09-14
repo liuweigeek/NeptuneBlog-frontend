@@ -1,0 +1,70 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="30" nzRequired nzFor="email">电子邮箱</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请输入有效邮箱地址">
+            <input nz-input formControlName="email" id="email"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="username" nzRequired>
+          <span>
+              用户名
+            <i nz-icon nz-tooltip nzTooltipTitle="其他用户可通过用户名找到你" nzType="question-circle"
+               nzTheme="outline"></i>
+          </span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请输入用户名">
+            <input nz-input id="username" formControlName="username"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="name" nzRequired>昵称</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请输入昵称">
+            <input nz-input id="name" formControlName="name"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="birthday" nzRequired>出生日期</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请选择出生日期">
+            <nz-date-picker formControlName="birthday"></nz-date-picker>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>性别</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请选择性别">
+            <nz-radio-group formControlName="sex">
+                <label nz-radio nzValue="1">男</label>
+                <label nz-radio nzValue="2">女</label>
+            </nz-radio-group>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="password" nzRequired>密码</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请输入密码">
+            <input nz-input type="password" id="password" formControlName="password"
+                   (ngModelChange)="updateConfirmValidator()"/>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="checkPassword" nzRequired>确认密码</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24" [nzErrorTip]="errorTpl">
+            <input nz-input type="password" formControlName="checkPassword" id="checkPassword"/>
+            <ng-template #errorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    确认密码
+                </ng-container>
+                <ng-container *ngIf="control.hasError('confirm')">
+                    两次输入密码不匹配
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="sign-up-area">
+        <nz-form-control [nzSpan]="16" [nzOffset]="10">
+            <button type="submit" class="sign-up-form-button" nz-button nzType="primary">立即注册</button>
+            <br>
+            已有账号?
+            <a routerLink="/login/signIn">立即登录</a>
+        </nz-form-control>
+    </nz-form-item>
+</form>

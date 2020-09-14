@@ -50,11 +50,11 @@ export class UserItemComponent implements OnInit {
         }
     }
 
-    handleFollow(userId: string) {
+    handleFollow(userId: number) {
         this.friendService.follow(userId)
             .subscribe(res => {
                 if (res.isSuccess()) {
-                    this.message.success(`已成功关注${this.user.nickname}`);
+                    this.message.success(`已成功关注${this.user.name}`);
                     this.user.relation = Relation.FOLLOWING;
                     this.cd.markForCheck();
                 } else {
@@ -63,7 +63,7 @@ export class UserItemComponent implements OnInit {
             });
     }
 
-    handleCancelFollow(userId: string) {
+    handleCancelFollow(userId: number) {
         this.friendService.cancelFollow(userId)
             .subscribe(res => {
                 if (res.isSuccess()) {

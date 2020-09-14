@@ -1,0 +1,44 @@
+<div class="container">
+    <nz-comment [nzAuthor]="tweet.author.name"
+                [nzDatetime]="tweet.createAt | date: dateFormat">
+        <nz-avatar nz-comment-avatar
+                   [nzSize]="50"
+                   [nzSrc]="tweet.author.mediumAvatar || null"
+                   [nzIcon]="!tweet.author.mediumAvatar ? 'user' : null"
+                   routerLink="/{{tweet.author.username}}">
+        </nz-avatar>
+        <nz-comment-content>
+            <p>{{tweet.text}}</p>
+        </nz-comment-content>
+        <nz-comment-action>
+            <i nz-tooltip
+               nzTooltipTitle="Forward"
+               nz-icon
+               nzType="retweet"
+               nzTheme="outline"
+               (click)="handleLike()">
+            </i>
+            转发<span class="count like">{{tweet.publicMetrics.quoteCount}}</span>
+        </nz-comment-action>
+        <nz-comment-action>
+            <i nz-tooltip
+               nzTooltipTitle="Comment"
+               nz-icon
+               nzType="message"
+               nzTheme="outline"
+               (click)="handleLike()">
+            </i>
+            评论<span class="count like">{{tweet.publicMetrics.replyCount}}</span>
+        </nz-comment-action>
+        <nz-comment-action>
+            <i nz-tooltip
+               nzTooltipTitle="Like"
+               nz-icon
+               nzType="like"
+               nzTheme="outline"
+               (click)="handleLike()">
+            </i>
+            喜欢<span class="count like">{{tweet.publicMetrics.likeCount}}</span>
+        </nz-comment-action>
+    </nz-comment>
+</div>

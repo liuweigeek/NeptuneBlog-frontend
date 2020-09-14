@@ -7,7 +7,7 @@ export const environment = {
     baseUrl: 'http://localhost:8080',
 //   baseUrl: 'http://192.168.8.231:8080',
     httpTimeout: 60000,
-    pageSize: 10
+    pageLimit: 10
 };
 
 /*

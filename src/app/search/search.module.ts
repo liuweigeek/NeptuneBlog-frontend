@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SearchResultListComponent } from './component/search-result-list';
 import { NzIconModule, NzInputModule, NzListModule, NzPageHeaderModule, NzToolTipModule } from 'ng-zorro-antd';
-import { PostModule } from '../post';
+import { TweetModule } from '../tweet';
 import { UserModule } from '../user';
 
 @NgModule({
@@ -11,7 +11,7 @@ import { UserModule } from '../user';
     imports: [
         CommonModule,
         NzPageHeaderModule,
-        PostModule,
+        TweetModule,
         NzInputModule,
         NzIconModule,
         NzToolTipModule,

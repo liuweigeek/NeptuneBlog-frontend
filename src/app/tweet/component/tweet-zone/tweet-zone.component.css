@@ -1,0 +1,23 @@
+nz-page-header {
+    background-color: white;
+    margin-bottom: 1px;
+}
+
+#container-send-box {
+    margin-bottom: 10px;
+}
+
+#container-tweet-list {
+    cursor: pointer;
+}
+
+nz-list-item {
+    padding: 0;
+}
+
+.load-more {
+    text-align: center;
+    margin: 12px 0;
+    height: 32px;
+    line-height: 32px;
+}

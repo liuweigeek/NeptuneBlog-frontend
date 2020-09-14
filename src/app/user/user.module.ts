@@ -14,7 +14,7 @@ import {
     NzSkeletonModule,
     NzToolTipModule
 } from 'ng-zorro-antd';
-import { PostModule } from '../post';
+import { TweetModule } from '../tweet';
 import { UserItemComponent } from './component/user-item';
 import { RouterModule } from '@angular/router';
 
@@ -35,7 +35,7 @@ import { RouterModule } from '@angular/router';
         NzPageHeaderModule,
         NzToolTipModule,
         NzIconModule,
-        PostModule,
+        TweetModule,
         NzAvatarModule,
         RouterModule
     ],

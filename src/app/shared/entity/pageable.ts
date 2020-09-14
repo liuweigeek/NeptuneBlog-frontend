@@ -1,6 +1,6 @@
 export interface Pageable<T> {
-    current: number;
-    size: number;
+    offset: number;
+    limit: number;
     total?: number;
     records?: T[];
 }

@@ -2,7 +2,7 @@
     <nz-list-item-meta
         [nzTitle]="nzTitle"
         [nzAvatar]="nzAvatar"
-        [nzDescription]="user.nickname">
+        [nzDescription]="user.name">
         <ng-template #nzTitle>
             <a routerLink="/{{user.username}}">{{ user.username }}</a>
         </ng-template>

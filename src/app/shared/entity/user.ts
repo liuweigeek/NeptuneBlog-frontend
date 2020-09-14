@@ -2,7 +2,7 @@ export interface User {
     /**
      * Id
      */
-    id: string;
+    id?: number;
 
     /**
      * 邮箱地址
@@ -17,22 +17,22 @@ export interface User {
     /**
      * 昵称
      */
-    nickname: string;
+    name: string;
 
     /**
      * 小尺寸头像
      */
-    smallAvatar: string;
+    smallAvatar?: string;
 
     /**
      * 正常尺寸头像
      */
-    normalAvatar: string;
+    mediumAvatar?: string;
 
     /**
      * 大尺寸头像
      */
-    largeAvatar: string;
+    largeAvatar?: string;
 
     /**
      * 密码
@@ -47,22 +47,17 @@ export interface User {
     /**
      * 性别
      */
-    sex: number;
+    gender?: string;
 
     /**
      * 注册时间
      */
-    registerDate?: Date;
-
-    /**
-     * 最近登录时间
-     */
-    loginDate?: Date;
+    createAt?: Date;
 
     /**
      * 语言
      */
-    langKey?: string;
+    lang?: string;
 
     /**
      * 登录Token信息
@@ -70,20 +65,20 @@ export interface User {
     token?: string;
 
     /**
-     * 关注状态
-     */
-    relation: number;
-
-    /**
      * 正在关注用户数量
      */
-    followingCount: number;
+    followingCount?: number;
 
     /**
      * 关注者数量
      */
-    followerCount: number;
+    followersCount?: number;
 
+
+    /**
+     * 关注状态
+     */
+    relation?: number;
 }
 
 /**

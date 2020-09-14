@@ -44,7 +44,7 @@ nz-page-header {
     width: 100%;
 }
 
-.user-nickname {
+.user-name {
     font-weight: bold;
     font-size: large;
     color: black;
@@ -79,6 +79,6 @@ nz-page-header {
     color: black;
 }
 
-#container-post-list {
+#container-tweet-list {
     cursor: pointer;
 }

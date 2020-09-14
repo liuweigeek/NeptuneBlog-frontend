@@ -9,13 +9,13 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { AppRoutingModule } from './app-routing.module';
 
-import { NgZorroAntdModule, NZ_I18N, NzFormModule, zh_CN } from 'ng-zorro-antd';
+import { NZ_I18N, NzFormModule, zh_CN } from 'ng-zorro-antd';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './shared/interceptor';
 import { HomeModule } from './home';
-import { LoginModule } from './login';
+import { AuthenticationModule } from './authentication';
 
 registerLocaleData(zh);
 
@@ -28,13 +28,12 @@ registerLocaleData(zh);
         AppRoutingModule,
         RouterModule,
         NzFormModule,
-        NgZorroAntdModule,
         HttpClientModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         NzMessageModule,
         HomeModule,
-        LoginModule
+        AuthenticationModule
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

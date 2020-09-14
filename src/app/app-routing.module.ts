@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/guard';
-import { LoginComponent } from './login/component/login';
+import { AuthenticationComponent } from './authentication/component/authentication';
 import { SearchResultListComponent } from './search/component/search-result-list';
 import { UserProfileComponent } from './user/component/user-profile';
 import { UserListComponent } from './user/component/user-list';
 import { HomeComponent } from './home/component/home';
-import { PostZoneComponent } from './post/component/post-zone';
-import { SignInComponent } from './login/component/sign-in';
-import { SignUpComponent } from './login/component/sign-up';
-import { AddInfoComponent } from './login/component/add-info';
+import { TweetZoneComponent } from './tweet/component/tweet-zone';
+import { SignInComponent } from './authentication/component/sign-in';
+import { SignUpComponent } from './authentication/component/sign-up';
+import { AddInfoComponent } from './authentication/component/add-info';
 
 
 const routes: Routes = [
     {
-        path: 'login',
-        component: LoginComponent,
+        path: 'auth',
+        component: AuthenticationComponent,
         children: [
             {
                 path: '',
@@ -44,7 +44,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: PostZoneComponent,
+                component: TweetZoneComponent,
                 pathMatch: 'full'
             },
             {

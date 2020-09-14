@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Post, ServerResponse, User } from '../../../shared/entity';
+import { ServerResponse, Tweet, User } from '../../../shared/entity';
 import { SearchService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ export class SearchResultListComponent implements OnInit {
     keyword: string;
 
     userList: User[] = [];
-    postList: Post[] = [];
+    tweetList: Tweet[] = [];
 
     constructor(private route: ActivatedRoute,
                 private searchService: SearchService,
@@ -54,14 +54,14 @@ export class SearchResultListComponent implements OnInit {
                             this.message.error(userRes.msg);
                         }
                     }
-                    // get post list from result
-                    if (resultMap.has('postRes')) {
-                        const postRes = Object.assign(new ServerResponse<Post[]>(), resultMap.get('postRes'));
-                        if (postRes.isSuccess()) {
-                            this.postList = postRes.data;
+                    // get tweet list from result
+                    if (resultMap.has('tweetRes')) {
+                        const tweetRes = Object.assign(new ServerResponse<Tweet[]>(), resultMap.get('tweetRes'));
+                        if (tweetRes.isSuccess()) {
+                            this.tweetList = tweetRes.data;
                             this.cd.markForCheck();
                         } else {
-                            this.message.error(postRes.msg);
+                            this.message.error(tweetRes.msg);
                         }
                     }
                 } else {

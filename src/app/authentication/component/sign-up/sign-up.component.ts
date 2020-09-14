@@ -1,0 +1,82 @@
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../../shared/entity';
+import { AuthenticationService } from '../../service/authentication.service';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
+import { UserStoreService } from '../../../shared/service';
+
+@Component({
+    selector: 'app-sign-up',
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class SignUpComponent implements OnInit {
+
+    validateForm: FormGroup;
+
+    @Output() signUpSuccess = new EventEmitter<User>();
+
+    constructor(private fb: FormBuilder,
+                private router: Router,
+                private message: NzMessageService,
+                private loginService: AuthenticationService,
+                private userStoreService: UserStoreService) {
+    }
+
+    ngOnInit(): void {
+        this.validateForm = this.fb.group({
+            email: [null, [Validators.email, Validators.required]],
+            username: [null, [Validators.required]],
+            name: [null, [Validators.required]],
+            birthday: [null, [Validators.required]],
+            sex: [null, [Validators.required]],
+            password: [null, [Validators.required]],
+            checkPassword: [null, [Validators.required, this.confirmationValidator]]
+        });
+    }
+
+    submitForm(): void {
+        for (const i in this.validateForm.controls) {
+            if (this.validateForm.controls.hasOwnProperty(i)) {
+                this.validateForm.controls[i].markAsDirty();
+                this.validateForm.controls[i].updateValueAndValidity();
+            }
+        }
+
+        this.loginService.signUp(this.getUserFromForm())
+            .subscribe(next => {
+                this.userStoreService.setLoginUser(next);
+                this.router.navigate(['login', 'addInfo']);
+            }, error => {
+                this.message.error(error.error.message || '注册失败');
+            });
+    }
+
+    getUserFromForm(): User {
+        return {
+            email: this.validateForm.controls.email.value,
+            username: this.validateForm.controls.username.value,
+            name: this.validateForm.controls.name.value,
+            birthday: this.validateForm.controls.birthday.value,
+            sex: this.validateForm.controls.sex.value,
+            password: this.validateForm.controls.password.value
+        } as User;
+    }
+
+    updateConfirmValidator(): void {
+        // wait for refresh value
+        Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
+    }
+
+    confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+        if (!control.value) {
+            return {required: true};
+        } else if (control.value !== this.validateForm.controls.password.value) {
+            return {confirm: true, error: true};
+        }
+        return {};
+    }
+
+}

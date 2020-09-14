@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { Pageable, Post, Relation, User } from '../../../shared/entity';
-import { PostService } from '../../../post/service';
+import { PageRequest, Relation, Tweet, User } from '../../../shared/entity';
+import { TweetService } from '../../../tweet/service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { FriendService, UserService } from '../../service';
 import { UserStoreService } from '../../../shared/service';
@@ -20,15 +20,15 @@ export class UserProfileComponent implements OnInit {
     user: User;
     loginUser: User;
 
-    postList: Post[] = [];
+    tweetList: Tweet[] = [];
 
-    pageable: Pageable<any> = {
-        current: 1,
-        size: 30
+    pageRequest: PageRequest = {
+        offset: 1,
+        limit: 30
     };
 
     birthdayFormat = 'yyyy年MM月dd日';
-    registerDateFormat = 'yyyy年MM月';
+    createAtFormat = 'yyyy年MM月';
 
     constructor(private activeRoute: ActivatedRoute,
                 private router: Router,
@@ -36,7 +36,7 @@ export class UserProfileComponent implements OnInit {
                 private userStoreService: UserStoreService,
                 private userService: UserService,
                 private friendService: FriendService,
-                private postService: PostService,
+                private tweetService: TweetService,
                 private cd: ChangeDetectorRef) {
     }
 
@@ -49,13 +49,8 @@ export class UserProfileComponent implements OnInit {
         );
 
         this.username$.subscribe(username => {
-            /*this.pageable = {
-              current: 1,
-              size: 30
-            };
-            this.postList = [];*/
             this.getByUsername(username);
-            this.getPosts(username);
+            this.getTweets(username);
         });
 
     }
@@ -80,14 +75,14 @@ export class UserProfileComponent implements OnInit {
      * 获取用户推文
      * @param username  用户名
      */
-    getPosts(username: string) {
-        this.postService.getPostsByUsername(username, this.pageable)
+    getTweets(username: string) {
+        this.tweetService.getTweetsByUsername(username, this.pageRequest)
             .subscribe(res => {
                 if (res.isSuccess()) {
-                    const newPosts = res.data.records;
-                    if (newPosts.length > 0) {
-                        this.postList = this.postList.concat(newPosts);
-                        this.pageable.current++;
+                    const newTweets = res.data.records;
+                    if (newTweets.length > 0) {
+                        this.tweetList = this.tweetList.concat(newTweets);
+                        this.pageRequest.offset = this.pageRequest.offset + newTweets.length;
                         this.cd.markForCheck();
                     } else {
                         this.message.info('没有更多内容了');
@@ -110,7 +105,7 @@ export class UserProfileComponent implements OnInit {
         this.friendService.follow(this.user.id)
             .subscribe(res => {
                 if (res.isSuccess()) {
-                    this.message.success(`已成功关注${this.user.nickname}`);
+                    this.message.success(`已成功关注${this.user.name}`);
                     this.user.relation = Relation.FOLLOWING;
                     this.cd.markForCheck();
                 } else {

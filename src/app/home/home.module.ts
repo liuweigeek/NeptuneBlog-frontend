@@ -16,7 +16,7 @@ import {
 } from 'ng-zorro-antd';
 
 import { FormsModule } from '@angular/forms';
-import { PostModule } from '../post';
+import { TweetModule } from '../tweet';
 import { HomeComponent } from './component/home';
 import { NavComponent } from './component/nav';
 import { ContentComponent } from './component/content';
@@ -46,7 +46,7 @@ import { RouterModule } from '@angular/router';
         NzAvatarModule,
         NzButtonModule,
         NzListModule,
-        PostModule,
+        TweetModule,
         UserModule,
         SearchModule,
         RouterModule
