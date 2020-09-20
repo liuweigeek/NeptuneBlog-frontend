@@ -11,7 +11,7 @@ export class NavService {
     constructor(private userStoreService: UserStoreService) {
     }
 
-    user = this.userStoreService.getLoginUser();
+    user = this.userStoreService.getAuthUser();
     navMenuItems: NavMenuItem[] = [
         {title: '主页', icon: 'home', link: '/'},
         {title: '好友圈', icon: 'team', link: ''},

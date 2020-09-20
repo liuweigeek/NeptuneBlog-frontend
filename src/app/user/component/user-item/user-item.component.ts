@@ -20,7 +20,7 @@ import { UserStoreService } from '../../../shared/service';
 })
 export class UserItemComponent implements OnInit {
 
-    private loginUser: User;
+    private authUser: User;
 
     @Input() user: User;
     @ViewChild('follow', {static: true}) followRef;
@@ -33,11 +33,11 @@ export class UserItemComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loginUser = this.userStoreService.getLoginUser();
+        this.authUser = this.userStoreService.getAuthUser();
     }
 
     getActions(): TemplateRef<void>[] {
-        if (this.loginUser.id === this.user.id) {
+        if (this.authUser.id === this.user.id) {
             return [];
         }
         switch (this.user.relation) {

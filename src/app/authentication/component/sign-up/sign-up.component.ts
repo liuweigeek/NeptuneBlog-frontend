@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit {
 
         this.authenticationService.signUp(this.getUserFromForm())
             .subscribe(next => {
-                this.userStoreService.setLoginUser(next);
+                this.userStoreService.setAuthUser(next);
                 this.router.navigate(['auth', 'addInfo']);
             }, error => {
                 this.message.error(error.error.message || '注册失败');

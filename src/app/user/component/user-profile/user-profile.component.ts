@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
 
     username$: Observable<string>;
     user: User;
-    loginUser: User;
+    authUser: User;
 
     tweetList: Tweet[] = [];
 
@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit() {
 
-        this.loginUser = this.userStoreService.getLoginUser();
+        this.authUser = this.userStoreService.getAuthUser();
         this.username$ = this.activeRoute.paramMap.pipe(
             filter(params => params.has('username')),
             map(params => params.get('username'))
@@ -94,7 +94,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     isSelf(): boolean {
-        return this.loginUser.id === this.user.id;
+        return this.authUser.id === this.user.id;
     }
 
     isFollowing(): boolean {

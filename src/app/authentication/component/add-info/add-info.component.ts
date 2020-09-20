@@ -25,8 +25,8 @@ export class AddInfoComponent implements OnInit {
     }
 
     ngOnInit() {
-        const loginUser = this.userStoreService.getLoginUser();
-        this.previewUrl = loginUser.mediumAvatar;
+        const authUser = this.userStoreService.getAuthUser();
+        this.previewUrl = authUser.mediumAvatar;
     }
 
     beforeUpload = (file: File): boolean => {
@@ -95,7 +95,7 @@ export class AddInfoComponent implements OnInit {
                     if (res.isSuccess()) {
                         this.avatarFile = null;
                         this.message.success('头像上传成功');
-                        this.userStoreService.setLoginUser(res.data);
+                        this.userStoreService.setAuthUser(res.data);
                         this.navigateToMainPage();
                     } else {
                         this.message.error(res.msg);

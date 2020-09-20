@@ -7,31 +7,31 @@ import { AuthorityService } from './authority.service';
 })
 export class UserStoreService {
 
-    private loginUser: User;
+    private authUser: User;
 
-    private readonly userInfoKey = 'loginUser';
+    private readonly userInfoKey = 'authUser';
 
     constructor(private authService: AuthorityService) {
     }
 
-    getLoginUser(): User {
-        if (!this.loginUser) {
+    getAuthUser(): User {
+        if (!this.authUser) {
             const userInfoJson = localStorage.getItem(this.userInfoKey);
             if (userInfoJson) {
-                this.loginUser = JSON.parse(userInfoJson);
+                this.authUser = JSON.parse(userInfoJson);
             }
         }
-        return this.loginUser;
+        return this.authUser;
     }
 
-    setLoginUser(user: User) {
-        this.loginUser = user;
+    setAuthUser(user: User) {
+        this.authUser = user;
         localStorage.setItem(this.userInfoKey, JSON.stringify(user));
         this.authService.setAuthorizationToken(user.token);
     }
 
-    updateLoginUser(user: User) {
-        this.setLoginUser(user);
+    updateAuthUser(user: User) {
+        this.setAuthUser(user);
     }
 
 }

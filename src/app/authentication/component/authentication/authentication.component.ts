@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-login',
+    selector: 'app-auth',
     templateUrl: './authentication.component.html',
     styleUrls: ['./authentication.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
             this.navigateToSignUp();
             return false;
         }
-        if (!this.userStoreService.getLoginUser()) {
+        if (!this.userStoreService.getAuthUser()) {
             this.navigateToSignUp();
             return false;
         }

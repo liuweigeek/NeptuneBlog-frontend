@@ -3,16 +3,16 @@
     width: 100%;
 }
 
-.login-wallpaper-wrapper {
+.auth-wallpaper-wrapper {
     width: 50%;
     height: 100%;
     float: left;
-    background-image: url("/assets/background/login-background.jpg");
+    background-image: url("/assets/background/auth-background.jpg");
     background-position: center;
     background-size: cover;
 }
 
-.login-form-wrapper {
+.auth-form-wrapper {
     width: 50%;
     height: 100%;
     float: right;

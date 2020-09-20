@@ -40,7 +40,7 @@ export class SignInComponent implements OnInit {
 
         this.authenticationService.signIn(this.validateForm.controls.username.value, this.validateForm.controls.password.value)
             .subscribe(next => {
-                this.userStoreService.setLoginUser(next);
+                this.userStoreService.setAuthUser(next);
                 this.router.navigate(['/']);
             }, error => {
                 this.message.error(error.error.message || '登录失败');

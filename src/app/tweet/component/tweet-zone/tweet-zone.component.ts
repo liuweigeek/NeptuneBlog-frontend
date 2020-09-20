@@ -31,7 +31,7 @@ export class TweetZoneComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.user = this.userStoreService.getLoginUser();
+        this.user = this.userStoreService.getAuthUser();
         this.cd.markForCheck();
         this.tweetService.getFollowingTweet(this.pageRequest)
             .subscribe(next => {
