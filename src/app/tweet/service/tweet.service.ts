@@ -45,6 +45,8 @@ export class TweetService {
                     limit: String(pageRequest.limit)
                 }
             }
+        ).pipe(
+            timeout(environment.httpTimeout)
         );
     }
 }
