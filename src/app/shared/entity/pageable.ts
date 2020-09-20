@@ -1,6 +1,20 @@
 export interface Pageable<T> {
-    offset: number;
-    limit: number;
-    total?: number;
-    records?: T[];
+
+    number: number;
+
+    size: number;
+
+    content?: T[];
+
+    empty: boolean;
+
+    first: boolean;
+
+    last: boolean;
+
+    numberOfElements: number;
+
+    totalPages: number;
+
+    totalElements: number;
 }

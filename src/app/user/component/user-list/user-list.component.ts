@@ -92,7 +92,7 @@ export class UserListComponent implements OnInit {
 
     successCallBack(res: ServerResponse<Pageable<User>>) {
         this.loading = false;
-        const newUsers = res.data.records;
+        const newUsers = res.data.content;
         if (newUsers.length > 0) {
             this.userList = this.userList.concat(newUsers);
             this.pageRequest.offset += newUsers.length;

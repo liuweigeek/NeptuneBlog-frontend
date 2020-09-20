@@ -26,7 +26,7 @@ export class AuthenticationService {
 
     signUp(user: User): Observable<User> {
         return this.http.post<User>(
-            `${environment.baseUrl}/user/user/register`, user
+            `${environment.baseUrl}/auth-server/auth/signUp`, user
         );
     }
 }

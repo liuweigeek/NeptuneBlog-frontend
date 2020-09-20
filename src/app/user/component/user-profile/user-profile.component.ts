@@ -79,7 +79,7 @@ export class UserProfileComponent implements OnInit {
         this.tweetService.getTweetsByUsername(username, this.pageRequest)
             .subscribe(res => {
                 if (res.isSuccess()) {
-                    const newTweets = res.data.records;
+                    const newTweets = res.data.content;
                     if (newTweets.length > 0) {
                         this.tweetList = this.tweetList.concat(newTweets);
                         this.pageRequest.offset = this.pageRequest.offset + newTweets.length;

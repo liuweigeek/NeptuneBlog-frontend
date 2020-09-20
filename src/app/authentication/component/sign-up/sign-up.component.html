@@ -32,9 +32,9 @@
     <nz-form-item>
         <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>性别</nz-form-label>
         <nz-form-control [nzSm]="16" [nzXs]="24" nzErrorTip="请选择性别">
-            <nz-radio-group formControlName="sex">
-                <label nz-radio nzValue="1">男</label>
-                <label nz-radio nzValue="2">女</label>
+            <nz-radio-group formControlName="gender">
+                <label nz-radio nzValue="male">男</label>
+                <label nz-radio nzValue="female">女</label>
             </nz-radio-group>
         </nz-form-control>
     </nz-form-item>
@@ -64,7 +64,7 @@
             <button type="submit" class="sign-up-form-button" nz-button nzType="primary">立即注册</button>
             <br>
             已有账号?
-            <a routerLink="/login/signIn">立即登录</a>
+            <a routerLink="/auth/signIn">立即登录</a>
         </nz-form-control>
     </nz-form-item>
 </form>

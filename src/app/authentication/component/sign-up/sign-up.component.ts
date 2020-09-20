@@ -21,7 +21,7 @@ export class SignUpComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private message: NzMessageService,
-                private loginService: AuthenticationService,
+                private authenticationService: AuthenticationService,
                 private userStoreService: UserStoreService) {
     }
 
@@ -31,7 +31,7 @@ export class SignUpComponent implements OnInit {
             username: [null, [Validators.required]],
             name: [null, [Validators.required]],
             birthday: [null, [Validators.required]],
-            sex: [null, [Validators.required]],
+            gender: [null, [Validators.required]],
             password: [null, [Validators.required]],
             checkPassword: [null, [Validators.required, this.confirmationValidator]]
         });
@@ -45,10 +45,10 @@ export class SignUpComponent implements OnInit {
             }
         }
 
-        this.loginService.signUp(this.getUserFromForm())
+        this.authenticationService.signUp(this.getUserFromForm())
             .subscribe(next => {
                 this.userStoreService.setLoginUser(next);
-                this.router.navigate(['login', 'addInfo']);
+                this.router.navigate(['auth', 'addInfo']);
             }, error => {
                 this.message.error(error.error.message || '注册失败');
             });
@@ -60,7 +60,7 @@ export class SignUpComponent implements OnInit {
             username: this.validateForm.controls.username.value,
             name: this.validateForm.controls.name.value,
             birthday: this.validateForm.controls.birthday.value,
-            sex: this.validateForm.controls.sex.value,
+            gender: this.validateForm.controls.gender.value,
             password: this.validateForm.controls.password.value
         } as User;
     }

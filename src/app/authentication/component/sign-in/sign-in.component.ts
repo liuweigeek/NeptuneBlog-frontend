@@ -18,7 +18,7 @@ export class SignInComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private router: Router,
                 private message: NzMessageService,
-                private loginService: AuthenticationService,
+                private authenticationService: AuthenticationService,
                 private userStoreService: UserStoreService) {
     }
 
@@ -38,7 +38,7 @@ export class SignInComponent implements OnInit {
             }
         }
 
-        this.loginService.signIn(this.validateForm.controls.username.value, this.validateForm.controls.password.value)
+        this.authenticationService.signIn(this.validateForm.controls.username.value, this.validateForm.controls.password.value)
             .subscribe(next => {
                 this.userStoreService.setLoginUser(next);
                 this.router.navigate(['/']);

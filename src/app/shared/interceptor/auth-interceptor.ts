@@ -8,11 +8,11 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    private readonly authHeader = 'Authorization';
+    private readonly authHeader = 'authorization';
 
     private readonly ignoreUrls: string[] = [
-        '/user/user/authentication',
-        '/user/user/register'
+        '/auth-server/auth/signIn',
+        '/auth-server/auth/signUp'
     ];
 
     constructor(private auth: AuthorityService,

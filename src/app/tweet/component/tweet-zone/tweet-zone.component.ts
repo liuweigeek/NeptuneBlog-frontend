@@ -35,26 +35,26 @@ export class TweetZoneComponent implements OnInit {
         this.cd.markForCheck();
         this.tweetService.getFollowingTweet(this.pageRequest)
             .subscribe(next => {
-                this.initLoading = false;
-                const newTweets = next.records;
+                const newTweets = next.content;
                 if (newTweets.length > 0) {
                     this.tweetList = newTweets;
                     this.pageRequest.offset += newTweets.length;
-                    this.cd.markForCheck();
                 } else {
                     this.message.info('没有更多内容了');
                 }
             }, error => {
                 this.message.error(error.error.message);
+            }, () => {
+                this.initLoading = false;
+                this.cd.markForCheck();
             });
-
     }
 
     getNextTweets() {
         this.loadingMore = true;
         this.tweetService.getFollowingTweet(this.pageRequest)
             .subscribe(next => {
-                const newTweets = next.records;
+                const newTweets = next.content;
                 if (newTweets.length > 0) {
                     this.tweetList = this.tweetList.concat(newTweets);
                     this.pageRequest.offset += newTweets.length;
