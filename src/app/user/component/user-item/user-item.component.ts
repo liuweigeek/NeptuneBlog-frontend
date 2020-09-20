@@ -52,27 +52,25 @@ export class UserItemComponent implements OnInit {
 
     handleFollow(userId: number) {
         this.friendService.follow(userId)
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    this.message.success(`已成功关注${this.user.name}`);
-                    this.user.relation = Relation.FOLLOWING;
-                    this.cd.markForCheck();
-                } else {
-                    this.message.error(res.msg);
-                }
+            .subscribe(next => {
+                this.message.success(`已成功关注${next.name}`);
+                this.user.relation = Relation.FOLLOWING;
+            }, error => {
+                this.message.error(error.error.message || '关注失败');
+            }, () => {
+                this.cd.markForCheck();
             });
     }
 
     handleCancelFollow(userId: number) {
         this.friendService.cancelFollow(userId)
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    this.message.success('已取消关注');
-                    this.user.relation = Relation.UN_FOLLOW;
-                    this.cd.markForCheck();
-                } else {
-                    this.message.error(res.msg);
-                }
+            .subscribe(next => {
+                this.message.success(`已取消关注${next.name}`);
+                this.user.relation = Relation.UN_FOLLOW;
+            }, error => {
+                this.message.error(error.error.message || '关注失败');
+            }, () => {
+                this.cd.markForCheck();
             });
     }
 

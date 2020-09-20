@@ -50,7 +50,6 @@ export class UserProfileComponent implements OnInit {
 
         this.username$.subscribe(username => {
             this.getByUsername(username);
-            this.getTweets(username);
         });
 
     }
@@ -61,35 +60,31 @@ export class UserProfileComponent implements OnInit {
      */
     getByUsername(username: string) {
         this.userService.getByUsername(username)
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    this.user = res.data;
-                    this.cd.markForCheck();
-                } else {
-                    this.message.error(res.msg);
-                }
+            .subscribe(next => {
+                this.user = next;
+                this.cd.markForCheck();
+                this.findTweets(this.user.id);
+            }, error => {
+                this.message.error(error.error.message || '获取用户信息失败');
             });
     }
 
     /**
      * 获取用户推文
-     * @param username  用户名
+     * @param userId  用户Id
      */
-    getTweets(username: string) {
-        this.tweetService.getTweetsByUsername(username, this.pageRequest)
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    const newTweets = res.data.content;
-                    if (newTweets.length > 0) {
-                        this.tweetList = this.tweetList.concat(newTweets);
-                        this.pageRequest.offset = this.pageRequest.offset + newTweets.length;
-                        this.cd.markForCheck();
-                    } else {
-                        this.message.info('没有更多内容了');
-                    }
+    findTweets(userId: number) {
+        this.tweetService.findTweetsByUserId(userId, this.pageRequest)
+            .subscribe(next => {
+                if (!next.empty) {
+                    this.tweetList = this.tweetList.concat(next.content);
+                    this.pageRequest.offset = this.pageRequest.offset + next.size;
+                    this.cd.markForCheck();
                 } else {
-                    this.message.error(res.msg);
+                    this.message.info('没有更多内容了');
                 }
+            }, error => {
+                this.message.error(error.error.message || '获取推文失败');
             });
     }
 

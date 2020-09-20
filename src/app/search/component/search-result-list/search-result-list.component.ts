@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ServerResponse, Tweet, User } from '../../../shared/entity';
+import { Tweet, User } from '../../../shared/entity';
 import { SearchService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
@@ -37,36 +37,12 @@ export class SearchResultListComponent implements OnInit {
 
     searchByKeyword(keyword: string) {
         this.searchService.searchByKeyword(keyword)
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    const resultMap = new Map();
-                    for (const key of Object.keys(res.data)) {
-                        resultMap.set(key, res.data[key]);
-                    }
-
-                    // get user list from result
-                    if (resultMap.has('userRes')) {
-                        const userRes = Object.assign(new ServerResponse<User[]>(), resultMap.get('userRes'));
-                        if (userRes.isSuccess()) {
-                            this.userList = userRes.data;
-                            this.cd.markForCheck();
-                        } else {
-                            this.message.error(userRes.msg);
-                        }
-                    }
-                    // get tweet list from result
-                    if (resultMap.has('tweetRes')) {
-                        const tweetRes = Object.assign(new ServerResponse<Tweet[]>(), resultMap.get('tweetRes'));
-                        if (tweetRes.isSuccess()) {
-                            this.tweetList = tweetRes.data;
-                            this.cd.markForCheck();
-                        } else {
-                            this.message.error(tweetRes.msg);
-                        }
-                    }
-                } else {
-                    this.message.error(res.msg);
-                }
+            .subscribe(next => {
+                this.userList = next.get('users');
+                this.tweetList = next.get('tweets');
+                this.cd.markForCheck();
+            }, error => {
+                this.message.error(error.error.message || '搜索失败');
             });
     }
 

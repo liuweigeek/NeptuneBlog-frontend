@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Pageable, PageRequest, ServerResponse, Tweet } from '../../shared/entity';
-import { Observable, of } from 'rxjs';
+import { Pageable, PageRequest, Tweet } from '../../shared/entity';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { catchError, map, timeout } from 'rxjs/operators';
+import { timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -13,58 +13,30 @@ export class TweetService {
     constructor(private http: HttpClient) {
     }
 
-    publishTweet(tweet: Tweet): Observable<ServerResponse<Tweet>> {
-        return this.http.post<ServerResponse<Tweet>>(
-            `${environment.baseUrl}/post/post/sendPost`,
+    publishTweet(tweet: Tweet): Observable<Tweet> {
+        return this.http.post<Tweet>(
+            `${environment.baseUrl}/tweet-server/tweets`,
             tweet
         ).pipe(
-            map(result => Object.assign(new ServerResponse(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() =>
-                of(ServerResponse.createByErrorMsg('发送失败'))
-            )
+            timeout(environment.httpTimeout)
         );
     }
 
-    getTweetsByUserId(authorId: string, pageRequest: PageRequest): Observable<ServerResponse<Pageable<Tweet>>> {
-        return this.http.get<ServerResponse<Tweet[]>>(
-            `${environment.baseUrl}/post/post/getPostsByUserId`,
+    findTweetsByUserId(authorId: number, pageRequest: PageRequest): Observable<Pageable<Tweet>> {
+        return this.http.get<Pageable<Tweet>>(
+            `${environment.baseUrl}/tweet-server/tweets/user/${authorId}`,
             {
                 params: {
-                    authorId,
                     offset: String(pageRequest.offset),
                     limit: String(pageRequest.limit)
                 }
             }
         ).pipe(
-            map(result => Object.assign(new ServerResponse<Pageable<Tweet>>(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() => {
-                return of(ServerResponse.createByErrorMsg('获取推文失败'));
-            })
+            timeout(environment.httpTimeout)
         );
     }
 
-    getTweetsByUsername(username: string, pageRequest: PageRequest): Observable<ServerResponse<Pageable<Tweet>>> {
-        return this.http.get<ServerResponse<Tweet[]>>(
-            `${environment.baseUrl}/post/post/getPostsByUsername`,
-            {
-                params: {
-                    username,
-                    offset: String(pageRequest.offset),
-                    limit: String(pageRequest.limit)
-                }
-            }
-        ).pipe(
-            map(result => Object.assign(new ServerResponse<Pageable<Tweet>>(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() => {
-                return of(ServerResponse.createByErrorMsg('获取推文失败'));
-            })
-        );
-    }
-
-    getFollowingTweet(pageRequest: PageRequest): Observable<Pageable<Tweet>> {
+    findFollowingTweet(pageRequest: PageRequest): Observable<Pageable<Tweet>> {
         return this.http.get<Pageable<Tweet>>(
             `${environment.baseUrl}/tweet-server/tweets/following`,
             {

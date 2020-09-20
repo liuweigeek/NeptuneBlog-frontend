@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Pageable, PageRequest, ServerResponse, User } from '../../shared/entity';
-import { Observable, of } from 'rxjs';
+import { Pageable, PageRequest, User } from '../../shared/entity';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { catchError, map, timeout } from 'rxjs/operators';
+import { timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -15,19 +15,15 @@ export class FriendService {
 
     /**
      * 获取正在关注的用户
-     * @param username          用户名
-     * @param pageRequest       分页参数
-     * @param successCallback   获取成功回调
-     * @param failedCallback    获取失败回调
+     * @param username      用户名
+     * @param pageRequest   分页参数
      */
     getFollowingUsers(
         username: string,
-        pageRequest: PageRequest,
-        successCallback: (res: ServerResponse<Pageable<User>>) => void,
-        failedCallback: (res: ServerResponse<Pageable<User>>) => void
-    ) {
-        return this.http.get<ServerResponse<User[]>>(
-            `${environment.baseUrl}/user/friend/findFollowing`,
+        pageRequest: PageRequest
+    ): Observable<Pageable<User>> {
+        return this.http.get<Pageable<User>>(
+            `${environment.baseUrl}/user-server/following`,
             {
                 params: {
                     username,
@@ -36,29 +32,21 @@ export class FriendService {
                 }
             }
         ).pipe(
-            map(result => Object.assign(new ServerResponse<Pageable<User>>(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() => of(ServerResponse.createByErrorMsg('获取关注人失败')))
-        ).subscribe(res => {
-            res.isSuccess() ? successCallback(res) : failedCallback(res);
-        });
+            timeout(environment.httpTimeout)
+        );
     }
 
     /**
      * 获取关注者
-     * @param username          用户名
-     * @param pageable          分页
-     * @param successCallback   获取成功回调
-     * @param failedCallback    获取失败回调
+     * @param username      用户名
+     * @param pageRequest   分页
      */
     getFollowerUsers(
         username: string,
-        pageRequest: PageRequest,
-        successCallback: (res: ServerResponse<Pageable<User>>) => void,
-        failedCallback: (res: ServerResponse<Pageable<User>>) => void
-    ) {
-        return this.http.get<ServerResponse<User[]>>(
-            `${environment.baseUrl}/user/friend/findFollower`,
+        pageRequest: PageRequest
+    ): Observable<Pageable<User>> {
+        return this.http.get<Pageable<User>>(
+            `${environment.baseUrl}/user-server/followers`,
             {
                 params: {
                     username,
@@ -67,28 +55,24 @@ export class FriendService {
                 }
             }
         ).pipe(
-            map(result => Object.assign(new ServerResponse<Pageable<User>>(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() => of(ServerResponse.createByErrorMsg('获取关注者失败')))
-        ).subscribe(res => {
-            res.isSuccess() ? successCallback(res) : failedCallback(res);
-        });
+            timeout(environment.httpTimeout)
+        );
     }
 
     /**
      * 关注用户
      * @param userId    用户ID
      */
-    follow(userId: number): Observable<ServerResponse<any>> {
-        return this.http.post<ServerResponse<any>>(
-            `${environment.baseUrl}/user/friend/follow`,
-            userId
+    follow(userId: number): Observable<User> {
+        return this.http.post<User>(
+            `${environment.baseUrl}/user-server/friendships`, null,
+            {
+                params: {
+                    userId: userId.toString()
+                }
+            }
         ).pipe(
-            map(result => Object.assign(new ServerResponse(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() =>
-                of(ServerResponse.createByErrorMsg('关注失败'))
-            )
+            timeout(environment.httpTimeout)
         );
     }
 
@@ -96,15 +80,11 @@ export class FriendService {
      * 取消关注
      * @param userId    用户ID
      */
-    cancelFollow(userId: number): Observable<ServerResponse<any>> {
-        return this.http.delete<ServerResponse<any>>(
-            `${environment.baseUrl}/user/friend/cancelFollow/${userId}`
+    cancelFollow(userId: number): Observable<User> {
+        return this.http.delete<User>(
+            `${environment.baseUrl}/user-server/friendships/${userId}`
         ).pipe(
-            map(result => Object.assign(new ServerResponse(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() =>
-                of(ServerResponse.createByErrorMsg('取消关注失败'))
-            )
+            timeout(environment.httpTimeout)
         );
     }
 }

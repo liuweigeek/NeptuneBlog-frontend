@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ServerResponse, Tweet, User } from '../../shared/entity';
+import { User } from '../../shared/entity';
 import { environment } from '../../../environments/environment';
-import { catchError, map, timeout } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { timeout } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -13,27 +13,19 @@ export class UserService {
     constructor(private http: HttpClient) {
     }
 
-    getUserInfo(userId: string): Observable<ServerResponse<User>> {
-        return this.http.get<ServerResponse<User[]>>(
-            `${environment.baseUrl}/user/user/getUserInfo/${userId}`
+    getByUserId(userId: number): Observable<User> {
+        return this.http.get<User>(
+            `${environment.baseUrl}/user-server/users/${userId}`
         ).pipe(
-            map(result => Object.assign(new ServerResponse<User>(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() => {
-                return of(ServerResponse.createByErrorMsg('获取用户信息失败'));
-            })
+            timeout(environment.httpTimeout)
         );
     }
 
-    getByUsername(username: string): Observable<ServerResponse<User>> {
-        return this.http.get<ServerResponse<Tweet[]>>(
-            `${environment.baseUrl}/user/user/getByUsername/${username}`
+    getByUsername(username: string): Observable<User> {
+        return this.http.get<User>(
+            `${environment.baseUrl}/user-server/users/username/${username}`
         ).pipe(
-            map(result => Object.assign(new ServerResponse<User>(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() => {
-                return of(ServerResponse.createByErrorMsg('获取用户信息失败'));
-            })
+            timeout(environment.httpTimeout)
         );
     }
 }

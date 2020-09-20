@@ -33,12 +33,11 @@ export class TweetZoneComponent implements OnInit {
     ngOnInit() {
         this.user = this.userStoreService.getAuthUser();
         this.cd.markForCheck();
-        this.tweetService.getFollowingTweet(this.pageRequest)
+        this.tweetService.findFollowingTweet(this.pageRequest)
             .subscribe(next => {
-                const newTweets = next.content;
-                if (newTweets.length > 0) {
-                    this.tweetList = newTweets;
-                    this.pageRequest.offset += newTweets.length;
+                if (!next.empty) {
+                    this.tweetList = next.content;
+                    this.pageRequest.offset += next.size;
                 } else {
                     this.message.info('没有更多内容了');
                 }
@@ -52,12 +51,11 @@ export class TweetZoneComponent implements OnInit {
 
     getNextTweets() {
         this.loadingMore = true;
-        this.tweetService.getFollowingTweet(this.pageRequest)
+        this.tweetService.findFollowingTweet(this.pageRequest)
             .subscribe(next => {
-                const newTweets = next.content;
-                if (newTweets.length > 0) {
-                    this.tweetList = this.tweetList.concat(newTweets);
-                    this.pageRequest.offset += newTweets.length;
+                if (!next.empty) {
+                    this.tweetList = this.tweetList.concat(next.content);
+                    this.pageRequest.offset += next.size;
                     this.cd.markForCheck();
                 } else {
                     this.message.info('没有更多内容了');

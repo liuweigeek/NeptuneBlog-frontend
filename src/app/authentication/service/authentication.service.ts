@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from '../../shared/entity';
 import { Observable } from 'rxjs';
+import { timeout } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -21,12 +22,16 @@ export class AuthenticationService {
                     password
                 }
             }
+        ).pipe(
+            timeout(environment.httpTimeout)
         );
     }
 
     signUp(user: User): Observable<User> {
         return this.http.post<User>(
             `${environment.baseUrl}/auth-server/auth/signUp`, user
+        ).pipe(
+            timeout(environment.httpTimeout)
         );
     }
 }

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ServerResponse } from '../../shared/entity';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { catchError, map, timeout } from 'rxjs/operators';
+import { timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -13,15 +12,16 @@ export class SearchService {
     constructor(private http: HttpClient) {
     }
 
-    searchByKeyword(keyword: string): Observable<ServerResponse<Map<string, ServerResponse<any>>>> {
-        return this.http.get<ServerResponse<Map<string, ServerResponse<any>>>>(
-            `${environment.baseUrl}/search/search/${keyword}`
+    searchByKeyword(keyword: string): Observable<Map<string, Array<any>>> {
+        return this.http.get<Map<string, Array<any>>>(
+            `${environment.baseUrl}/search-server/search`,
+            {
+                params: {
+                    q: keyword
+                }
+            }
         ).pipe(
-            map(result => Object.assign(new ServerResponse<Map<string, ServerResponse<any>>>(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() => {
-                return of(ServerResponse.createByErrorMsg('搜索失败'));
-            })
+            timeout(environment.httpTimeout)
         );
     }
 }

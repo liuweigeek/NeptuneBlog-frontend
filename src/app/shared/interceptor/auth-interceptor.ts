@@ -27,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         const authToken = this.auth.getAuthorizationToken();
         if (!authToken) {
-            this.router.navigate(['/authentication/signIn']);
+            this.router.navigate(['/auth/signIn']);
             return;
         }
         const authReq = req.clone({
@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
             map(event => {
                 if (event instanceof HttpResponse) {
                     if (event.body.status && event.body.status === 10) {
-                        this.router.navigate(['/authentication/signIn']);
+                        this.router.navigate(['/auth/signIn']);
                         return;
                     }
                 }

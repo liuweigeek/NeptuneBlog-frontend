@@ -30,8 +30,4 @@ export class UserStoreService {
         this.authService.setAuthorizationToken(user.token);
     }
 
-    updateAuthUser(user: User) {
-        this.setAuthUser(user);
-    }
-
 }

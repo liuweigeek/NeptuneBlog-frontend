@@ -49,15 +49,13 @@ export class SendBoxComponent implements OnInit {
         }
 
         this.tweetService.publishTweet(this.getTweetFromForm())
-            .subscribe(res => {
-                if (res.isSuccess()) {
-                    this.message.success('发送成功');
-                    this.publishSuccess.emit(res.data);
-                    this.validateForm.reset();
-                    this.cd.markForCheck();
-                } else {
-                    this.message.error(res.msg);
-                }
+            .subscribe(next => {
+                this.message.success('发送成功');
+                this.publishSuccess.emit(next);
+                this.validateForm.reset();
+                this.cd.markForCheck();
+            }, error => {
+                this.message.error(error.error.message || '发送失败');
             });
     }
 
