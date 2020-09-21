@@ -38,8 +38,8 @@ export class SearchResultListComponent implements OnInit {
     searchByKeyword(keyword: string) {
         this.searchService.searchByKeyword(keyword)
             .subscribe(next => {
-                this.userList = next.get('users');
-                this.tweetList = next.get('tweets');
+                this.userList = next.users;
+                this.tweetList = next.tweets;
                 this.cd.markForCheck();
             }, error => {
                 this.message.error(error.error.message || '搜索失败');

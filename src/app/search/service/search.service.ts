@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { SearchResult } from "../../shared/entity";
 
 @Injectable({
     providedIn: 'root'
@@ -12,8 +13,8 @@ export class SearchService {
     constructor(private http: HttpClient) {
     }
 
-    searchByKeyword(keyword: string): Observable<Map<string, Array<any>>> {
-        return this.http.get<Map<string, Array<any>>>(
+    searchByKeyword(keyword: string): Observable<SearchResult> {
+        return this.http.get<SearchResult>(
             `${environment.baseUrl}/search-server/search`,
             {
                 params: {
