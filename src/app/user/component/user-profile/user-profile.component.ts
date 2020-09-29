@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { PageRequest, Relation, Tweet, User } from '../../../shared/entity';
 import { TweetService } from '../../../tweet/service';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { FriendService, UserService } from '../../service';
 import { UserStoreService } from '../../../shared/service';
 

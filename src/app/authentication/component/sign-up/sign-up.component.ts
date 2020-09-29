@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { User } from '../../../shared/entity';
 import { AuthenticationService } from '../../service/authentication.service';
 import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { UserStoreService } from '../../../shared/service';
 
 @Component({

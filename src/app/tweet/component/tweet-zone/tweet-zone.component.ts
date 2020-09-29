@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { PageRequest, Tweet, User } from '../../../shared/entity';
 import { UserStoreService } from '../../../shared/service';
 import { TweetService } from '../../service';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from '../../../../environments/environment';
 
 @Component({

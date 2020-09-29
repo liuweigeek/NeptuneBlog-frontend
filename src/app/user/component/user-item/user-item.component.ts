@@ -7,7 +7,7 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Relation, User } from '../../../shared/entity';
 import { FriendService } from '../../service';
 import { UserStoreService } from '../../../shared/service';

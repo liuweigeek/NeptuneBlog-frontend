@@ -2,18 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TweetCardComponent } from './component/tweet-card';
-import {
-    NzAvatarModule,
-    NzButtonModule,
-    NzCommentModule,
-    NzFormModule,
-    NzIconModule,
-    NzInputModule,
-    NzListModule,
-    NzPageHeaderModule,
-    NzSkeletonModule,
-    NzToolTipModule
-} from 'ng-zorro-antd';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { TweetZoneComponent } from './component/tweet-zone';
 import { TweetDetailComponent } from './component/tweet-detail';
 import { SendBoxComponent } from './component/send-box';

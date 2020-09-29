@@ -10,7 +10,7 @@ import {
 import { Tweet, User } from '../../../shared/entity';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TweetService } from '../../service';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
     selector: 'app-send-box',

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { FriendService } from '../../service';
 import { PageRequest, User } from '../../../shared/entity';
 import { environment } from '../../../../environments/environment';

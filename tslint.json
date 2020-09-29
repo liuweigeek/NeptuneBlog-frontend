@@ -147,9 +147,11 @@
                 "check-type",
                 "check-typecast"
             ]
-        }
+        },
+        "nz-secondary-entry-imports": true
     },
     "rulesDirectory": [
-        "codelyzer"
+        "codelyzer",
+        "node_modules/nz-tslint-rules"
     ]
 }
