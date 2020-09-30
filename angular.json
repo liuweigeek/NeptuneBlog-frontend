@@ -21,12 +21,7 @@
                         "aot": true,
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets",
-                            {
-                                "glob": "**/*",
-                                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                                "output": "/assets/"
-                            }
+                            "src/assets"
                         ],
                         "styles": [
                             "src/styles.css",
@@ -91,12 +86,7 @@
                         "karmaConfig": "karma.conf.js",
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets",
-                            {
-                                "glob": "**/*",
-                                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                                "output": "/assets/"
-                            }
+                            "src/assets"
                         ],
                         "styles": [
                             "src/styles.css",
