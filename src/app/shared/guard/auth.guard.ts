@@ -6,7 +6,7 @@ import { AuthorityService, UserStoreService } from '../service';
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-    signInRoute = '/authentication/signIn';
+    signInRoute = '/auth/signIn';
 
     constructor(private router: Router,
                 private authService: AuthorityService,
