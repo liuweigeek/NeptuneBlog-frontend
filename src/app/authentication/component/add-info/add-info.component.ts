@@ -44,7 +44,7 @@ export class AddInfoComponent implements OnInit {
             this.cd.markForCheck();
         }
         return false;
-    }
+    };
 
     checkFile(file: File): boolean {
         const isSupports = ['image/jpeg', 'image/png'].includes(file.type);

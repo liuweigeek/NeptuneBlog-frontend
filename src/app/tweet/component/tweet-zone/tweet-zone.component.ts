@@ -20,7 +20,7 @@ export class TweetZoneComponent implements OnInit {
     tweetList: Array<Tweet> = [];
 
     private pageRequest: PageRequest = {
-        offset: 1,
+        offset: 0,
         limit: environment.pageLimit
     };
 

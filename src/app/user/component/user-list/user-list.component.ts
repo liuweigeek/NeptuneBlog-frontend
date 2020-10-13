@@ -23,7 +23,7 @@ export class UserListComponent implements OnInit {
     userList: User[] = [];
 
     private pageRequest: PageRequest = {
-        offset: 1,
+        offset: 0,
         limit: environment.pageLimit
     };
 

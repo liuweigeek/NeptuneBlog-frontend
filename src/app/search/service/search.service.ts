@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { SearchResult } from "../../shared/entity";
+import { SearchResult } from '../../shared/entity';
 
 @Injectable({
     providedIn: 'root'

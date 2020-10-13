@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit {
     tweetList: Tweet[] = [];
 
     pageRequest: PageRequest = {
-        offset: 1,
+        offset: 0,
         limit: 30
     };
 
