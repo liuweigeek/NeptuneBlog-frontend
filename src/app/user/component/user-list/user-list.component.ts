@@ -69,13 +69,16 @@ export class UserListComponent implements OnInit {
         this.friendService.getFollowingUsers(this.username, this.pageRequest)
             .subscribe(next => {
                 if (!next.empty) {
-                    this.userList = this.userList.concat(next.content);
+                    this.userList = this.userList.concat(next.content.map(friendship => friendship.targetUser));
                     this.pageRequest.offset += next.size;
                 } else {
                     this.message.info('没有更多内容了');
                 }
             }, error => {
                 this.message.error(error.error.message || '获取正在关注失败');
+            }, () => {
+                this.loading = false;
+                this.cd.markForCheck();
             });
     }
 
@@ -84,7 +87,7 @@ export class UserListComponent implements OnInit {
         this.friendService.getFollowerUsers(this.username, this.pageRequest)
             .subscribe(next => {
                 if (!next.empty) {
-                    this.userList = this.userList.concat(next.content);
+                    this.userList = this.userList.concat(next.content.map(friendship => friendship.sourceUser));
                     this.pageRequest.offset += next.size;
                 } else {
                     this.message.info('没有更多内容了');
