@@ -17,7 +17,7 @@ export class TweetZoneComponent implements OnInit {
 
     initLoading = true;
     loadingMore = false;
-    tweetList: Array<Tweet> = [];
+    tweetList: Tweet[] = [];
 
     private pageRequest: PageRequest = {
         offset: 0,
@@ -36,7 +36,7 @@ export class TweetZoneComponent implements OnInit {
         this.tweetService.findFollowingTweet(this.pageRequest)
             .subscribe(next => {
                 if (!next.empty) {
-                    this.tweetList = next.content;
+                    this.tweetList = this.tweetList.concat(next.content);
                     this.pageRequest.offset += next.size;
                 } else {
                     this.message.info('没有更多内容了');
@@ -56,13 +56,14 @@ export class TweetZoneComponent implements OnInit {
                 if (!next.empty) {
                     this.tweetList = this.tweetList.concat(next.content);
                     this.pageRequest.offset += next.size;
-                    this.cd.markForCheck();
                 } else {
                     this.message.info('没有更多内容了');
                 }
-                this.loadingMore = false;
             }, error => {
                 this.message.error(error.error.message || '获取推文失败');
+            }, () => {
+                this.loadingMore = false;
+                this.cd.markForCheck();
             });
     }
 

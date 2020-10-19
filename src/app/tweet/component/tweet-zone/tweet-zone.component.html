@@ -10,7 +10,7 @@
                  [nzRenderItem]="item"
                  [nzLoadMore]="loadMore">
             <ng-template #item let-item>
-                <app-tweet-card [tweet]="" ]="item"></app-tweet-card>
+                <app-tweet-card [tweet]="item"></app-tweet-card>
             </ng-template>
             <ng-template #loadMore>
                 <div class="load-more">

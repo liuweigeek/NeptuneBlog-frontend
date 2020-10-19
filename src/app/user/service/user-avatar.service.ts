@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { ServerResponse, User } from '../../shared/entity';
+import { Observable } from 'rxjs';
+import { User } from '../../shared/entity';
 import { environment } from '../../../environments/environment';
-import { catchError, map, timeout } from 'rxjs/operators';
+import { timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -13,18 +13,14 @@ export class UserAvatarService {
     constructor(private http: HttpClient) {
     }
 
-    uploadAvatar(formData: FormData): Observable<ServerResponse<User>> {
+    uploadAvatar(formData: FormData): Observable<User> {
 
-        return this.http.post<ServerResponse<User>>(
-            `${environment.baseUrl}/user/userAvatar/uploadAvatar`,
+        return this.http.post<User>(
+            `${environment.baseUrl}/user-server/avatars`,
             formData,
             {}
         ).pipe(
-            map(result => Object.assign(new ServerResponse<User>(), result)),
-            timeout(environment.httpTimeout),
-            catchError(() => {
-                return of(ServerResponse.createByErrorMsg('上传头像失败'));
-            })
+            timeout(environment.httpTimeout)
         );
 
 

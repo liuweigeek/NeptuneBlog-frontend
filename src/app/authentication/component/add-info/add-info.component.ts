@@ -90,21 +90,15 @@ export class AddInfoComponent implements OnInit {
         formData.append('file', this.avatarFile);
         this.uploading = true;
         this.userAvatarService.uploadAvatar(formData)
-            .subscribe(res => {
-                    this.uploading = false;
-                    if (res.isSuccess()) {
-                        this.avatarFile = null;
-                        this.message.success('头像上传成功');
-                        this.userStoreService.setAuthUser(res.data);
-                        this.navigateToMainPage();
-                    } else {
-                        this.message.error(res.msg);
-                    }
-                    this.cd.markForCheck();
+            .subscribe(next => {
+                    this.message.success('头像上传成功');
+                    this.userStoreService.setAuthUser(next);
+                    this.navigateToMainPage();
                 },
-                () => {
+                error => {
+                    this.message.error(error.error.message || '头像上传失败');
+                }, () => {
                     this.uploading = false;
-                    this.message.error('头像上传失败');
                     this.cd.markForCheck();
                 }
             );
