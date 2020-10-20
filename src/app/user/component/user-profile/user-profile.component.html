@@ -24,18 +24,18 @@
             </button>
             <div class="user-info-zone">
                 <div class="user-name">{{user ? user.name : ''}}</div>
-                <div class="user-username">@{{user ? user.username : ''}}</div>
+                <div class="user-username">{{user ? '@' + user.username : ''}}</div>
                 <div class="user-more-info">
                     <span class="user-more-info-item">
-                        <i nz-tooltip nzTooltipTitle="Forward" nz-icon nzType="environment" nzTheme="outline"></i>
+                        <i nz-tooltip nz-icon nzType="environment" nzTheme="outline"></i>
                         中华人民共和国
                     </span>
                     <span class="user-more-info-item">
-                        <i nz-tooltip nzTooltipTitle="Forward" nz-icon nzType="bulb" nzTheme="outline"></i>
+                        <i nz-tooltip nz-icon nzType="bulb" nzTheme="outline"></i>
                         出生于{{user ? (user.birthday | date: birthdayFormat) : ''}}
                     </span>
                     <span class="user-more-info-item">
-                        <i nz-tooltip nzTooltipTitle="Forward" nz-icon nzType="calendar" nzTheme="outline"></i>
+                        <i nz-tooltip nz-icon nzType="calendar" nzTheme="outline"></i>
                         {{user ? (user.createAt | date: createAtFormat) : ''}}加入
                     </span>
                 </div>

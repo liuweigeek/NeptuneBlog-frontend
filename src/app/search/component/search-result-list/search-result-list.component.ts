@@ -3,7 +3,7 @@ import { Tweet, User } from '../../../shared/entity';
 import { SearchService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { filter, finalize, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-search-result-list',
@@ -37,10 +37,12 @@ export class SearchResultListComponent implements OnInit {
 
     searchByKeyword(keyword: string) {
         this.searchService.searchByKeyword(keyword)
+            .pipe(finalize(() => {
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 this.userList = next.users;
                 this.tweetList = next.tweets;
-                this.cd.markForCheck();
             }, error => {
                 this.message.error(error.error.message || '搜索失败');
             });

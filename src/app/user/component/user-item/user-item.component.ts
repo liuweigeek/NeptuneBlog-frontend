@@ -3,6 +3,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Relation, User } from '../../../shared/entity';
 import { FriendService } from '../../service';
 import { UserStoreService } from '../../../shared/service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-user-item',
@@ -44,25 +45,27 @@ export class UserItemComponent implements OnInit {
 
     handleFollow(userId: number) {
         this.friendService.follow(userId)
+            .pipe(finalize(() => {
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 this.message.success(`已成功关注${next.name}`);
                 this.user.relation = Relation.FOLLOWING;
             }, error => {
                 this.message.error(error.error.message || '关注失败');
-            }, () => {
-                this.cd.markForCheck();
             });
     }
 
     handleCancelFollow(userId: number) {
         this.friendService.cancelFollow(userId)
+            .pipe(finalize(() => {
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 this.message.success(`已取消关注${next.name}`);
                 this.user.relation = Relation.UN_FOLLOW;
             }, error => {
                 this.message.error(error.error.message || '关注失败');
-            }, () => {
-                this.cd.markForCheck();
             });
     }
 

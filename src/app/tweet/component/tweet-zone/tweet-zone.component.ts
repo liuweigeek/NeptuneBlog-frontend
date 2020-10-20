@@ -4,6 +4,7 @@ import { UserStoreService } from '../../../shared/service';
 import { TweetService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from '../../../../environments/environment';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-tweet-zone',
@@ -34,6 +35,10 @@ export class TweetZoneComponent implements OnInit {
         this.user = this.userStoreService.getAuthUser();
         this.cd.markForCheck();
         this.tweetService.findFollowingTweet(this.pageRequest)
+            .pipe(finalize(() => {
+                this.initLoading = false;
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 if (!next.empty) {
                     this.tweetList = this.tweetList.concat(next.content);
@@ -43,15 +48,16 @@ export class TweetZoneComponent implements OnInit {
                 }
             }, error => {
                 this.message.error(error.error.message);
-            }, () => {
-                this.initLoading = false;
-                this.cd.markForCheck();
             });
     }
 
     getNextTweets() {
         this.loadingMore = true;
         this.tweetService.findFollowingTweet(this.pageRequest)
+            .pipe(finalize(() => {
+                this.loadingMore = false;
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 if (!next.empty) {
                     this.tweetList = this.tweetList.concat(next.content);
@@ -61,9 +67,6 @@ export class TweetZoneComponent implements OnInit {
                 }
             }, error => {
                 this.message.error(error.error.message || '获取推文失败');
-            }, () => {
-                this.loadingMore = false;
-                this.cd.markForCheck();
             });
     }
 

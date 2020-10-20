@@ -18,6 +18,7 @@ export class FriendService {
      * 获取正在关注的用户
      * @param username      用户名
      * @param pageRequest   分页参数
+     * @param finallyCallback   回调
      */
     getFollowingUsers(
         username: string,

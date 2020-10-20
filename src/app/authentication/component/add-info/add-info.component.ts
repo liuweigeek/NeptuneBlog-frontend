@@ -3,6 +3,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { UserAvatarService } from '../../../user/service';
 import { UserStoreService } from '../../../shared/service';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-add-info',
@@ -90,6 +91,10 @@ export class AddInfoComponent implements OnInit {
         formData.append('file', this.avatarFile);
         this.uploading = true;
         this.userAvatarService.uploadAvatar(formData)
+            .pipe(finalize(() => {
+                this.uploading = false;
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                     this.message.success('头像上传成功');
                     this.userStoreService.setAuthUser(next);
@@ -97,9 +102,6 @@ export class AddInfoComponent implements OnInit {
                 },
                 error => {
                     this.message.error(error.error.message || '头像上传失败');
-                }, () => {
-                    this.uploading = false;
-                    this.cd.markForCheck();
                 }
             );
     }

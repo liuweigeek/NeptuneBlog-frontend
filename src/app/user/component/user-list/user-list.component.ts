@@ -4,7 +4,7 @@ import { FriendService } from '../../service';
 import { PageRequest, User } from '../../../shared/entity';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { filter, finalize, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -67,6 +67,12 @@ export class UserListComponent implements OnInit {
     findFollowing() {
         this.loading = true;
         this.friendService.getFollowingUsers(this.username, this.pageRequest)
+            .pipe(
+                finalize(() => {
+                    this.loading = true;
+                    this.cd.markForCheck();
+                })
+            )
             .subscribe(next => {
                 if (!next.empty) {
                     this.userList = this.userList.concat(next.content.map(friendship => friendship.targetUser));
@@ -76,15 +82,18 @@ export class UserListComponent implements OnInit {
                 }
             }, error => {
                 this.message.error(error.error.message || '获取正在关注失败');
-            }, () => {
-                this.loading = false;
-                this.cd.markForCheck();
             });
     }
 
     findFollowers() {
         this.loading = true;
         this.friendService.getFollowerUsers(this.username, this.pageRequest)
+            .pipe(
+                finalize(() => {
+                    this.loading = false;
+                    this.cd.markForCheck();
+                })
+            )
             .subscribe(next => {
                 if (!next.empty) {
                     this.userList = this.userList.concat(next.content.map(friendship => friendship.sourceUser));
@@ -94,9 +103,6 @@ export class UserListComponent implements OnInit {
                 }
             }, error => {
                 this.message.error(error.error.message || '获取关注人失败');
-            }, () => {
-                this.loading = false;
-                this.cd.markForCheck();
             });
     }
 }

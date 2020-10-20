@@ -14,7 +14,6 @@ export class UserAvatarService {
     }
 
     uploadAvatar(formData: FormData): Observable<User> {
-
         return this.http.post<User>(
             `${environment.baseUrl}/user-server/avatars`,
             formData,

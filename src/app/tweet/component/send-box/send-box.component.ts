@@ -3,6 +3,7 @@ import { Tweet, User } from '../../../shared/entity';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TweetService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-send-box',
@@ -41,11 +42,13 @@ export class SendBoxComponent implements OnInit {
         }
 
         this.tweetService.publishTweet(this.getTweetFromForm())
+            .pipe(finalize(() => {
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 this.message.success('发送成功');
                 this.publishSuccess.emit(next);
                 this.validateForm.reset();
-                this.cd.markForCheck();
             }, error => {
                 this.message.error(error.error.message || '发送失败');
             });

@@ -12,7 +12,7 @@ export class RecommendComponent implements OnInit {
 
     data = [
         '#China National Day',
-        '#New iPhone',
+        '#iPhone12',
         '#Google I/O',
         '#Steve Jobs'
     ];

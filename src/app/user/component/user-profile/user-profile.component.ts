@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, finalize, map } from 'rxjs/operators';
 import { PageRequest, Relation, Tweet, User } from '../../../shared/entity';
 import { TweetService } from '../../../tweet/service';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -60,9 +60,11 @@ export class UserProfileComponent implements OnInit {
      */
     getByUsername(username: string) {
         this.userService.getByUsername(username)
+            .pipe(finalize(() => {
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 this.user = next;
-                this.cd.markForCheck();
                 this.findTweets(this.user.id);
             }, error => {
                 this.message.error(error.error.message || '获取用户信息失败');
@@ -75,11 +77,13 @@ export class UserProfileComponent implements OnInit {
      */
     findTweets(userId: number) {
         this.tweetService.findTweetsByUserId(userId, this.pageRequest)
+            .pipe(finalize(() => {
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 if (!next.empty) {
                     this.tweetList = this.tweetList.concat(next.content);
                     this.pageRequest.offset = this.pageRequest.offset + next.size;
-                    this.cd.markForCheck();
                 } else {
                     this.message.info('没有更多内容了');
                 }
@@ -98,25 +102,27 @@ export class UserProfileComponent implements OnInit {
 
     handleFollow() {
         this.friendService.follow(this.user.id)
+            .pipe(finalize(() => {
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 this.message.success(`已成功关注${next.name}`);
                 this.user.relation = Relation.FOLLOWING;
             }, error => {
                 this.message.error(error.error.message || '关注失败');
-            }, () => {
-                this.cd.markForCheck();
             });
     }
 
     handleCancelFollow() {
         this.friendService.cancelFollow(this.user.id)
+            .pipe(finalize(() => {
+                this.cd.markForCheck();
+            }))
             .subscribe(next => {
                 this.message.success(`已取消关注${next.name}`);
                 this.user.relation = Relation.UN_FOLLOW;
             }, error => {
                 this.message.error(error.error.message || '关注失败');
-            }, () => {
-                this.cd.markForCheck();
             });
     }
 }
