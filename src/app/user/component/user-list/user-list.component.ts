@@ -69,7 +69,7 @@ export class UserListComponent implements OnInit {
         this.friendService.getFollowingUsers(this.username, this.pageRequest)
             .pipe(
                 finalize(() => {
-                    this.loading = true;
+                    this.loading = false;
                     this.cd.markForCheck();
                 })
             )

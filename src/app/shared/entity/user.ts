@@ -78,21 +78,38 @@ export interface User {
     /**
      * 关注状态
      */
-    relation?: number;
+    connections?: string[];
 }
 
 /**
  * 关系类型
  */
-export enum Relation {
+export enum UserConnection {
 
     /**
-     * 未关注
+     * following
      */
-    UN_FOLLOW = 0,
-
+    FOLLOWING = 'following',
     /**
-     * 正在关注
+     * following requested
      */
-    FOLLOWING = 1
+    FOLLOWING_REQUESTED = 'followingRequested',
+    /**
+     * followed by
+     */
+    FOLLOWED_BY = 'followedBy',
+    /**
+     * none
+     */
+    NONE = 'none',
+    /**
+     * blocking
+     */
+    BLOCKING = 'blocking',
+    /**
+     * muting
+     */
+    MUTING = 'muting'
+
+
 }

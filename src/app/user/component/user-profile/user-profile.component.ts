@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, finalize, map } from 'rxjs/operators';
-import { PageRequest, Relation, Tweet, User } from '../../../shared/entity';
+import { PageRequest, Tweet, User, UserConnection } from '../../../shared/entity';
 import { TweetService } from '../../../tweet/service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FriendService, UserService } from '../../service';
@@ -97,7 +97,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     isFollowing(): boolean {
-        return Relation.FOLLOWING === this.user.relation;
+        return this.user.connections && this.user.connections.includes(UserConnection.FOLLOWING);
     }
 
     handleFollow() {
@@ -107,7 +107,7 @@ export class UserProfileComponent implements OnInit {
             }))
             .subscribe(next => {
                 this.message.success(`已成功关注${next.name}`);
-                this.user.relation = Relation.FOLLOWING;
+                this.user.connections.push(UserConnection.FOLLOWING);
             }, error => {
                 this.message.error(error.error.message || '关注失败');
             });
@@ -120,9 +120,10 @@ export class UserProfileComponent implements OnInit {
             }))
             .subscribe(next => {
                 this.message.success(`已取消关注${next.name}`);
-                this.user.relation = Relation.UN_FOLLOW;
+                this.user.connections = this.user.connections
+                    .filter(connection => connection !== UserConnection.FOLLOWING);
             }, error => {
-                this.message.error(error.error.message || '关注失败');
+                this.message.error(error.error.message || '取消关注失败');
             });
     }
 }

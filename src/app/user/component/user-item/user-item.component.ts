@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Relation, User } from '../../../shared/entity';
+import { User, UserConnection } from '../../../shared/entity';
 import { FriendService } from '../../service';
 import { UserStoreService } from '../../../shared/service';
 import { finalize } from 'rxjs/operators';
@@ -33,14 +33,10 @@ export class UserItemComponent implements OnInit {
         if (this.authUser.id === this.user.id) {
             return [];
         }
-        switch (this.user.relation) {
-            case Relation.FOLLOWING:
-                return [this.cancelFollowRef];
-            case Relation.UN_FOLLOW:
-                return [this.followRef];
-            default:
-                return [];
+        if (this.user.connections && this.user.connections.includes(UserConnection.FOLLOWING)) {
+            return [this.cancelFollowRef];
         }
+        return [this.followRef];
     }
 
     handleFollow(userId: number) {
@@ -50,7 +46,7 @@ export class UserItemComponent implements OnInit {
             }))
             .subscribe(next => {
                 this.message.success(`已成功关注${next.name}`);
-                this.user.relation = Relation.FOLLOWING;
+                this.user.connections.push(UserConnection.FOLLOWING);
             }, error => {
                 this.message.error(error.error.message || '关注失败');
             });
@@ -63,9 +59,10 @@ export class UserItemComponent implements OnInit {
             }))
             .subscribe(next => {
                 this.message.success(`已取消关注${next.name}`);
-                this.user.relation = Relation.UN_FOLLOW;
+                this.user.connections = this.user.connections
+                    .filter(connection => connection !== UserConnection.FOLLOWING);
             }, error => {
-                this.message.error(error.error.message || '关注失败');
+                this.message.error(error.error.message || '取消关注失败');
             });
     }
 
