@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FriendService } from '../../service';
-import { PageRequest, User } from '../../../shared/entity';
+import { PageRequest, UserRelationship } from '../../../shared/entity';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, finalize, map } from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class UserListComponent implements OnInit {
     title = '';
     following: boolean;
     loading = false;
-    userList: User[] = [];
+    userList: UserRelationship[] = [];
 
     private pageRequest: PageRequest = {
         offset: 0,
@@ -75,7 +75,7 @@ export class UserListComponent implements OnInit {
             )
             .subscribe(next => {
                 if (!next.empty) {
-                    this.userList = this.userList.concat(next.content.map(friendship => friendship.targetUser));
+                    this.userList = this.userList.concat(next.content);
                     this.pageRequest.offset += next.size;
                 } else {
                     this.message.info('没有更多内容了');
@@ -96,7 +96,7 @@ export class UserListComponent implements OnInit {
             )
             .subscribe(next => {
                 if (!next.empty) {
-                    this.userList = this.userList.concat(next.content.map(friendship => friendship.sourceUser));
+                    this.userList = this.userList.concat(next.content);
                     this.pageRequest.offset += next.size;
                 } else {
                     this.message.info('没有更多内容了');

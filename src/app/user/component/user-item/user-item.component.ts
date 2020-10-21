@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { User, UserConnection } from '../../../shared/entity';
+import { User, UserConnection, UserRelationship } from '../../../shared/entity';
 import { FriendService } from '../../service';
 import { UserStoreService } from '../../../shared/service';
 import { finalize } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class UserItemComponent implements OnInit {
 
     private authUser: User;
 
-    @Input() user: User;
+    @Input() user: UserRelationship;
     @ViewChild('follow', {static: true}) followRef;
     @ViewChild('cancelFollow', {static: true}) cancelFollowRef;
 

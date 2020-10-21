@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Friendship } from '../../shared/entity/friendship';
+import { UserRelationship } from '../../shared/entity/user-relationship';
 
 @Injectable({
     providedIn: 'root'
@@ -23,8 +23,8 @@ export class FriendService {
     getFollowingUsers(
         username: string,
         pageRequest: PageRequest
-    ): Observable<Pageable<Friendship>> {
-        return this.http.get<Pageable<Friendship>>(
+    ): Observable<Pageable<UserRelationship>> {
+        return this.http.get<Pageable<UserRelationship>>(
             `${environment.baseUrl}/user-server/following`,
             {
                 params: {
@@ -46,8 +46,8 @@ export class FriendService {
     getFollowerUsers(
         username: string,
         pageRequest: PageRequest
-    ): Observable<Pageable<Friendship>> {
-        return this.http.get<Pageable<Friendship>>(
+    ): Observable<Pageable<UserRelationship>> {
+        return this.http.get<Pageable<UserRelationship>>(
             `${environment.baseUrl}/user-server/followers`,
             {
                 params: {
