@@ -17,7 +17,8 @@
                     <button type="button" nz-button nzType="default" nzShape="circle" class="attachment-control">
                         <i nz-icon nzTheme="outline" nzType="smile"></i>
                     </button>
-                    <button nz-button nzType="primary" nzShape="round" nzSize="default" class="publish-control"
+                    <button type="submit" nz-button nzType="primary" nzShape="round" nzSize="default"
+                            class="publish-control"
                             [nzLoading]="isSending"
                             [disabled]="isSending
                             || !validateForm.controls.content.value
