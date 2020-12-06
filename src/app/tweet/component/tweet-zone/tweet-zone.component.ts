@@ -47,7 +47,7 @@ export class TweetZoneComponent implements OnInit {
                     this.message.info('没有更多内容了');
                 }
             }, error => {
-                this.message.error(error.error.message);
+                this.message.error(error.error.message || '获取推文失败');
             });
     }
 
