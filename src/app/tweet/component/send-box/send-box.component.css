@@ -32,17 +32,24 @@ nz-comment-content textarea {
 }
 
 #controls-group {
-    vertical-align: center;
     margin-bottom: 0;
 }
 
 .attachment-control {
     float: left;
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .publish-control {
     float: right;
+    line-height: 24px;
+    font-weight: bold;
+    font-size: larger;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-right: 30px;
+    cursor: pointer;
 }
 
 ::ng-deep .ant-comment-inner {

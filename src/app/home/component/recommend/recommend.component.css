@@ -8,9 +8,13 @@
     margin: 10px 15px;
 }
 
-#search-bar nz-input-group input {
+#search-bar nz-input-group {
     border-color: #63b6ff;
     border-radius: 20px;
+    background: #f6f8fa;
+}
+
+#search-bar nz-input-group input {
     background: #f6f8fa;
 }
 

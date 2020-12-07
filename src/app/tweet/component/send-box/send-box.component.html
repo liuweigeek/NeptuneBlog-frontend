@@ -6,11 +6,9 @@
                        [nzSrc]="user.mediumAvatar ? user.mediumAvatar : null" [nzSize]="50"></nz-avatar>
             <nz-comment-content>
                 <nz-form-item id="form-textarea">
-                    <label>
-                        <textarea formControlName="content" nz-input nzAutosize [placeholder]="placeHolder"></textarea>
-                    </label>
+                    <textarea formControlName="content" nz-input nzSize="large" [placeholder]="placeHolder"></textarea>
                 </nz-form-item>
-                <nz-form-item id="controls-group">
+                <div id="controls-group">
                     <button type="button" nz-button nzType="default" nzShape="circle" class="attachment-control">
                         <i nz-icon nzTheme="outline" nzType="file-image"></i>
                     </button>
@@ -25,7 +23,7 @@
                             || validateForm.controls.content.value.length <= 0">
                         发布
                     </button>
-                </nz-form-item>
+                </div>
             </nz-comment-content>
         </nz-comment>
     </form>
