@@ -1,6 +1,6 @@
 # NeptuneBlog
 
-基于Angular 10的MicroBlog, 后端使用Spring Cloud Netflix开发.
+基于Angular 10的MicroBlog, 后端部分使用Spring Cloud Netflix开发.
 
 ## 项目地址
 
