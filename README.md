@@ -9,10 +9,10 @@
 
 ## 项目截图
 
-### 主页
+#### 主页
 
 ![主页](./docs/images/homepage.png)
 
-### 个人资料页
+#### 个人资料页
 
 ![个人资料页](./docs/images/user-profile.png)
