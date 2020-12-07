@@ -26,3 +26,7 @@
 
 打开`docs/docker/services`
 中对应版本的Docker Compose配置文件, 修改`volumes`为自己的本地路径, 统一部署中间件
+
+## ❤️ Contributing
+
+<a href="https://www.buymeacoffee.com/liuweigeek" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Us A Coffee" style="height: auto !important;width: auto !important;" ></a>
