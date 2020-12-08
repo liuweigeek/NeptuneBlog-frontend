@@ -3,4 +3,5 @@
     height: 100%;
     background: #f6f8fa;
     padding: 0 2px 0 2px;
+    overflow: scroll;
 }
