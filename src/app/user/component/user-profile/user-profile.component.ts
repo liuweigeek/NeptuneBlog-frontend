@@ -83,7 +83,7 @@ export class UserProfileComponent implements OnInit {
             .subscribe(next => {
                 if (!next.empty) {
                     this.tweetList = this.tweetList.concat(next.content);
-                    this.pageRequest.offset = this.pageRequest.offset + next.size;
+                    this.pageRequest.offset += next.numberOfElements;
                 } else {
                     this.message.info('没有更多内容了');
                 }
