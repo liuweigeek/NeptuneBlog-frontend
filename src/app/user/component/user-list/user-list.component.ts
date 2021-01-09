@@ -76,7 +76,7 @@ export class UserListComponent implements OnInit {
             .subscribe(next => {
                 if (!next.empty) {
                     this.userList = this.userList.concat(next.content);
-                    this.pageRequest.offset += next.size;
+                    this.pageRequest.offset += next.numberOfElements;
                 } else {
                     this.message.info('没有更多内容了');
                 }
@@ -97,7 +97,7 @@ export class UserListComponent implements OnInit {
             .subscribe(next => {
                 if (!next.empty) {
                     this.userList = this.userList.concat(next.content);
-                    this.pageRequest.offset += next.size;
+                    this.pageRequest.offset += next.numberOfElements;
                 } else {
                     this.message.info('没有更多内容了');
                 }
