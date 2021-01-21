@@ -24,9 +24,6 @@
 - 启动后端项目 [NeptuneBlog-backend](https://github.com/liuweigeek/NeptuneBlog-backend)
 - 在项目目录下执行`ng serve`启动前端项目,然后在浏览器中访问<http://localhost:4200>
 
-打开`docs/docker/services`
-中对应版本的Docker Compose配置文件, 修改`volumes`为自己的本地路径, 统一部署中间件
-
 ## ❤️ Contributing
 
 <a href="https://www.buymeacoffee.com/liuweigeek" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Us A Coffee" style="height: auto !important;width: auto !important;" ></a>
