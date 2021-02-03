@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './shared/guard';
-import { AuthenticationComponent } from './authentication/component/authentication';
-import { SearchResultListComponent } from './search/component/search-result-list';
-import { UserProfileComponent } from './user/component/user-profile';
-import { UserListComponent } from './user/component/user-list';
-import { HomeComponent } from './home/component/home';
-import { TweetZoneComponent } from './tweet/component/tweet-zone';
-import { SignInComponent } from './authentication/component/sign-in';
-import { SignUpComponent } from './authentication/component/sign-up';
-import { AddInfoComponent } from './authentication/component/add-info';
+import { AuthGuard } from './shared';
+import { SearchResultListComponent } from './search';
+import { UserListComponent, UserProfileComponent } from './user';
+import { HomeComponent } from './home';
+import { TweetZoneComponent } from './tweet';
+import { AddInfoComponent, AuthenticationComponent, SignInComponent, SignUpComponent } from './authentication';
 
 
 const routes: Routes = [

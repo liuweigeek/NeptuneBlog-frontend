@@ -13,7 +13,7 @@ import zh from '@angular/common/locales/zh';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 
-import { AuthInterceptor } from './shared/interceptor';
+import { AuthInterceptor } from './shared';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home';
 import { AuthenticationModule } from './authentication';

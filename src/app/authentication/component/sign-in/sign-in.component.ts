@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../service/authentication.service';
-import { UserStoreService } from '../../../shared/service';
+import { AuthenticationService } from '../../service';
+import { UserStoreService } from '../../../shared';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 

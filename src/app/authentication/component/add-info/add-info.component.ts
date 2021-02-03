@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { UserAvatarService } from '../../../user/service';
-import { UserStoreService } from '../../../shared/service';
+import { UserAvatarService } from '../../../user';
+import { UserStoreService } from '../../../shared';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 

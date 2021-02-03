@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Pageable, PageRequest, User } from '../../shared/entity';
+import { Pageable, PageRequest, User, UserRelationship } from '../../shared';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { timeout } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { UserRelationship } from '../../shared/entity/user-relationship';
 
 @Injectable({
     providedIn: 'root'

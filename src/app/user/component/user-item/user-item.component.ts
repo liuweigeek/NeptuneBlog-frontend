@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { User, UserConnection, UserRelationship } from '../../../shared/entity';
+import { User, UserConnection, UserRelationship, UserStoreService } from '../../../shared';
 import { FriendService } from '../../service';
-import { UserStoreService } from '../../../shared/service';
 import { finalize } from 'rxjs/operators';
 
 @Component({

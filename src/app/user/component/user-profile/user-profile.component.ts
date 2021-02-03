@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, finalize, map } from 'rxjs/operators';
-import { PageRequest, Tweet, User, UserConnection } from '../../../shared/entity';
-import { TweetService } from '../../../tweet/service';
+import { PageRequest, Tweet, User, UserConnection, UserStoreService } from '../../../shared';
+import { TweetService } from '../../../tweet';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FriendService, UserService } from '../../service';
-import { UserStoreService } from '../../../shared/service';
 
 @Component({
     selector: 'app-user-profile',

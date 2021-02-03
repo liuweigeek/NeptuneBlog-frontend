@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { NavMenuItem } from '../component/nav';
+import { NavMenuItem } from '../component';
 import { Observable, of } from 'rxjs';
-import { UserStoreService } from '../../shared/service';
+import { UserStoreService } from '../../shared';
 
 @Injectable({
     providedIn: 'root'

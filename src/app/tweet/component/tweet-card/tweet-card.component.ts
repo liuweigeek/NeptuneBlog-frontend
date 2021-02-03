@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Tweet } from '../../../shared/entity';
+import { Tweet } from '../../../shared';
 
 @Component({
     selector: 'app-tweet-card',

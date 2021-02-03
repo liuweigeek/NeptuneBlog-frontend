@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Tweet, User } from '../../../shared/entity';
+import { Tweet, User } from '../../../shared';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TweetService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd/message';

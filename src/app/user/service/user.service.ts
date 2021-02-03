@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../../shared/entity';
+import { User } from '../../shared';
 import { environment } from '../../../environments/environment';
 import { timeout } from 'rxjs/operators';
 import { Observable } from 'rxjs';

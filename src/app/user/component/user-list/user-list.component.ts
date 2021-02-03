@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FriendService } from '../../service';
-import { PageRequest, UserRelationship } from '../../../shared/entity';
+import { PageRequest, UserRelationship } from '../../../shared';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, finalize, map } from 'rxjs/operators';

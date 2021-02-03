@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Pageable, PageRequest, Tweet } from '../../shared/entity';
+import { Pageable, PageRequest, Tweet } from '../../shared';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { timeout } from 'rxjs/operators';

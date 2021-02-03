@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { PageRequest, Tweet, User } from '../../../shared/entity';
-import { UserStoreService } from '../../../shared/service';
+import { PageRequest, Tweet, User, UserStoreService } from '../../../shared';
 import { TweetService } from '../../service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { environment } from '../../../../environments/environment';
