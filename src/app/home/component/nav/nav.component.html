@@ -11,5 +11,15 @@
             </ng-template>
             <span>{{menu.title}}</span>
         </li>
+        <li class="nav-menu-item" nz-menu-item nz-tooltip nzTooltipPlacement="right"
+            nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+            <i nz-icon nzType="menu"></i>
+            <span>更多</span>
+        </li>
     </ul>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+            <li nz-menu-item (click)="logOut()">退出登录</li>
+        </ul>
+    </nz-dropdown-menu>
 </div>

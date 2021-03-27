@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../entity/user';
+import { User } from '../entity';
 import { AuthorityService } from './authority.service';
 
 @Injectable({
@@ -30,6 +30,11 @@ export class UserStoreService {
         if (user.token) {
             this.authService.setAuthorizationToken(user.token);
         }
+    }
+
+    clearAuthUser() {
+        localStorage.removeItem(this.userInfoKey);
+        this.authService.clearAuthorizationToken();
     }
 
 }

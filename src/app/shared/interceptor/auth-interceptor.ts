@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
+import { Const } from '../constant/const';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -27,7 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         const authToken = this.auth.getAuthorizationToken();
         if (!authToken) {
-            this.router.navigate(['/auth/signIn']);
+            this.router.navigate([Const.signInRoute]);
             return;
         }
         const authReq = req.clone({
@@ -36,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(authReq).pipe(
             catchError((error: HttpErrorResponse) => {
                 if (error.status && error.status === 401) {
-                    this.router.navigate(['/auth/signIn']);
+                    this.router.navigate([Const.signInRoute]);
                     return;
                 }
                 return throwError(error);

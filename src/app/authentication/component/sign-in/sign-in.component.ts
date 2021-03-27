@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../service';
-import { UserStoreService } from '../../../shared';
+import { UserStoreService, Const } from '../../../shared';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -14,6 +14,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class SignInComponent implements OnInit {
 
     validateForm: FormGroup;
+    signUpRoute = Const.signUpRoute;
 
     constructor(private fb: FormBuilder,
                 private router: Router,

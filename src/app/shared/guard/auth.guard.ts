@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthorityService, UserStoreService } from '../service';
+import { Const } from '../constant/const';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-    signInRoute = '/auth/signIn';
 
     constructor(private router: Router,
                 private authService: AuthorityService,
@@ -26,6 +26,6 @@ export class AuthGuard implements CanActivate {
     }
 
     navigateToSignIn() {
-        this.router.navigate([this.signInRoute]);
+        this.router.navigate([Const.signInRoute]);
     }
 }

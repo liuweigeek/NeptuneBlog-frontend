@@ -15,13 +15,11 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 import { FormsModule } from '@angular/forms';
 import { TweetModule } from '../tweet';
-import { HomeComponent } from './component/home';
-import { NavComponent } from './component/nav';
-import { ContentComponent } from './component/content';
-import { RecommendComponent } from './component/recommend';
+import { ContentComponent, HomeComponent, NavComponent, RecommendComponent } from './component';
 import { UserModule } from '../user';
 import { SearchModule } from '../search';
 import { RouterModule } from '@angular/router';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 @NgModule({
     declarations: [
@@ -47,7 +45,8 @@ import { RouterModule } from '@angular/router';
         TweetModule,
         UserModule,
         SearchModule,
-        RouterModule
+        RouterModule,
+        NzDropDownModule
     ]
 })
 export class HomeModule {

@@ -1,3 +1,4 @@
+export * from './constant';
 export * from './service';
 export * from './entity';
 export * from './interceptor';

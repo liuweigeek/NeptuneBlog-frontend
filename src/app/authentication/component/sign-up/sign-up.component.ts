@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { User, UserStoreService } from '../../../shared';
+import { Const, User, UserStoreService } from '../../../shared';
 import { AuthenticationService } from '../../service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -14,6 +14,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class SignUpComponent implements OnInit {
 
     validateForm: FormGroup;
+    signInRoute = Const.signInRoute;
 
     @Output() signUpSuccess = new EventEmitter<User>();
 

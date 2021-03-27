@@ -17,4 +17,8 @@ export class AuthorityService {
     setAuthorizationToken(token: string): void {
         localStorage.setItem(this.authToken, token);
     }
+
+    clearAuthorizationToken(): void {
+        localStorage.removeItem(this.authToken);
+    }
 }
