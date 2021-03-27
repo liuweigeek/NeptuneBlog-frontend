@@ -33,6 +33,7 @@ export class UserStoreService {
     }
 
     clearAuthUser() {
+        this.authUser = null;
         localStorage.removeItem(this.userInfoKey);
         this.authService.clearAuthorizationToken();
     }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Const, User, UserStoreService } from '../../../shared';
 import { AuthenticationService } from '../../service';
@@ -15,8 +15,6 @@ export class SignUpComponent implements OnInit {
 
     validateForm: FormGroup;
     signInRoute = Const.signInRoute;
-
-    @Output() signUpSuccess = new EventEmitter<User>();
 
     constructor(private fb: FormBuilder,
                 private router: Router,

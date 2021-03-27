@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Const, UserStoreService } from '../../../shared';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 export class NavMenuItem {
@@ -19,9 +18,9 @@ export class NavComponent implements OnInit {
 
     initSelectedMenu: NavMenuItem;
     @Input() menuItems: NavMenuItem[];
+    @Output() logout = new EventEmitter();
 
-    constructor(private userStoreService: UserStoreService,
-                private router: Router) {
+    constructor(private router: Router) {
     }
 
     ngOnInit() {
@@ -32,10 +31,5 @@ export class NavComponent implements OnInit {
                 this.initSelectedMenu = this.menuItems[0];
             }
         }
-    }
-
-    logOut() {
-        this.userStoreService.clearAuthUser();
-        this.router.navigate([Const.signInRoute]);
     }
 }

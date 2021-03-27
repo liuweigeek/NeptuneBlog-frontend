@@ -11,18 +11,16 @@ export class NavService {
     constructor(private userStoreService: UserStoreService) {
     }
 
-    user = this.userStoreService.getAuthUser();
-    navMenuItems: NavMenuItem[] = [
-        {title: '主页', icon: 'home', link: '/'},
-        {title: '好友圈', icon: 'team', link: ''},
-        {title: '探索', icon: 'compass', link: ''},
-        {title: '通知', icon: 'notification', link: ''},
-        {title: '私信', icon: 'mail', link: ''},
-        {title: '喜欢', icon: 'like', link: ''},
-        {title: '个人资料', icon: 'user', link: `/${this.user.username}`}
-    ];
-
     getNavMenus(): Observable<NavMenuItem[]> {
-        return of(this.navMenuItems);
+        const user = this.userStoreService.getAuthUser();
+        return of([
+            {title: '主页', icon: 'home', link: '/'},
+            {title: '好友圈', icon: 'team', link: ''},
+            {title: '探索', icon: 'compass', link: ''},
+            {title: '通知', icon: 'notification', link: ''},
+            {title: '私信', icon: 'mail', link: ''},
+            {title: '喜欢', icon: 'like', link: ''},
+            {title: '个人资料', icon: 'user', link: `/${user.username}`}
+        ]);
     }
 }

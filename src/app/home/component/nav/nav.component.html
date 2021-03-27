@@ -19,7 +19,7 @@
     </ul>
     <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu nzSelectable>
-            <li nz-menu-item (click)="logOut()">退出登录</li>
+            <li nz-menu-item (click)="logout.emit()">退出登录</li>
         </ul>
     </nz-dropdown-menu>
 </div>
