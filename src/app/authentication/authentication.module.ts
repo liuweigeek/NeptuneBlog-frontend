@@ -14,11 +14,8 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AuthenticationComponent } from './component/authentication';
-import { SignInComponent } from './component/sign-in';
-import { SignUpComponent } from './component/sign-up';
+import { AddInfoComponent, AuthenticationComponent, SignInComponent, SignUpComponent } from './component';
 import { RouterModule } from '@angular/router';
-import { AddInfoComponent } from './component/add-info';
 
 @NgModule({
     declarations: [SignInComponent, SignUpComponent, AuthenticationComponent, AddInfoComponent],
