@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { AuthorityService } from '../service';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { Const } from '../constant/const';
@@ -29,7 +29,7 @@ export class AuthInterceptor implements HttpInterceptor {
         const authToken = this.auth.getAuthorizationToken();
         if (!authToken) {
             this.router.navigate([Const.signInRoute]);
-            return;
+            return of(null);
         }
         const authReq = req.clone({
             headers: req.headers.set(this.authHeader, authToken)
@@ -38,7 +38,7 @@ export class AuthInterceptor implements HttpInterceptor {
             catchError((error: HttpErrorResponse) => {
                 if (error.status && error.status === 401) {
                     this.router.navigate([Const.signInRoute]);
-                    return;
+                    return of(null);
                 }
                 return throwError(error);
             }));
