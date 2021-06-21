@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
-import { Const } from '../constant/const';
+import { Const } from '../constant';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
